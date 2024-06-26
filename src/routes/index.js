@@ -1,7 +1,7 @@
 /* Route declarations for the app */
 
 import * as reviews from "../views";
-
+import BipinWork from "../views/BipinWork";
 const routData = [
   {
     id: "route-001",
@@ -64,6 +64,12 @@ const routData = [
     component: reviews.PracticeRedirectPage,
     requiresAuth: true,
   },
+  {
+    id: "route-010",
+    path: "/bipin",
+    component: BipinWork,
+    requiresAuth: false,
+  }
 ];
 
 export default routData;
