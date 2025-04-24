@@ -34,6 +34,7 @@ import { filterBadWords } from "./Badwords";
 import S3Client from "../config/awsS3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import usePreloadAudio from "../hooks/usePreloadAudio";
+import { updateLearnerProfile } from "../services/learnerAi/learnerAiService";
 /* eslint-disable */
 
 const AudioPath = {
@@ -155,7 +156,7 @@ function VoiceAnalyser(props) {
         alert("Failed to load the audio. Please try again.");
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -376,7 +377,7 @@ function VoiceAnalyser(props) {
         sub_session_id,
         contentId,
         contentType,
-        mechanics_id: localStorage.getItem("mechanism_id") || "",
+        mechanics_id: getLocalData("mechanism_id") || "",
       };
 
       if (props.selectedOption) {
@@ -388,13 +389,8 @@ function VoiceAnalyser(props) {
       }
 
       if (callUpdateLearner) {
-        const { data: updateLearnerData } = await axios.post(
-          `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.UPDATE_LEARNER_PROFILE}/${lang}`,
-          requestBody
-        );
-
+        const updateLearnerData = await updateLearnerProfile(lang, requestBody);
         //TODO: handle  Errors
-
         data = updateLearnerData;
         responseText = data.responseText;
         profanityWord = await filterBadWords(data.responseText);
@@ -568,7 +564,7 @@ function VoiceAnalyser(props) {
       }
       setRecordedAudioBase64("");
       setApiResponse("error");
-      console.log("err", error);
+      console.error("err", error);
     }
   };
 
@@ -659,7 +655,7 @@ function VoiceAnalyser(props) {
         setLivesData(newLivesData);
       }
     } catch (e) {
-      console.log("error", e);
+      console.error("error", e);
     }
   };
 
@@ -689,7 +685,7 @@ function VoiceAnalyser(props) {
         setAudioPermission(true);
       })
       .catch((error) => {
-        console.log("Permission Denied");
+        console.error("Permission Denied");
         setAudioPermission(false);
         //alert("Microphone Permission Denied");
       });
