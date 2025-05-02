@@ -92,6 +92,7 @@ export const getSetResultPractice = async ({
         session_id: sessionId,
         totalSyllableCount: totalSyllableCount,
         language: getLocalData("lang"),
+        max_level: 15,
         is_mechanics: mechanism && mechanism?.id ? true : false,
       },
       getHeaders()
