@@ -1,4 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
+import {
+  ThemeProvider,
+  createTheme,
+  useMediaQuery,
+  Grid,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 import listenImg from "../../assets/listenmike.svg";
 import clockImg from "../../assets/chronometer.svg";
 import wordImg from "../../assets/words.svg";
@@ -56,6 +64,8 @@ const levelMap = {
   14: level14,
   15: level15,
 };
+
+const theme = createTheme();
 
 const content = {
   question: {
@@ -158,7 +168,8 @@ const R3 = ({
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
-
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const transcriptRef = useRef("");
 
   useEffect(() => {
@@ -381,356 +392,359 @@ const R3 = ({
         loading,
       }}
     >
-      <div
-        style={{
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          // background:
-          //   "linear-gradient(128.49deg, rgb(158, 197, 255) 0%, rgb(225, 166, 248) 100%)",
-          backgroundColor: "#FFFFFF",
-        }}
-      >
-        {showConfetti && (
-          <Confetti width={window.innerWidth} height={window.innerHeight} />
-        )}
+      <ThemeProvider theme={theme}>
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            // background:
+            //   "linear-gradient(128.49deg, rgb(158, 197, 255) 0%, rgb(225, 166, 248) 100%)",
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          {showConfetti && (
+            <Confetti width={window.innerWidth} height={window.innerHeight} />
+          )}
 
-        {step === "1" && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "20px",
-            }}
-          >
-            {!showRecordButton && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  marginBottom: "10px",
-                }}
-              >
-                {/* Dog Image - Moves with Progress */}
-                <img
-                  src={dogGif}
-                  alt="Dog"
-                  style={{
-                    position: "relative",
-                    left: `${(progress / 100) * 260}px`,
-                    width: "50px",
-                    height: "55px",
-                    transition: "left 0.2s linear",
-                    marginBottom: "-10px",
-                    marginLeft: "-10px",
-                  }}
-                />
-
-                {/* Progress Bar */}
-                <div
-                  style={{
-                    width: "280px",
-                    height: "15px",
-                    backgroundColor: "white",
-                    borderRadius: "12px",
-                    overflow: "hidden",
-                    border: "2px solid #F39F27",
-                    position: "relative",
-                  }}
-                >
-                  {/* Progress Fill */}
-                  <div
-                    style={{
-                      width: `${progress}%`,
-                      height: "100%",
-                      background:
-                        "linear-gradient(0deg, #F19920 0%, #F39F27 23%, #F7B03B 58%, #FECC5C 100%)",
-                      transition: "width 0.2s linear",
-                    }}
-                  />
-                </div>
-              </div>
-            )}
-
+          {step === "1" && (
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "10px",
-                background: "#FF7F361A",
-                borderRadius: "20px",
-                padding: "20px 50px",
-                maxWidth: "50%",
-                border: "2px dotted var(--Button-Orange, #FF7F36)",
-                //boxShadow: "0px 6px 0px 1px rgb(245, 245, 255)",
-                // boxShadow:
-                //   "rgb(245, 245, 255) 0px 6px 0px 1px, rgb(102, 102, 133) 0px 11px 0px 1px",
+                gap: "20px",
               }}
             >
-              {/* <img
+              {!showRecordButton && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {/* Dog Image - Moves with Progress */}
+                  <img
+                    src={dogGif}
+                    alt="Dog"
+                    style={{
+                      position: "relative",
+                      left: `${(progress / 100) * 260}px`,
+                      width: isMobile ? "45px" : "50px",
+                      height: isMobile ? "50px" : "55px",
+                      transition: "left 0.2s linear",
+                      marginBottom: "-10px",
+                      marginLeft: "-10px",
+                    }}
+                  />
+
+                  {/* Progress Bar */}
+                  <div
+                    style={{
+                      width: "280px",
+                      height: "15px",
+                      backgroundColor: "white",
+                      borderRadius: "12px",
+                      overflow: "hidden",
+                      border: "2px solid #F39F27",
+                      position: "relative",
+                    }}
+                  >
+                    {/* Progress Fill */}
+                    <div
+                      style={{
+                        width: `${progress}%`,
+                        height: "100%",
+                        background:
+                          "linear-gradient(0deg, #F19920 0%, #F39F27 23%, #F7B03B 58%, #FECC5C 100%)",
+                        transition: "width 0.2s linear",
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "10px",
+                  background: "#FF7F361A",
+                  borderRadius: "20px",
+                  padding: "20px 50px",
+                  maxWidth: "50%",
+                  border: "2px dotted var(--Button-Orange, #FF7F36)",
+                  //boxShadow: "0px 6px 0px 1px rgb(245, 245, 255)",
+                  // boxShadow:
+                  //   "rgb(245, 245, 255) 0px 6px 0px 1px, rgb(102, 102, 133) 0px 11px 0px 1px",
+                }}
+              >
+                {/* <img
                 src={content.L1[0].stepOne.img}
                 alt="Ship"
                 style={{ width: "210px", height: "auto" }}
               /> */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "10px",
-                  maxWidth: "80%",
-                  textAlign: "center",
-                }}
-              >
-                <span
+                <div
                   style={{
-                    fontSize: "28px",
-                    fontWeight: "700",
-                    fontStyle: "Quicksand",
-                    color: "##000000",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "10px",
+                    maxWidth: isMobile ? "90%" : "80%",
+                    textAlign: "center",
                   }}
                 >
-                  {conversation[currentStep - 1]?.question?.text}
-                </span>
-                {/* <img
+                  <span
+                    style={{
+                      fontSize: isMobile ? "18px" : "28px",
+                      fontWeight: "700",
+                      fontStyle: "Quicksand",
+                      color: "##000000",
+                    }}
+                  >
+                    {conversation[currentStep - 1]?.question?.text}
+                  </span>
+                  {/* <img
                   src={listenImg}
                   alt="Listen"
                   style={{ width: "30px", cursor: "pointer" }}
                   onClick={() => playAudio(content.L1[0].stepOne.correctAudio)}
                 /> */}
+                </div>
               </div>
-            </div>
 
-            {!showRecordButton && (
-              <div
-                style={{
-                  display: "flex",
-                  gap: "50px",
-                  marginTop: "20px",
-                }}
-              >
-                {conversation[currentStep - 1]?.options.map((audio, index) => {
-                  const style = styles[index % styles.length];
+              {!showRecordButton && (
+                <div
+                  style={{
+                    display: "flex",
+                    gap: isMobile ? "5px" : "50px",
+                    marginTop: "20px",
+                  }}
+                >
+                  {conversation[currentStep - 1]?.options.map(
+                    (audio, index) => {
+                      const style = styles[index % styles.length];
 
-                  return (
-                    <div
-                      key={index}
-                      style={{
-                        position: "relative",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: "10px",
-                      }}
-                    >
-                      {index === activeIndex && (
-                        <img
-                          src={handIconGif}
-                          alt="Hint"
-                          style={{
-                            position: "absolute",
-                            ...(handPhase === "audio"
-                              ? {
-                                  bottom: "40px",
-                                  left: "-30px",
-                                  transform: "rotate(-120deg)",
-                                }
-                              : {
-                                  bottom: "-50px",
-                                  left: "-30px",
-                                  transform: "rotate(-120deg)",
-                                }),
-                            height: "80px",
-                            zIndex: "9999",
-                            transition: "all 0.3s ease",
-                          }}
-                        />
-                      )}
-                      <div
-                        style={{
-                          display: "flex",
-                          //border: "2px solid white",
-                          gap: "10px",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <span
-                          style={{
-                            color: "#000000",
-                            fontFamily: "Quicksand",
-                            fontWeight: 700,
-                            fontSize: "36px",
-                            lineHeight: "60px",
-                            letterSpacing: "0%",
-                            textAlign: "center",
-                            verticalAlign: "middle",
-                          }}
-                        >
-                          {index + 1}
-                        </span>
-
+                      return (
                         <div
+                          key={index}
                           style={{
-                            gap: "5px",
-                            width: "80px",
-                            height: "80px",
-                            background:
-                              selectedText === audio.id
-                                ? isMatch
-                                  ? "#58CC02"
-                                  : "#FF0000"
-                                : style.background,
-                            boxShadow:
-                              selectedText === audio.id
-                                ? "none"
-                                : style.boxShadow,
-                            borderRadius: "50%",
+                            position: "relative",
                             display: "flex",
-                            //border: "2px solid white",
+                            flexDirection: "column",
                             alignItems: "center",
-                            justifyContent: "center",
-                            //fontSize: "30px",
-                            fontWeight: "bold",
-                            filter:
-                              activeIndex !== index
-                                ? "brightness(50%)"
-                                : "none",
-                            transition: "filter 0.3s ease",
-                            cursor: "pointer",
-                            color: "#FFFFFF",
-                          }}
-                          onClick={() => {
-                            setActiveIndex(index);
-                            playAudio(audio.value);
+                            gap: "10px",
                           }}
                         >
-                          <img
-                            src={Assets.musicIcon}
-                            alt="Mike"
+                          {index === activeIndex && (
+                            <img
+                              src={handIconGif}
+                              alt="Hint"
+                              style={{
+                                position: "absolute",
+                                ...(handPhase === "audio"
+                                  ? {
+                                      bottom: "40px",
+                                      left: "-30px",
+                                      transform: "rotate(-120deg)",
+                                    }
+                                  : {
+                                      bottom: "-50px",
+                                      left: "-30px",
+                                      transform: "rotate(-120deg)",
+                                    }),
+                                height: isMobile ? "70px" : "80px",
+                                zIndex: "9999",
+                                transition: "all 0.3s ease",
+                              }}
+                            />
+                          )}
+                          <div
                             style={{
-                              width: "40px",
-                              height: "40px",
-                              cursor: "pointer",
+                              display: "flex",
+                              //border: "2px solid white",
+                              gap: "10px",
+                              alignItems: "center",
+                              justifyContent: "center",
                             }}
-                          />
-                        </div>
-                      </div>
-                      <div
-                        style={{
-                          width: "60px",
-                          height: "60px",
-                          backgroundColor:
-                            selectedCheckbox === audio.id
-                              ? "#58CC02"
-                              : "#BB81D066",
-                          border: "2px solid white",
-                          borderRadius: "8px",
-                          cursor: "pointer",
-                          position: "relative",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          marginTop: "15px",
-                          marginLeft: "30px",
-                        }}
-                        onClick={() => handleCheckboxChange(audio.id)}
-                      >
-                        <input
-                          type="checkbox"
-                          id={`checkbox-${audio.id}`}
-                          checked={selectedCheckbox === audio.id}
-                          readOnly
-                          style={{
-                            display: "none",
-                          }}
-                        />
-                        <span
-                          style={{
-                            fontSize: "36px",
-                            fontWeight: "900",
-                            color: "white",
-                            lineHeight: 1,
-                          }}
-                        >
-                          ✓
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+                          >
+                            <span
+                              style={{
+                                color: "#000000",
+                                fontFamily: "Quicksand",
+                                fontWeight: 700,
+                                fontSize: isMobile ? "20px" : "36px",
+                                lineHeight: "60px",
+                                letterSpacing: "0%",
+                                textAlign: "center",
+                                verticalAlign: "middle",
+                              }}
+                            >
+                              {index + 1}
+                            </span>
 
-            {showNextButton && (
-              <div
-                style={{
-                  position: "fixed",
-                  bottom: "180px",
-                  right: "60px",
-                  zIndex: 1000,
-                }}
-              >
-                {/* <img
+                            <div
+                              style={{
+                                gap: "5px",
+                                width: isMobile ? "50px" : "80px",
+                                height: isMobile ? "50px" : "80px",
+                                background:
+                                  selectedText === audio.id
+                                    ? isMatch
+                                      ? "#58CC02"
+                                      : "#FF0000"
+                                    : style.background,
+                                boxShadow:
+                                  selectedText === audio.id
+                                    ? "none"
+                                    : style.boxShadow,
+                                borderRadius: "50%",
+                                display: "flex",
+                                //border: "2px solid white",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                //fontSize: "30px",
+                                fontWeight: "bold",
+                                filter:
+                                  activeIndex !== index
+                                    ? "brightness(50%)"
+                                    : "none",
+                                transition: "filter 0.3s ease",
+                                cursor: "pointer",
+                                color: "#FFFFFF",
+                              }}
+                              onClick={() => {
+                                setActiveIndex(index);
+                                playAudio(audio.value);
+                              }}
+                            >
+                              <img
+                                src={Assets.musicIcon}
+                                alt="Mike"
+                                style={{
+                                  width: isMobile ? "30px" : "40px",
+                                  height: isMobile ? "30px" : "40px",
+                                  cursor: "pointer",
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div
+                            style={{
+                              width: isMobile ? "50px" : "60px",
+                              height: isMobile ? "50px" : "60px",
+                              backgroundColor:
+                                selectedCheckbox === audio.id
+                                  ? "#58CC02"
+                                  : "#BB81D066",
+                              border: "2px solid white",
+                              borderRadius: "8px",
+                              cursor: "pointer",
+                              position: "relative",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              marginTop: "15px",
+                              marginLeft: "30px",
+                            }}
+                            onClick={() => handleCheckboxChange(audio.id)}
+                          >
+                            <input
+                              type="checkbox"
+                              id={`checkbox-${audio.id}`}
+                              checked={selectedCheckbox === audio.id}
+                              readOnly
+                              style={{
+                                display: "none",
+                              }}
+                            />
+                            <span
+                              style={{
+                                fontSize: isMobile ? "24px" : "36px",
+                                fontWeight: "900",
+                                color: "white",
+                                lineHeight: 1,
+                              }}
+                            >
+                              ✓
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    }
+                  )}
+                </div>
+              )}
+
+              {showNextButton && (
+                <div
+                  style={{
+                    position: "fixed",
+                    bottom: "180px",
+                    right: "60px",
+                    zIndex: 1000,
+                  }}
+                >
+                  {/* <img
                   src={r3Next}
                   alt="Listen"
                   style={{ height: "80px", cursor: "pointer" }}
                   onClick={handleNextClick}
                 /> */}
-                <div onClick={handleNextClick} style={{ cursor: "pointer" }}>
-                  <NextButtonRound height={60} width={60} />
+                  <div onClick={handleNextClick} style={{ cursor: "pointer" }}>
+                    <NextButtonRound height={60} width={60} />
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {showRecordButton && !showReset && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  marginTop: "25px",
-                }}
-              >
-                <img
-                  src={isMatch ? correctTick : r3WrongTick}
-                  alt="Effect"
+              {showRecordButton && !showReset && (
+                <div
                   style={{
-                    height: "80px",
-                    transition: "opacity 0.4s ease-in-out",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    marginTop: "25px",
                   }}
-                />
-              </div>
-            )}
+                >
+                  <img
+                    src={isMatch ? correctTick : r3WrongTick}
+                    alt="Effect"
+                    style={{
+                      height: "80px",
+                      transition: "opacity 0.4s ease-in-out",
+                    }}
+                  />
+                </div>
+              )}
 
-            {showReset && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  marginTop: "25px",
-                }}
-              >
-                <img
-                  src={r3Reset}
-                  alt="Effect"
+              {showReset && (
+                <div
                   style={{
-                    height: "80px",
-                    transition: "opacity 0.4s ease-in-out",
-                    cursor: "pointer",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    marginTop: "25px",
                   }}
-                  onClick={reset}
-                />
-              </div>
-            )}
+                >
+                  <img
+                    src={r3Reset}
+                    alt="Effect"
+                    style={{
+                      height: "80px",
+                      transition: "opacity 0.4s ease-in-out",
+                      cursor: "pointer",
+                    }}
+                    onClick={reset}
+                  />
+                </div>
+              )}
 
-            {/* {showRecordButton && (
+              {/* {showRecordButton && (
             <div
               style={{
                 display: "flex",
@@ -764,107 +778,108 @@ const R3 = ({
               />
             </div>
           )} */}
-          </div>
-        )}
+            </div>
+          )}
 
-        {/* Modal */}
-        {isOpen && (
-          <div
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0, 0, 0, 0.6)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              zIndex: 9999,
-            }}
-          >
+          {/* Modal */}
+          {isOpen && (
             <div
               style={{
-                backgroundColor: "#fff",
-                padding: "50px 15px 15px",
-                borderRadius: "30px",
-                width: "250px",
-                textAlign: "center",
-                position: "relative",
-                height: "240px",
-                boxShadow: "0px 7px 0px 1px rgb(245, 245, 255)",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 9999,
               }}
             >
-              <img
-                src={headerImg}
-                alt="Header"
-                style={{
-                  position: "absolute",
-                  top: "-128px",
-                  left: "51%",
-                  transform: "translateX(-50%)",
-                  width: "359px",
-                }}
-              />
-
-              <h2
-                style={{
-                  fontSize: "23px",
-                  fontWeight: "bold",
-                  color: "#60A5FA",
-                  margin: "45px 0 8px",
-                  fontFamily: "digitalt",
-                }}
-              >
-                REWARD
-              </h2>
-
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "8px",
+                  backgroundColor: "#fff",
+                  padding: "50px 15px 15px",
+                  borderRadius: "30px",
+                  width: "250px",
+                  textAlign: "center",
                   position: "relative",
-                  marginTop: "21px",
+                  height: "240px",
+                  boxShadow: "0px 7px 0px 1px rgb(245, 245, 255)",
                 }}
               >
-                <img src={coinsImg} alt="Coins" style={{ width: "60px" }} />
-                <span
+                <img
+                  src={headerImg}
+                  alt="Header"
                   style={{
-                    fontSize: "22px",
+                    position: "absolute",
+                    top: "-128px",
+                    left: "51%",
+                    transform: "translateX(-50%)",
+                    width: "359px",
+                  }}
+                />
+
+                <h2
+                  style={{
+                    fontSize: "23px",
                     fontWeight: "bold",
-                    color: "#2563EB",
+                    color: "#60A5FA",
+                    margin: "45px 0 8px",
+                    fontFamily: "digitalt",
                   }}
                 >
-                  15
-                </span>
-              </div>
+                  REWARD
+                </h2>
 
-              <img
-                src={buttonImg}
-                alt="Next Exercise"
-                onClick={() => {
-                  toggleModal();
-                  //setStep(step === "1" ? "2" : step === "2" ? "3" : "1");
-                  setShowRecordButton(false);
-                  setShowReset(false);
-                  // if (step === "3") {
-                  //   handleNext();
-                  // }
-                  handleNext();
-                  reset();
-                }}
-                style={{
-                  width: "200px",
-                  marginTop: "35px",
-                  cursor: "pointer",
-                }}
-              />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "8px",
+                    position: "relative",
+                    marginTop: "21px",
+                  }}
+                >
+                  <img src={coinsImg} alt="Coins" style={{ width: "60px" }} />
+                  <span
+                    style={{
+                      fontSize: "22px",
+                      fontWeight: "bold",
+                      color: "#2563EB",
+                    }}
+                  >
+                    15
+                  </span>
+                </div>
+
+                <img
+                  src={buttonImg}
+                  alt="Next Exercise"
+                  onClick={() => {
+                    toggleModal();
+                    //setStep(step === "1" ? "2" : step === "2" ? "3" : "1");
+                    setShowRecordButton(false);
+                    setShowReset(false);
+                    // if (step === "3") {
+                    //   handleNext();
+                    // }
+                    handleNext();
+                    reset();
+                  }}
+                  style={{
+                    width: "200px",
+                    marginTop: "35px",
+                    cursor: "pointer",
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </ThemeProvider>
     </MainLayout>
   );
 };

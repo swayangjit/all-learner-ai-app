@@ -316,7 +316,7 @@ const MainLayout = (props) => {
   let currentPracticeStep = progressData?.currentPracticeStep;
 
   const sectionStyle = {
-    width: "100%",
+    width: { xs: "120%", md: "100%" },
     backgroundImage: `url(${
       backgroundImage ? backgroundImage : levelsImages?.[LEVEL]?.background
     })`,
@@ -406,8 +406,8 @@ const MainLayout = (props) => {
             !allCompleted && (
               <Card
                 sx={{
-                  position: { xs: "absolute", md: "relative" },
-                  left: { xs: "0px", md: "auto" },
+                  position: "relative",
+                  left: { xs: "auto", md: "auto" },
                   width: { xs: "100%", md: "85vw" },
                   minHeight: "80vh",
                   borderRadius: "20px",
