@@ -740,11 +740,12 @@ const AnouncementFlow = ({
     optionsContainer: {
       marginTop: "20px",
       display: "grid",
-      gridTemplateColumns:
-        tasks[currentTaskIndex]?.options?.length === 4 ||
-        tasks[currentTaskIndex]?.options?.length === 5
-          ? "repeat(2, 1fr)"
-          : "repeat(2, 1fr)",
+      gridTemplateColumns: isMobile
+        ? "1fr"
+        : tasks[currentTaskIndex]?.options?.length === 4 ||
+          tasks[currentTaskIndex]?.options?.length === 5
+        ? "repeat(2, 1fr)"
+        : "repeat(2, 1fr)",
       gap: "20px",
       width: "80%",
       marginLeft: "auto",
@@ -768,7 +769,7 @@ const AnouncementFlow = ({
     thirdOption: {
       gridColumn: "1 / -1",
       justifySelf: "center",
-      width: "50%",
+      width: isMobile ? "80%" : "50%",
     },
 
     correctOption: {
@@ -912,6 +913,7 @@ const AnouncementFlow = ({
                         style={{
                           whiteSpace: "pre-wrap",
                           width: "75%",
+                          textAlign: "center",
                           lineHeight: isMobile ? "1.3" : "1.8",
                         }}
                       >

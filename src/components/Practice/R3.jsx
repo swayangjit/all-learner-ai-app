@@ -650,7 +650,7 @@ const R3 = ({
                               alignItems: "center",
                               justifyContent: "center",
                               marginTop: "15px",
-                              marginLeft: "30px",
+                              marginLeft: isMobile ? "20px" : "30px",
                             }}
                             onClick={() => handleCheckboxChange(audio.id)}
                           >
@@ -684,7 +684,7 @@ const R3 = ({
               {showNextButton && (
                 <div
                   style={{
-                    position: "fixed",
+                    position: isMobile ? "none" : "fixed",
                     bottom: "180px",
                     right: "60px",
                     zIndex: 1000,
@@ -697,7 +697,10 @@ const R3 = ({
                   onClick={handleNextClick}
                 /> */}
                   <div onClick={handleNextClick} style={{ cursor: "pointer" }}>
-                    <NextButtonRound height={60} width={60} />
+                    <NextButtonRound
+                      height={isMobile ? 45 : 60}
+                      width={isMobile ? 45 : 60}
+                    />
                   </div>
                 </div>
               )}
@@ -715,7 +718,7 @@ const R3 = ({
                     src={isMatch ? correctTick : r3WrongTick}
                     alt="Effect"
                     style={{
-                      height: "80px",
+                      height: isMobile ? "45px" : "80px",
                       transition: "opacity 0.4s ease-in-out",
                     }}
                   />
@@ -735,7 +738,7 @@ const R3 = ({
                     src={r3Reset}
                     alt="Effect"
                     style={{
-                      height: "80px",
+                      height: isMobile ? "45px" : "80px",
                       transition: "opacity 0.4s ease-in-out",
                       cursor: "pointer",
                     }}

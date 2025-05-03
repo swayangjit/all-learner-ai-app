@@ -1,4 +1,11 @@
-import { Box, Button } from "@mui/material";
+import {
+  ThemeProvider,
+  createTheme,
+  useMediaQuery,
+  Grid,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 import React, { useEffect, useState, useRef } from "react";
 import VoiceAnalyser from "../../utils/VoiceAnalyser";
 import listenImg2 from "../../assets/listen.png";
@@ -34,6 +41,8 @@ import Joyride from "react-joyride";
 //   !/Edg/.test(navigator.userAgent);
 
 const isChrome = true;
+
+const theme = createTheme();
 
 const Mechanics7 = ({
   setVoiceText,
@@ -129,6 +138,8 @@ const Mechanics7 = ({
   const streamRef = useRef(null);
   //const [recordedAudioBlob, setRecordedAudioBlob] = useState(null);
   const chunksRef = useRef([]);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
   const syllableCount = currentImg?.syllablesAudio?.length || 0;
   const isLastSyllable = stepIndex === syllableCount;
@@ -725,16 +736,18 @@ const Mechanics7 = ({
           />
         </Box>
       )} */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-          height: "60vh",
-          //width: "80%"
-        }}
-      >
-        {/*         
+      <ThemeProvider theme={theme}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            height: "100%",
+            //width: "80%"
+          }}
+        >
+          {/*         
         <Joyride
           steps={walkSteps}
           run={run}
@@ -764,348 +777,161 @@ const Mechanics7 = ({
           }}                  
         />
         */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            maskBorderWidth: 6,
-          }}
-        >
-          <img
-            src={currentImg?.img}
-            alt="pencil"
-            height={"200px"}
-            width={"200px"}
-            style={{
-              zIndex: 2,
-            }}
-          />
-        </Box>
-        <Box
-          sx={{
-            width: "1px",
-            backgroundColor: "#E0E2E7",
-            height: "100%",
-            border: "1px solid #E0E2E7",
-          }}
-        />
-        {false && (
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexWrap: "wrap",
-                mb: 5,
-                mt: 4,
-              }}
-            >
-              {wordsRef.current?.slice(0, 1)?.map((elem, wIndex) => (
-                <React.Fragment key={elem}>
-                  {type === "word" ? (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        //marginLeft: getDynamicMarginLeft(wIndex),
-                      }}
-                    >
-                      <Box
-                        onClick={() => handleWords(elem)}
-                        sx={{
-                          marginTop: "10px",
-                          position: "relative",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          height: { xs: "30px", sm: "40px", md: "50px" },
-                          minWidth: { xs: "50px", sm: "60px", md: "70px" },
-                          //   background: "#1897DE",
-                          m: { xs: 0.5, sm: 1 },
-                          cursor:
-                            wIndex === 0
-                              ? `url(${clapImage}) 32 24, auto`
-                              : "auto",
-                          //   borderRadius: "12px",
-                          //   border: "5px solid #10618E",
-                          fontSize: {
-                            xs: "30px",
-                            sm: "30px",
-                            md: "40px",
-                            lg: "40px",
-                          },
-                          //marginLeft: getMarginLeft(wIndex),
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            backgroundColor: "#1CB0F60F",
-                            border: "2px solid #1CB0F633",
-                            borderRadius: "16px",
-                            display: "flex",
-                            padding: "8px 70px",
-                          }}
-                        >
-                          {elem?.split("")?.map((char, index) => (
-                            <span
-                              style={{
-                                color: wIndex == 0 ? "##333F61" : "#000000",
-                                fontWeight: 700,
-                                fontSize: "72px",
-                                lineHeight: "87px",
-                                letterSpacing: "2%",
-                                fontFamily: "Quicksand",
-                                marginLeft: index > 0 ? "10px" : undefined,
-                                textTransform: "uppercase",
-                              }}
-                            >
-                              {char}
-                            </span>
-                          ))}
-                        </Box>
-                      </Box>
-                    </div>
-                  ) : (
-                    <Box
-                      onClick={() => handleWords(elem)}
-                      sx={{
-                        textAlign: "center",
-                        px: { xs: "15px", sm: "20px", md: "25px" },
-                        py: { xs: "8px", sm: "10px", md: "12px" },
-                        m: { xs: 0.5, sm: 1 },
-                        textTransform: "none",
-                        borderRadius: "12px",
-                        border: `1px solid rgba(51, 63, 97, 0.10)`,
-                        background: "#FFF",
-                        cursor: "pointer",
-                        fontSize: {
-                          xs: "25px",
-                          sm: "30px",
-                          md: "35px",
-                          lg: "40px",
-                        },
-                      }}
-                    >
-                      <span
-                        style={{
-                          color: "#6F80B1",
-                          fontWeight: 600,
-                          fontFamily: "Quicksand",
-                        }}
-                      >
-                        {elem}
-                      </span>
-                    </Box>
-                  )}
-                </React.Fragment>
-              ))}
-            </Box>
-          </div>
-        )}
-        <Box textAlign="center">
           <Box
             sx={{
-              backgroundColor: !isRecorded
-                ? "#1CB0F60F" // default background
-                : isIncorrectWord
-                ? "#58CC020F" // red FF7F360F
-                : "#58CC020F", // green background
-              border: !isRecorded
-                ? "2px solid #1CB0F633" // default border
-                : isIncorrectWord
-                ? "2px solid #58CC02" // red FF7F36
-                : "2px solid #58CC02", // green border
-              borderRadius: "16px",
               display: "flex",
-              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              padding: "10px 70px",
-              marginBottom: "16px",
+              maskBorderWidth: 6,
             }}
           >
+            <img
+              src={currentImg?.img}
+              alt="pencil"
+              height={"200px"}
+              width={"200px"}
+              style={{
+                zIndex: 2,
+              }}
+            />
+          </Box>
+          <Box
+            sx={{
+              width: isMobile ? "50vh" : "1px",
+              backgroundColor: "#E0E2E7",
+              height: isMobile ? "1px" : "50vh",
+              border: "1px solid #E0E2E7",
+              marginBottom: isMobile ? "40px" : "0px",
+            }}
+          />
+          <Box textAlign="center">
             <Box
               sx={{
-                display: "inline-flex",
+                backgroundColor: !isRecorded
+                  ? "#1CB0F60F" // default background
+                  : isIncorrectWord
+                  ? "#58CC020F" // red FF7F360F
+                  : "#58CC020F", // green background
+                border: !isRecorded
+                  ? "2px solid #1CB0F633" // default border
+                  : isIncorrectWord
+                  ? "2px solid #58CC02" // red FF7F36
+                  : "2px solid #58CC02", // green border
+                borderRadius: "16px",
+                display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                padding: isMobile ? "10px 20px" : "10px 70px",
+                marginBottom: "16px",
               }}
             >
+              <Box
+                sx={{
+                  display: "inline-flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {isRecorded && (
+                  <img
+                    //src={!isIncorrectWord ? Assets.tick : Assets.wrongTick}
+                    src={Assets.tick}
+                    alt="tick"
+                    style={{
+                      marginRight: "16px",
+                      width: "56px",
+                      height: "56px",
+                    }}
+                  />
+                )}
+                {currentText?.split("").map((char, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      color: !isRecorded
+                        ? "#333F61" // default background
+                        : isIncorrectWord
+                        ? "#58CC02" // red FF7F36
+                        : "#58CC02",
+                      //color: isRecorded ? "#58CC02" : "#333F61",
+                      fontWeight: 700,
+                      fontSize: isMobile ? "50px" : "72px",
+                      lineHeight: isMobile ? "60px" : "87px",
+                      letterSpacing: isMobile ? "1%" : "2%",
+                      fontFamily: "Quicksand",
+                      marginLeft:
+                        index > 0 ? (isMobile ? "2px" : "10px") : undefined,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </Box>
               {isRecorded && (
                 <img
-                  //src={!isIncorrectWord ? Assets.tick : Assets.wrongTick}
-                  src={Assets.tick}
-                  alt="tick"
-                  style={{ marginRight: "16px", width: "56px", height: "56px" }}
+                  src={Assets.graph}
+                  alt="graph"
+                  style={{ height: "40px", margin: "10px" }}
                 />
               )}
-              {currentText?.split("").map((char, index) => (
-                <span
-                  key={index}
-                  style={{
-                    color: !isRecorded
-                      ? "#333F61" // default background
-                      : isIncorrectWord
-                      ? "#58CC02" // red FF7F36
-                      : "#58CC02",
-                    //color: isRecorded ? "#58CC02" : "#333F61",
-                    fontWeight: 700,
-                    fontSize: "72px",
-                    lineHeight: "87px",
-                    letterSpacing: "2%",
-                    fontFamily: "Quicksand",
-                    marginLeft: index > 0 ? "10px" : undefined,
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {char}
-                </span>
-              ))}
             </Box>
-            {isRecorded && (
-              <img
-                src={Assets.graph}
-                alt="graph"
-                style={{ height: "40px", margin: "10px" }}
-              />
-            )}
-          </Box>
 
-          {/* Action Buttons */}
-          {!isRecording && !isRecorded && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                maskBorderWidth: 6,
-                gap: 5,
-              }}
-            >
-              {isPlaying ? (
-                <div>
-                  <Box
-                    sx={{
-                      marginTop: "7px",
-                      position: "relative",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      minWidth: { xs: "50px", sm: "60px", md: "70px" },
-                      cursor: "pointer",
-                      marginLeft: getMarginLeft(0),
-                    }}
-                    onClick={stopCompleteAudio}
-                  >
-                    <StopButton height={50} width={50} />
-                  </Box>
-                </div>
-              ) : (
-                <div>
-                  <Box
-                    className="walkthrough-step-1"
-                    sx={{
-                      marginTop: "7px",
-                      position: "relative",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      minWidth: { xs: "50px", sm: "60px", md: "70px" },
-                      cursor: `url(${clapImage}) 32 24, auto`,
-                      marginLeft: getMarginLeft(0),
-                    }}
-                    onClick={() => {
-                      playWordAudio(currentAudio);
-                    }}
-                  >
-                    <ListenButton height={50} width={50} />
-                  </Box>
-                </div>
-              )}
+            {/* Action Buttons */}
+            {!isRecording && !isRecorded && (
               <Box
-                className="walkthrough-step-2"
                 sx={{
-                  position: "relative",
-                  width: "90px",
-                  height: "90px",
                   display: "flex",
+                  flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
-                  marginTop: "7px",
-                  //marginLeft: getMarginLeft(0),
-                  cursor: `url(${clapImage}) 32 24, auto`,
-                }}
-                onClick={() => {
-                  setIsRecording(true);
-                  startRecording(currentText);
-                  //startAudioRecording();
+                  maskBorderWidth: 6,
+                  gap: 5,
                 }}
               >
+                {isPlaying ? (
+                  <div>
+                    <Box
+                      sx={{
+                        marginTop: "7px",
+                        position: "relative",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        minWidth: { xs: "50px", sm: "60px", md: "70px" },
+                        cursor: "pointer",
+                        marginLeft: getMarginLeft(0),
+                      }}
+                      onClick={stopCompleteAudio}
+                    >
+                      <StopButton height={50} width={50} />
+                    </Box>
+                  </div>
+                ) : (
+                  <div>
+                    <Box
+                      className="walkthrough-step-1"
+                      sx={{
+                        marginTop: "7px",
+                        position: "relative",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        minWidth: { xs: "50px", sm: "60px", md: "70px" },
+                        cursor: `url(${clapImage}) 32 24, auto`,
+                        marginLeft: getMarginLeft(0),
+                      }}
+                      onClick={() => {
+                        playWordAudio(currentAudio);
+                      }}
+                    >
+                      <ListenButton height={50} width={50} />
+                    </Box>
+                  </div>
+                )}
                 <Box
-                  sx={{
-                    position: "absolute",
-                    width: "90px",
-                    height: "90px",
-                    backgroundColor: "#58CC0233",
-                    borderRadius: "50%",
-                    animation: "pulse 1.2s linear infinite",
-                    "@keyframes pulse": {
-                      "0%": {
-                        transform: "scale(0.6)",
-                        opacity: 0,
-                      },
-                      "50%": {
-                        opacity: 1,
-                      },
-                      "100%": {
-                        transform: "scale(1.4)",
-                        opacity: 0,
-                      },
-                    },
-                  }}
-                />
-                <Box
-                  sx={{
-                    position: "relative",
-                    zIndex: 1,
-                  }}
-                >
-                  <SpeakButton height={50} width={50} />
-                </Box>
-              </Box>
-            </Box>
-          )}
-
-          {isRecording && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                maskBorderWidth: 6,
-              }}
-            >
-              <Box style={{ marginTop: "10px", marginBottom: "50px" }}>
-                <RecordVoiceVisualizer />
-              </Box>
-              <Box
-                className="walkthrough-step-3"
-                sx={{
-                  marginTop: "7px",
-                  position: "relative",
-                  display: "flex",
-                  gap: "50px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  //height: { xs: "30px", sm: "40px", md: "50px" },
-                  minWidth: { xs: "50px", sm: "60px", md: "70px" },
-                  cursor: `url(${clapImage}) 32 24, auto`,
-                }}
-              >
-                <Box
+                  className="walkthrough-step-2"
                   sx={{
                     position: "relative",
                     width: "90px",
@@ -1113,16 +939,14 @@ const Mechanics7 = ({
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    //marginTop: "7px",
+                    marginTop: "7px",
                     //marginLeft: getMarginLeft(0),
                     cursor: `url(${clapImage}) 32 24, auto`,
-                    borderRadius: "50%",
                   }}
                   onClick={() => {
-                    setIsRecording(false);
-                    setIsRecorded(true);
-                    stopRecording(currentText);
-                    //stopAudioRecording();
+                    setIsRecording(true);
+                    startRecording(currentText);
+                    //startAudioRecording();
                   }}
                 >
                   <Box
@@ -1130,7 +954,7 @@ const Mechanics7 = ({
                       position: "absolute",
                       width: "90px",
                       height: "90px",
-                      backgroundColor: "#FF4B4B33",
+                      backgroundColor: "#58CC0233",
                       borderRadius: "50%",
                       animation: "pulse 1.2s linear infinite",
                       "@keyframes pulse": {
@@ -1154,149 +978,232 @@ const Mechanics7 = ({
                       zIndex: 1,
                     }}
                   >
-                    <StopButton height={50} width={50} />
+                    <SpeakButton height={50} width={50} />
                   </Box>
                 </Box>
               </Box>
-            </Box>
-          )}
+            )}
 
-          {isRecorded && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: "30px",
-                gap: "10px",
-                //maskBorderWidth: 6,
-              }}
-            >
+            {isRecording && (
               <Box
                 sx={{
                   display: "flex",
-                  flexDirection: "row",
+                  flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
-                  gap: 5,
-                  marginRight: "5px",
+                  maskBorderWidth: 6,
+                }}
+              >
+                <Box style={{ marginTop: "10px", marginBottom: "50px" }}>
+                  <RecordVoiceVisualizer />
+                </Box>
+                <Box
+                  className="walkthrough-step-3"
+                  sx={{
+                    marginTop: "7px",
+                    position: "relative",
+                    display: "flex",
+                    gap: "50px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    //height: { xs: "30px", sm: "40px", md: "50px" },
+                    minWidth: { xs: "50px", sm: "60px", md: "70px" },
+                    cursor: `url(${clapImage}) 32 24, auto`,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: "90px",
+                      height: "90px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      //marginTop: "7px",
+                      //marginLeft: getMarginLeft(0),
+                      cursor: `url(${clapImage}) 32 24, auto`,
+                      borderRadius: "50%",
+                    }}
+                    onClick={() => {
+                      setIsRecording(false);
+                      setIsRecorded(true);
+                      stopRecording(currentText);
+                      //stopAudioRecording();
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        width: "90px",
+                        height: "90px",
+                        backgroundColor: "#FF4B4B33",
+                        borderRadius: "50%",
+                        animation: "pulse 1.2s linear infinite",
+                        "@keyframes pulse": {
+                          "0%": {
+                            transform: "scale(0.6)",
+                            opacity: 0,
+                          },
+                          "50%": {
+                            opacity: 1,
+                          },
+                          "100%": {
+                            transform: "scale(1.4)",
+                            opacity: 0,
+                          },
+                        },
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: "relative",
+                        zIndex: 1,
+                      }}
+                    >
+                      <StopButton height={50} width={50} />
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            )}
+
+            {isRecorded && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: "30px",
+                  gap: "10px",
                   //maskBorderWidth: 6,
                 }}
               >
                 <Box
                   sx={{
                     display: "flex",
-                    flexDirection: "column",
+                    flexDirection: "row",
                     justifyContent: "center",
                     alignItems: "center",
-                    maskBorderWidth: 6,
                     gap: 5,
+                    marginRight: "5px",
+                    //maskBorderWidth: 6,
                   }}
                 >
-                  {isPlaying ? (
-                    <div>
-                      <Box
-                        sx={{
-                          //marginTop: "7px",
-                          position: "relative",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          minWidth: { xs: "50px", sm: "60px", md: "70px" },
-                          cursor: "pointer",
-                          marginLeft: getMarginLeft(0),
-                        }}
-                        onClick={stopCompleteAudio}
-                      >
-                        <img
-                          src={spinnerStop}
-                          alt="Audio"
-                          style={{
-                            height: "50px",
-                            width: "50px",
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      maskBorderWidth: 6,
+                      gap: 5,
+                    }}
+                  >
+                    {isPlaying ? (
+                      <div>
+                        <Box
+                          sx={{
+                            //marginTop: "7px",
+                            position: "relative",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            minWidth: { xs: "50px", sm: "60px", md: "70px" },
                             cursor: "pointer",
+                            marginLeft: getMarginLeft(0),
                           }}
-                        />
-                        {/* <StopButton height={50} width={50} /> */}
-                      </Box>
-                    </div>
-                  ) : (
-                    <div>
-                      <Box
-                        className="walkthrough-step-4"
-                        sx={{
-                          //marginTop: "7px",
-                          position: "relative",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          minWidth: { xs: "50px", sm: "60px", md: "70px" },
-                          cursor: `url(${clapImage}) 32 24, auto`,
-                          //marginLeft: getMarginLeft(0),
-                        }}
-                        onClick={() => {
-                          playAudioFromBlob(recordedAudioBlob);
-                        }}
-                      >
-                        <img
-                          src={listenImg2}
-                          alt="Audio"
-                          style={{
-                            height: "50px",
-                            width: "50px",
-                            cursor: "pointer",
+                          onClick={stopCompleteAudio}
+                        >
+                          <img
+                            src={spinnerStop}
+                            alt="Audio"
+                            style={{
+                              height: "50px",
+                              width: "50px",
+                              cursor: "pointer",
+                            }}
+                          />
+                          {/* <StopButton height={50} width={50} /> */}
+                        </Box>
+                      </div>
+                    ) : (
+                      <div>
+                        <Box
+                          className="walkthrough-step-4"
+                          sx={{
+                            //marginTop: "7px",
+                            position: "relative",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            minWidth: { xs: "50px", sm: "60px", md: "70px" },
+                            cursor: `url(${clapImage}) 32 24, auto`,
+                            //marginLeft: getMarginLeft(0),
                           }}
-                        />
-                        {/* <ListenButton height={50} width={50} /> */}
-                      </Box>
-                    </div>
-                  )}
+                          onClick={() => {
+                            playAudioFromBlob(recordedAudioBlob);
+                          }}
+                        >
+                          <img
+                            src={listenImg2}
+                            alt="Audio"
+                            style={{
+                              height: "50px",
+                              width: "50px",
+                              cursor: "pointer",
+                            }}
+                          />
+                          {/* <ListenButton height={50} width={50} /> */}
+                        </Box>
+                      </div>
+                    )}
+                  </Box>
+                  <div
+                    onClick={() => {
+                      setIsRecorded(false);
+                      setIsRecording(true);
+                      startRecording(currentText);
+                    }}
+                    style={{
+                      //marginTop: "-10px",
+                      cursor: "pointer",
+                      //marginLeft: "30px",
+                    }}
+                  >
+                    <RetryIcon height={50} width={50} />
+                  </div>
                 </Box>
-                <div
+                <Box
+                  className="walkthrough-step-5"
                   onClick={() => {
                     setIsRecorded(false);
-                    setIsRecording(true);
-                    startRecording(currentText);
+                    if (isLastSyllable) {
+                      handleNext();
+                      setStepIndex(0);
+                    } else {
+                      setStepIndex((prev) => prev + 1);
+                    }
                   }}
-                  style={{
-                    //marginTop: "-10px",
+                  sx={{
+                    marginTop: "30px",
                     cursor: "pointer",
                     //marginLeft: "30px",
                   }}
                 >
-                  <RetryIcon height={50} width={50} />
-                </div>
+                  <NextButtonRound height={50} width={50} />
+                </Box>
               </Box>
-              <Box
-                className="walkthrough-step-5"
-                onClick={() => {
-                  setIsRecorded(false);
-                  if (isLastSyllable) {
-                    handleNext();
-                    setStepIndex(0);
-                  } else {
-                    setStepIndex((prev) => prev + 1);
-                  }
-                }}
-                sx={{
-                  marginTop: "30px",
-                  cursor: "pointer",
-                  //marginLeft: "30px",
-                }}
-              >
-                <NextButtonRound height={50} width={50} />
-              </Box>
-            </Box>
-          )}
-          <audio
-            ref={audioRef}
-            onEnded={handleAudioEnd}
-            src={completeAudio}
-            hidden
-          />
-        </Box>
-      </div>
+            )}
+            <audio
+              ref={audioRef}
+              onEnded={handleAudioEnd}
+              src={completeAudio}
+              hidden
+            />
+          </Box>
+        </div>
+      </ThemeProvider>
     </MainLayout>
   );
 };
