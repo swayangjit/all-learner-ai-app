@@ -628,11 +628,13 @@ const Practice = () => {
   }
 
   let currentPracticeStep;
-  if (progressDatas?.[virtualId]) {
-    currentPracticeStep = progressDatas[virtualId].currentPracticeStep;
+  if (progressDatas) {
+    currentPracticeStep = progressDatas?.currentPracticeStep;
   }
 
   const currentLevel = practiceSteps?.[currentPracticeStep]?.title || "P1";
+
+  console.log("prog", progressDatas);
 
   const rFlow = getLocalData("rFlow");
 
@@ -888,7 +890,7 @@ const Practice = () => {
           }
           //setLocalData("previous_level", getSetData.data.previous_level);
           setLocalData("previous_level", getSetData.previous_level);
-          if (getSetData.data.sessionResult === "pass") {
+          if (getSetData.sessionResult === "pass") {
             if (
               level === 15 &&
               (currentLevel === "S1" || currentLevel === "S2")
@@ -994,13 +996,13 @@ const Practice = () => {
           setLocalData("storyTitle", resGetContent?.name);
 
           // TODO: not required - we are geting this data from API
-          practiceProgress[virtualId] = {
+          practiceProgress = {
             currentQuestion: newQuestionIndex,
             currentPracticeProgress,
             currentPracticeStep: newPracticeStep,
           };
           setLocalData("practiceProgress", JSON.stringify(practiceProgress));
-          setProgressData(practiceProgress[virtualId]);
+          setProgressData(practiceProgress);
           localStorage.setItem("storyTitle", resGetContent?.name);
 
           setQuestions(quesArr);
@@ -1012,13 +1014,13 @@ const Practice = () => {
           setIsShowCase(showcaseLevel);
           setCurrentQuestion(0);
 
-          practiceProgress[virtualId] = {
+          practiceProgress = {
             currentQuestion: newQuestionIndex,
             currentPracticeProgress,
             currentPracticeStep: newPracticeStep,
           };
           setLocalData("practiceProgress", JSON.stringify(practiceProgress));
-          setProgressData(practiceProgress[virtualId]);
+          setProgressData(practiceProgress);
 
           const dummyQuestions = Array.from({ length: 5 }, (_, i) => ({
             id: `dummy-${i + 1}`,
@@ -1497,7 +1499,7 @@ const Practice = () => {
     }
   }, [questions[currentQuestion]]);
 
-  console.log("mec", mechanism, level, rFlow);
+  console.log("mec", mechanism, level, rFlow, currentLevel);
 
   const renderMechanics = () => {
     if (

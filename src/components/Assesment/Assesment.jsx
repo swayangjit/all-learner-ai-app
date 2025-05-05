@@ -65,6 +65,7 @@ import scoreView from "../../assets/images/scoreView.svg";
 import { fetchUserPoints } from "../../services/orchestration/orchestrationService";
 import { fetchVirtualId } from "../../services/userservice/userService";
 import { getFetchMilestoneDetails } from "../../services/learnerAi/learnerAiService";
+import * as Assets from "../../utils/imageAudioLinks";
 
 export const LanguageModal = ({ lang, setLang, setOpenLangModal }) => {
   const [selectedLang, setSelectedLang] = useState(lang);
