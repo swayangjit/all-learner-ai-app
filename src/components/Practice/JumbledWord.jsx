@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   ThemeProvider,
   createTheme,
@@ -37,6 +37,11 @@ import {
   level12,
   level15,
 } from "../../utils/levelData";
+import {
+  fetchASROutput,
+  handleTextEvaluation,
+  callTelemetryApi,
+} from "../../utils/apiUtil";
 
 const levelMap = {
   10: level10,
@@ -91,6 +96,72 @@ const JumbledWord = ({
   const [audioInstance, setAudioInstance] = useState(null);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const [recordedBlob, setRecordedBlob] = useState(null);
+  const mediaRecorderRef = useRef(null);
+  const recordedChunksRef = useRef([]);
+
+  const mimeType = "audio/webm;codecs=opus";
+
+  const startAudioRecording = useCallback(async () => {
+    setRecordedBlob(null);
+    recordedChunksRef.current = [];
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        console.error("MIME type not supported:", mimeType);
+        return;
+      }
+
+      const mediaRecorder = new MediaRecorder(stream, { mimeType });
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          recordedChunksRef.current.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        if (recordedChunksRef.current.length === 0) {
+          console.warn("No audio data captured.");
+          setRecordedBlob(null);
+          return;
+        }
+
+        const blob = new Blob(recordedChunksRef.current, { type: mimeType });
+        setRecordedBlob(blob);
+        recordedChunksRef.current = [];
+      };
+
+      mediaRecorderRef.current = mediaRecorder;
+      mediaRecorder.start(100); // Emit data every 100ms
+      setIsRecording(true);
+    } catch (err) {
+      console.error("Error starting audio recording:", err);
+    }
+  }, []);
+
+  const stopAudioRecording = useCallback(() => {
+    const recorder = mediaRecorderRef.current;
+    if (recorder && recorder.state !== "inactive") {
+      recorder.requestData(); // Flush remaining data
+      recorder.stop();
+      setIsRecording(false);
+    }
+  }, []);
+
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64data = reader.result.split(",")[1];
+        resolve(base64data);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
 
   const content = {
     L1: [
@@ -143,6 +214,23 @@ const JumbledWord = ({
   //const levelData = content.L1[0];
 
   console.log("lData", levelData);
+
+  const callTelemetry = async () => {
+    const sessionId = getLocalData("sessionId");
+    const responseStartTime = new Date().getTime();
+    let responseText = "";
+    const base64Data = await blobToBase64(recordedBlob);
+    console.log("bvlobss", recordedBlob);
+
+    await callTelemetryApi(
+      levelData?.correctWord[0]?.correctSentence,
+      sessionId,
+      currentStep - 1,
+      base64Data,
+      responseStartTime,
+      responseText?.responseText || ""
+    );
+  };
 
   let audioElement =
     getAssetAudioUrl(s3Assets[levelData?.correctWord?.[0]?.audio]) ||
@@ -216,6 +304,7 @@ const JumbledWord = ({
   };
 
   const goToNextStep = () => {
+    callTelemetry();
     stopCompleteAudio();
     handleNext();
     resetStates();
@@ -294,8 +383,14 @@ const JumbledWord = ({
 
   const handleMicClick3 = () => {
     if (isRecording3) {
+      // If currently recording, stop it
+      stopAudioRecording();
       setIsRecordingStopped3(true);
+    } else {
+      // If not recording, start it
+      startAudioRecording();
     }
+    // Toggle recording state
     setIsRecording3((prev) => !prev);
   };
 

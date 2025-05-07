@@ -747,116 +747,115 @@ const R2 = ({
         loading,
       }}
     >
-      <ThemeProvider theme={theme}>
-        {currentQuestion?.question ? (
-          <div
-            style={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              // background:
-              //   "linear-gradient(128.49deg, rgb(158, 197, 255) 0%, rgb(225, 166, 248) 100%)",
-              backgroundColor: "#FFFFFF",
-            }}
-          >
-            {showConfetti && (
-              <Confetti width={window.innerWidth} height={window.innerHeight} />
-            )}
+      {currentQuestion?.question ? (
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            // background:
+            //   "linear-gradient(128.49deg, rgb(158, 197, 255) 0%, rgb(225, 166, 248) 100%)",
+            backgroundColor: "#FFFFFF",
+          }}
+        >
+          {showConfetti && (
+            <Confetti width={window.innerWidth} height={window.innerHeight} />
+          )}
 
-            {step === "1" && (
+          {step === "1" && (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "20px",
+              }}
+            >
+              {!showRecordButton && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {/* Dog Image - Moves with Progress */}
+                  <img
+                    src={Assets.dogGif}
+                    alt="Dog"
+                    style={{
+                      position: "relative",
+                      left: `${(progress / 100) * 260}px`,
+                      width: isMobile ? "45px" : "50px",
+                      height: isMobile ? "50px" : "55px",
+                      transition: "left 0.2s linear",
+                      marginBottom: "-10px",
+                      marginLeft: "-10px",
+                    }}
+                  />
+
+                  {/* Progress Bar */}
+                  <div
+                    style={{
+                      width: "280px",
+                      height: "15px",
+                      backgroundColor: "white",
+                      borderRadius: "12px",
+                      overflow: "hidden",
+                      border: "2px solid #F39F27",
+                      position: "relative",
+                    }}
+                  >
+                    {/* Progress Fill */}
+                    <div
+                      style={{
+                        width: `${progress}%`,
+                        height: "100%",
+                        background:
+                          "linear-gradient(0deg, #F19920 0%, #F39F27 23%, #F7B03B 58%, #FECC5C 100%)",
+                        transition: "width 0.2s linear",
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "20px",
+                  gap: "10px",
+                  background: "#FF7F361A",
+                  borderRadius: "20px",
+                  padding: "20px 50px",
+                  maxWidth: "50%",
+                  height: "120px",
+                  border: "2px dotted var(--Button-Orange, #FF7F36)",
+                  //boxShadow: "0px 6px 0px 1px rgb(245, 245, 255)",
+                  // boxShadow:
+                  //   "rgb(245, 245, 255) 0px 6px 0px 1px, rgb(102, 102, 133) 0px 11px 0px 1px",
                 }}
               >
-                {!showRecordButton && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    {/* Dog Image - Moves with Progress */}
-                    <img
-                      src={dogGif}
-                      alt="Dog"
-                      style={{
-                        position: "relative",
-                        left: `${(progress / 100) * 260}px`,
-                        width: isMobile ? "45px" : "50px",
-                        height: isMobile ? "50px" : "55px",
-                        transition: "left 0.2s linear",
-                        marginBottom: "-10px",
-                        marginLeft: "-10px",
-                      }}
-                    />
-
-                    {/* Progress Bar */}
-                    <div
-                      style={{
-                        width: "280px",
-                        height: "15px",
-                        backgroundColor: "white",
-                        borderRadius: "12px",
-                        overflow: "hidden",
-                        border: "2px solid #F39F27",
-                        position: "relative",
-                      }}
-                    >
-                      {/* Progress Fill */}
-                      <div
-                        style={{
-                          width: `${progress}%`,
-                          height: "100%",
-                          background:
-                            "linear-gradient(0deg, #F19920 0%, #F39F27 23%, #F7B03B 58%, #FECC5C 100%)",
-                          transition: "width 0.2s linear",
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "10px",
-                    background: "#FF7F361A",
-                    borderRadius: "20px",
-                    padding: "20px 50px",
-                    maxWidth: "50%",
-                    height: "120px",
-                    border: "2px dotted var(--Button-Orange, #FF7F36)",
-                    //boxShadow: "0px 6px 0px 1px rgb(245, 245, 255)",
-                    // boxShadow:
-                    //   "rgb(245, 245, 255) 0px 6px 0px 1px, rgb(102, 102, 133) 0px 11px 0px 1px",
-                  }}
-                >
-                  {/* <img
+                {/* <img
                         src={content.L1[0].stepOne.img}
                         alt="Ship"
                         style={{ width: "210px", height: "auto" }}
                       /> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "10px",
-                      maxWidth: isMobile ? "90%" : "80%",
-                      textAlign: "center",
-                    }}
-                  >
-                    {/* <span
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "10px",
+                    maxWidth: isMobile ? "90%" : "80%",
+                    textAlign: "center",
+                  }}
+                >
+                  {/* <span
                           style={{
                             fontSize: "28px",
                             fontWeight: "600",
@@ -867,144 +866,144 @@ const R2 = ({
                           {content?.L1[currentQuestionIndex]?.question?.text}
 
                         </span> */}
-                    <img
-                      src={content?.L1[currentQuestionIndex]?.question?.img}
-                      alt="Hint"
-                      style={{
-                        //position: "absolute",
-                        //top: "-40px",
-                        //left: "-30px",
-                        //transform: "rotate(-45deg)",
-                        height: "100px",
-                      }}
-                    />
-                    {/* <img
+                  <img
+                    src={content?.L1[currentQuestionIndex]?.question?.img}
+                    alt="Hint"
+                    style={{
+                      //position: "absolute",
+                      //top: "-40px",
+                      //left: "-30px",
+                      //transform: "rotate(-45deg)",
+                      height: "100px",
+                    }}
+                  />
+                  {/* <img
                           src={listenImg}
                           alt="Listen"
                           style={{ width: "30px", cursor: "pointer" }}
                           onClick={() => playAudio(content.L1[0].stepOne.correctAudio)}
                         /> */}
-                  </div>
                 </div>
+              </div>
 
-                {!showRecordButton &&
-                  content?.L1[currentQuestionIndex]?.options?.length > 0 && (
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: isMobile ? "5px" : "50px",
-                        marginTop: "20px",
-                      }}
-                    >
-                      {content?.L1[currentQuestionIndex]?.options.map(
-                        (audio, index) => {
-                          const style = styles[index % styles.length];
+              {!showRecordButton &&
+                content?.L1[currentQuestionIndex]?.options?.length > 0 && (
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: isMobile ? "5px" : "50px",
+                      marginTop: "20px",
+                    }}
+                  >
+                    {content?.L1[currentQuestionIndex]?.options.map(
+                      (audio, index) => {
+                        const style = styles[index % styles.length];
 
-                          return (
+                        return (
+                          <div
+                            key={index}
+                            style={{
+                              position: "relative",
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              gap: "10px",
+                            }}
+                          >
+                            {index === activeIndex && (
+                              <img
+                                src={Assets.hintGif}
+                                alt="Hint"
+                                style={{
+                                  position: "absolute",
+                                  ...(handPhase === "audio"
+                                    ? {
+                                        bottom: "40px",
+                                        left: "-30px",
+                                        transform: "rotate(-120deg)",
+                                      }
+                                    : {
+                                        bottom: "-50px",
+                                        left: "-30px",
+                                        transform: "rotate(-120deg)",
+                                      }),
+                                  height: isMobile ? "70px" : "80px",
+                                  zIndex: "9999",
+                                  transition: "all 0.3s ease",
+                                }}
+                              />
+                            )}
                             <div
-                              key={index}
                               style={{
-                                position: "relative",
                                 display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
+                                //border: "2px solid white",
                                 gap: "10px",
+                                alignItems: "center",
+                                justifyContent: "center",
                               }}
                             >
-                              {index === activeIndex && (
-                                <img
-                                  src={handIconGif}
-                                  alt="Hint"
-                                  style={{
-                                    position: "absolute",
-                                    ...(handPhase === "audio"
-                                      ? {
-                                          bottom: "40px",
-                                          left: "-30px",
-                                          transform: "rotate(-120deg)",
-                                        }
-                                      : {
-                                          bottom: "-50px",
-                                          left: "-30px",
-                                          transform: "rotate(-120deg)",
-                                        }),
-                                    height: isMobile ? "70px" : "80px",
-                                    zIndex: "9999",
-                                    transition: "all 0.3s ease",
-                                  }}
-                                />
-                              )}
-                              <div
+                              <span
                                 style={{
-                                  display: "flex",
-                                  //border: "2px solid white",
-                                  gap: "10px",
-                                  alignItems: "center",
-                                  justifyContent: "center",
+                                  color: "#000000",
+                                  fontFamily: "Quicksand",
+                                  fontWeight: 700,
+                                  fontSize: isMobile ? "20px" : "36px",
+                                  lineHeight: "60px",
+                                  letterSpacing: "0%",
+                                  textAlign: "center",
+                                  verticalAlign: "middle",
                                 }}
                               >
-                                <span
+                                {index + 1}
+                              </span>
+                              <div
+                                style={{
+                                  gap: "5px",
+                                  width: isMobile ? "50px" : "80px",
+                                  height: isMobile ? "50px" : "80px",
+                                  background:
+                                    selectedText === audio.value
+                                      ? isMatch
+                                        ? "#58CC02"
+                                        : "#FF0000"
+                                      : style.background,
+                                  borderRadius: "50%",
+                                  display: "flex",
+                                  //border: "2px solid white",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  fontSize: "30px",
+                                  fontWeight: "bold",
+                                  boxShadow:
+                                    selectedText === audio.value
+                                      ? "none"
+                                      : style.boxShadow,
+                                  cursor: "pointer",
+                                  color: "#FFFFFF",
+                                  filter:
+                                    activeIndex !== index
+                                      ? "brightness(50%)"
+                                      : "none",
+                                  transition: "filter 0.3s ease",
+                                }}
+                                onClick={() => {
+                                  setActiveIndex(index);
+                                  playAudio(audio.value);
+                                }}
+                              >
+                                <img
+                                  src={Assets.musicIcon}
+                                  alt="Mike"
                                   style={{
-                                    color: "#000000",
-                                    fontFamily: "Quicksand",
-                                    fontWeight: 700,
-                                    fontSize: isMobile ? "20px" : "36px",
-                                    lineHeight: "60px",
-                                    letterSpacing: "0%",
-                                    textAlign: "center",
-                                    verticalAlign: "middle",
-                                  }}
-                                >
-                                  {index + 1}
-                                </span>
-                                <div
-                                  style={{
-                                    gap: "5px",
-                                    width: isMobile ? "50px" : "80px",
-                                    height: isMobile ? "50px" : "80px",
-                                    background:
-                                      selectedText === audio.value
-                                        ? isMatch
-                                          ? "#58CC02"
-                                          : "#FF0000"
-                                        : style.background,
-                                    borderRadius: "50%",
-                                    display: "flex",
-                                    //border: "2px solid white",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    fontSize: "30px",
-                                    fontWeight: "bold",
-                                    boxShadow:
-                                      selectedText === audio.value
-                                        ? "none"
-                                        : style.boxShadow,
+                                    width: isMobile ? "30px" : "40px",
+                                    height: isMobile ? "30px" : "40px",
                                     cursor: "pointer",
-                                    color: "#FFFFFF",
-                                    filter:
-                                      activeIndex !== index
-                                        ? "brightness(50%)"
-                                        : "none",
-                                    transition: "filter 0.3s ease",
                                   }}
-                                  onClick={() => {
-                                    setActiveIndex(index);
-                                    playAudio(audio.value);
-                                  }}
-                                >
-                                  <img
-                                    src={Assets.musicIcon}
-                                    alt="Mike"
-                                    style={{
-                                      width: isMobile ? "30px" : "40px",
-                                      height: isMobile ? "30px" : "40px",
-                                      cursor: "pointer",
-                                    }}
-                                  />
-                                  {/* {index + 1} */}
-                                </div>
+                                />
+                                {/* {index + 1} */}
                               </div>
-                              {/* <input
+                            </div>
+                            {/* <input
                               type="checkbox"
                               id={`checkbox-${audio.id}`}
                               checked={selectedCheckbox === audio.value}
@@ -1028,52 +1027,50 @@ const R2 = ({
                                 marginLeft: "30px",
                               }}
                             /> */}
-                              <div
+                            <div
+                              style={{
+                                width: isMobile ? "50px" : "60px",
+                                height: isMobile ? "50px" : "60px",
+                                backgroundColor:
+                                  selectedCheckbox === audio.value
+                                    ? "#58CC02"
+                                    : "#BB81D066",
+                                border: "2px solid white",
+                                borderRadius: "8px",
+                                cursor: "pointer",
+                                position: "relative",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginTop: "15px",
+                                marginLeft: isMobile ? "20px" : "30px",
+                              }}
+                              onClick={() => handleCheckboxChange(audio.value)}
+                            >
+                              <input
+                                type="checkbox"
+                                id={`checkbox-${audio.id}`}
+                                checked={selectedCheckbox === audio.value}
+                                readOnly
                                 style={{
-                                  width: isMobile ? "50px" : "60px",
-                                  height: isMobile ? "50px" : "60px",
-                                  backgroundColor:
-                                    selectedCheckbox === audio.value
-                                      ? "#58CC02"
-                                      : "#BB81D066",
-                                  border: "2px solid white",
-                                  borderRadius: "8px",
-                                  cursor: "pointer",
-                                  position: "relative",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  marginTop: "15px",
-                                  marginLeft: isMobile ? "20px" : "30px",
+                                  display: "none", // hide the native checkbox
                                 }}
-                                onClick={() =>
-                                  handleCheckboxChange(audio.value)
-                                }
+                              />
+                              {/* {selectedCheckbox === audio.value && ( */}
+                              <span
+                                style={{
+                                  fontSize: isMobile ? "24px" : "36px",
+                                  fontWeight: "900",
+                                  color: "white",
+                                  lineHeight: 1,
+                                }}
                               >
-                                <input
-                                  type="checkbox"
-                                  id={`checkbox-${audio.id}`}
-                                  checked={selectedCheckbox === audio.value}
-                                  readOnly
-                                  style={{
-                                    display: "none", // hide the native checkbox
-                                  }}
-                                />
-                                {/* {selectedCheckbox === audio.value && ( */}
-                                <span
-                                  style={{
-                                    fontSize: isMobile ? "24px" : "36px",
-                                    fontWeight: "900",
-                                    color: "white",
-                                    lineHeight: 1,
-                                  }}
-                                >
-                                  ✓
-                                </span>
-                                {/* )} */}
-                              </div>
+                                ✓
+                              </span>
+                              {/* )} */}
+                            </div>
 
-                              {/* {selectedCheckbox === audio.text && (
+                            {/* {selectedCheckbox === audio.text && (
                             <div
                               style={{
                                 position: "absolute",
@@ -1099,135 +1096,131 @@ const R2 = ({
                               </svg>
                             </div>
                           )} */}
-                            </div>
-                          );
-                        }
-                      )}
-                    </div>
-                  )}
-
-                {showNextButton && (
-                  <div
-                    style={{
-                      position: isMobile ? "none" : "fixed",
-                      bottom: "180px",
-                      right: "60px",
-                      zIndex: 1000,
-                    }}
-                  >
-                    <div
-                      onClick={handleNextClick}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <NextButtonRound
-                        height={isMobile ? 45 : 60}
-                        width={isMobile ? 45 : 60}
-                      />
-                    </div>
+                          </div>
+                        );
+                      }
+                    )}
                   </div>
                 )}
 
-                {showRecordButton && !showReset && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      marginTop: "25px",
-                    }}
-                  >
-                    <img
-                      src={isMatch ? correctTick : r3WrongTick}
-                      alt="Effect"
-                      style={{
-                        height: isMobile ? "45px" : "80px",
-                        transition: "opacity 0.4s ease-in-out",
-                      }}
+              {showNextButton && (
+                <div
+                  style={{
+                    position: isMobile ? "none" : "fixed",
+                    bottom: "180px",
+                    right: "60px",
+                    zIndex: 1000,
+                  }}
+                >
+                  <div onClick={handleNextClick} style={{ cursor: "pointer" }}>
+                    <NextButtonRound
+                      height={isMobile ? 45 : 60}
+                      width={isMobile ? 45 : 60}
                     />
                   </div>
-                )}
+                </div>
+              )}
 
-                {showReset && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      marginTop: "25px",
-                    }}
-                  >
-                    <img
-                      src={r3Reset}
-                      alt="Effect"
-                      style={{
-                        height: isMobile ? "45px" : "80px",
-                        transition: "opacity 0.4s ease-in-out",
-                        cursor: "pointer",
-                      }}
-                      onClick={reset}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        ) : (
-          <div style={{ textAlign: "center" }}>
-            <h2 style={{ fontSize: "24px" }}>{currentQuestion.word}</h2>
-            {currentQuestion.img && (
-              <img
-                src={currentQuestion.img}
-                alt={currentQuestion.word}
-                style={{ width: "120px", height: "120px" }}
-              />
-            )}
-            <div style={{ marginTop: "20px" }}>
-              {recording === "no" ? (
-                <img
-                  onClick={() => setRecording("startRec")}
-                  src={Assets.mic}
-                  alt="Start Recording"
-                  style={{ width: "70px", height: "70px", cursor: "pointer" }}
-                />
-              ) : (
+              {showRecordButton && !showReset && (
                 <div
                   style={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    justifyContent: "center",
-                    gap: "80px",
-                    margin: "20px 20px",
+                    marginTop: "25px",
                   }}
                 >
-                  <RecordVoiceVisualizer />
                   <img
-                    onClick={() => {
-                      const audio = new Audio(correctSound);
-                      audio.play();
-                      setRecording("no");
-                      if (currentQuestionIndex === content.L1.length - 1) {
-                        // setLocalData("rFlow", false);
-                        // if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
-                        //   navigate("/");
-                        // } else {
-                        //   navigate("/discover-start");
-                        // }
-                        onComplete();
-                      } else {
-                        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-                      }
+                    src={isMatch ? Assets.correctTick : Assets.r3WrongTick}
+                    alt="Effect"
+                    style={{
+                      height: isMobile ? "45px" : "80px",
+                      transition: "opacity 0.4s ease-in-out",
                     }}
-                    src={Assets.pause}
-                    alt="Stop Recording"
-                    style={{ width: "60px", height: "60px", cursor: "pointer" }}
+                  />
+                </div>
+              )}
+
+              {showReset && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    marginTop: "25px",
+                  }}
+                >
+                  <img
+                    src={Assets.r3Reset}
+                    alt="Effect"
+                    style={{
+                      height: isMobile ? "45px" : "80px",
+                      transition: "opacity 0.4s ease-in-out",
+                      cursor: "pointer",
+                    }}
+                    onClick={reset}
                   />
                 </div>
               )}
             </div>
+          )}
+        </div>
+      ) : (
+        <div style={{ textAlign: "center" }}>
+          <h2 style={{ fontSize: "24px" }}>{currentQuestion.word}</h2>
+          {currentQuestion.img && (
+            <img
+              src={currentQuestion.img}
+              alt={currentQuestion.word}
+              style={{ width: "120px", height: "120px" }}
+            />
+          )}
+          <div style={{ marginTop: "20px" }}>
+            {recording === "no" ? (
+              <img
+                onClick={() => setRecording("startRec")}
+                src={Assets.mic}
+                alt="Start Recording"
+                style={{ width: "70px", height: "70px", cursor: "pointer" }}
+              />
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "80px",
+                  margin: "20px 20px",
+                }}
+              >
+                <RecordVoiceVisualizer />
+                <img
+                  onClick={() => {
+                    const audio = new Audio(correctSound);
+                    audio.play();
+                    setRecording("no");
+                    if (currentQuestionIndex === content.L1.length - 1) {
+                      // setLocalData("rFlow", false);
+                      // if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+                      //   navigate("/");
+                      // } else {
+                      //   navigate("/discover-start");
+                      // }
+                      onComplete();
+                    } else {
+                      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+                    }
+                  }}
+                  src={Assets.pause}
+                  alt="Stop Recording"
+                  style={{ width: "60px", height: "60px", cursor: "pointer" }}
+                />
+              </div>
+            )}
           </div>
-        )}
-      </ThemeProvider>
+        </div>
+      )}
     </MainLayout>
   );
 };
