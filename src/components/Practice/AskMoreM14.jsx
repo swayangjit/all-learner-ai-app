@@ -32,7 +32,11 @@ import {
 import correctSound from "../../assets/correct.wav";
 import wrongSound from "../../assets/audio/wrong.wav";
 import VoiceAnalyser from "../../utils/VoiceAnalyser";
-import { fetchASROutput, handleTextEvaluation } from "../../utils/apiUtil";
+import {
+  fetchASROutput,
+  handleTextEvaluation,
+  callTelemetryApi,
+} from "../../utils/apiUtil";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -153,10 +157,10 @@ const AskMoreM14 = ({
   }, [transcript]);
 
   const handleStartRecording = () => {
-    if (!browserSupportsSpeechRecognition) {
-      alert("Speech recognition is not supported in your browser.");
-      return;
-    }
+    // if (!browserSupportsSpeechRecognition) {
+    //   //alert("Speech recognition is not supported in your browser.");
+    //   return;
+    // }
     setRecAudio(null);
     resetTranscript();
     setIsRecording(true);
@@ -387,6 +391,10 @@ const AskMoreM14 = ({
     }
     setIsLoading(true);
 
+    const sessionId = getLocalData("sessionId");
+    const responseStartTime = new Date().getTime();
+    let responseText = "";
+
     if (currentLevel === "S1" || currentLevel === "S2") {
       const options = {
         originalText: conversation[currentSteps]?.user,
@@ -395,8 +403,18 @@ const AskMoreM14 = ({
         contentId: contentId,
       };
 
-      await fetchASROutput(recAudio, options, setLoader, setApiResponse);
+      responseText = await fetchASROutput(recAudio, options, setLoader);
+      setApiResponse(responseText);
     }
+
+    await callTelemetryApi(
+      conversation[currentSteps]?.user,
+      sessionId,
+      currentStep - 1,
+      recAudio,
+      responseStartTime,
+      responseText?.responseText || ""
+    );
 
     if (currentSteps < conversation.length - 1) {
       const audio = new Audio(correctSound);

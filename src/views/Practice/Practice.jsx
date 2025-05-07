@@ -844,7 +844,7 @@ const Practice = () => {
         (elem) => elem.title === practiceSteps?.[newPracticeStep]?.name
       );
 
-      console.log("cqer", currentQuestion, questions, updatedLevel);
+      console.log("cqer", currentQuestion, questions, level);
 
       // if(updatedLevel === 14){
       //   setCurrentQuestion(currentQuestion + 1);
@@ -876,6 +876,7 @@ const Practice = () => {
 
         if (isShowCase || isGameOver) {
           const sub_session_id = getLocalData("sub_session_id");
+          const maxLevel = getLocalData("max_level");
           const getSetResultRes = await axios.post(
             `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.GET_SET_RESULT}`,
             {
@@ -885,7 +886,10 @@ const Practice = () => {
               user_id: virtualId,
               totalSyllableCount: totalSyllableCount,
               language: localStorage.getItem("lang"),
-              max_level: 15,
+              max_level: parseInt(
+                maxLevel || process.env.REACT_APP_MAX_LEVEL,
+                10
+              ),
               is_mechanics: mechanism && mechanism?.id ? true : false,
             }
           );
@@ -969,7 +973,9 @@ const Practice = () => {
           return;
         }
 
-        if (![10, 11, 12, 13, 14, 15].includes(updatedLevel)) {
+        console.log("levelNew", level);
+
+        if (![10, 11, 12, 13, 14, 15].includes(level)) {
           const resGetContent = await axios.get(
             `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.GET_CONTENT}/${currentGetContent.criteria}/${virtualId}?language=${lang}&contentlimit=${limit}&gettargetlimit=${limit}` +
               (currentGetContent?.mechanism?.id
@@ -1029,7 +1035,7 @@ const Practice = () => {
           setQuestions(quesArr);
         }
 
-        if ([10, 11, 12, 13, 14, 15].includes(updatedLevel)) {
+        if ([10, 11, 12, 13, 14, 15].includes(level)) {
           let showcaseLevel =
             currentPracticeStep === 3 || currentPracticeStep === 8;
           setIsShowCase(showcaseLevel);
@@ -1313,7 +1319,7 @@ const Practice = () => {
 
       console.log("crg", currentGetContent, level, virtualId, updatedLevel);
 
-      if (![10, 11, 12, 13, 14, 15].includes(updatedLevel)) {
+      if (![10, 11, 12, 13, 14, 15].includes(level)) {
         const resWord = await axios.get(
           `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.GET_CONTENT}/${currentGetContent.criteria}/${virtualId}?language=${lang}&contentlimit=${limit}&gettargetlimit=${limit}` +
             (currentGetContent?.mechanism?.id
@@ -1353,7 +1359,7 @@ const Practice = () => {
         setQuestions(quesArr);
       }
 
-      if ([10, 11, 12, 13, 14, 15].includes(updatedLevel)) {
+      if ([10, 11, 12, 13, 14, 15].includes(level)) {
         const dummyQuestions = Array.from({ length: 5 }, (_, i) => ({
           id: `dummy-${i + 1}`,
         }));
