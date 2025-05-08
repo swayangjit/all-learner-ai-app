@@ -8,6 +8,7 @@ import {
   Typography,
   Dialog,
 } from "../../../node_modules/@mui/material/index";
+import { useMediaQuery, useTheme } from "@mui/material";
 import LogoutImg from "../../assets/images/logout.svg";
 import { styled } from "@mui/material/styles";
 import {
@@ -358,6 +359,8 @@ export const ProfileHeader = ({
   const username = profileName || getLocalData("profileName");
   const navigate = useNavigate();
   const [openMessageDialog, setOpenMessageDialog] = useState("");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleProfileBack = () => {
     try {
@@ -492,15 +495,22 @@ export const ProfileHeader = ({
               <img
                 src={scoreView}
                 alt="scoreView"
-                width={"86px"}
-                height={"35px"}
+                width={isMobile ? "47px" : "86px"}
+                height={isMobile ? "25px" : "35px"}
               />
-              <Box sx={{ position: "absolute", top: "6px", right: "16px" }}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: isMobile ? "40%" : "50%",
+                  left: isMobile ? "68%" : "70%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
                 <span
                   style={{
                     color: "#FFDD39",
                     fontWeight: 700,
-                    fontSize: "18px",
+                    fontSize: isMobile ? "11px" : "18px",
                     fontFamily: "Quicksand",
                   }}
                 >
@@ -522,19 +532,23 @@ export const ProfileHeader = ({
             }
           >
             <Box sx={{ position: "relative", cursor: "pointer" }}>
-              <SelectLanguageButton />
-              <Box sx={{ position: "absolute", top: 9, left: 20 }}>
+              <SelectLanguageButton width={isMobile ? 80 : 180} />
+              <Box
+                sx={{ position: "absolute", top: 9, left: isMobile ? 10 : 20 }}
+              >
                 <span
                   style={{
                     color: "#000000",
                     fontWeight: 700,
-                    fontSize: { xs: "14px", sm: "16px" },
+                    fontSize: isMobile ? "10px" : "16px",
                     fontFamily: "Quicksand",
                     lineHeight: "25px",
                   }}
                 >
-                  {languages?.find((elem) => elem.lang === language)?.name ||
-                    "Select Language"}
+                  {isMobile
+                    ? "Language"
+                    : languages?.find((elem) => elem.lang === language)?.name ||
+                      "Select Language"}
                 </span>
               </Box>
             </Box>

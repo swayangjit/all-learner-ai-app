@@ -1,4 +1,12 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  ThemeProvider,
+  createTheme,
+  useMediaQuery,
+} from "@mui/material";
 import Stack from "@mui/material/Stack";
 import PropTypes from "prop-types";
 import practicebgstone from "../../assets/images/practice-bg-stone.svg";
@@ -57,91 +65,96 @@ import rThreeMileImage from "../../assets/r3mile.png";
 import rFourMileImage from "../../assets/r4mile.png";
 import zIndex from "@mui/material/styles/zIndex";
 
+const theme = createTheme();
+
 const MainLayout = (props) => {
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+
   const levelsImages = {
     1: {
-      milestone: <LevelOne />,
+      milestone: <LevelOne height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone,
       background: practicebg,
     },
     2: {
-      milestone: <LevelTwo />,
+      milestone: <LevelTwo height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone2,
       background: practicebg2,
     },
     3: {
-      milestone: <LevelThree />,
+      milestone: <LevelThree height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
     },
     4: {
-      milestone: <LevelFour />,
+      milestone: <LevelFour height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone,
       background: practicebg3,
       backgroundColor: `${levelConfig[4].color}60`,
     },
     5: {
-      milestone: <LevelFive />,
+      milestone: <LevelFive height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[5].color}60`,
     },
     6: {
-      milestone: <LevelSix />,
+      milestone: <LevelSix height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[6].color}60`,
     },
     7: {
-      milestone: <LevelSeven />,
+      milestone: <LevelSeven height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[7].color}60`,
     },
     8: {
-      milestone: <LevelEight />,
+      milestone: <LevelEight height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[8].color}60`,
     },
     9: {
-      milestone: <LevelNine />,
+      milestone: <LevelNine height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[9].color}60`,
     },
     10: {
-      milestone: <LevelTen />,
+      milestone: <LevelTen height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[9].color}60`,
     },
     11: {
-      milestone: <LevelEleven />,
+      milestone: <LevelEleven height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[9].color}60`,
     },
     12: {
-      milestone: <LevelTwelve />,
+      milestone: <LevelTwelve height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[9].color}60`,
     },
     13: {
-      milestone: <LevelThirteen />,
+      milestone: <LevelThirteen height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[9].color}60`,
     },
     14: {
-      milestone: <LevelFourteen />,
+      milestone: <LevelFourteen height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[9].color}60`,
     },
     15: {
-      milestone: <LevelFifteen />,
+      milestone: <LevelFifteen height={isMobile ? 120 : 168} />,
       backgroundAddOn: practicebgstone3,
       background: practicebg3,
       backgroundColor: `${levelConfig[9].color}60`,
@@ -406,8 +419,8 @@ const MainLayout = (props) => {
             !allCompleted && (
               <Card
                 sx={{
-                  position: { xs: "absolute", md: "relative" },
-                  left: { xs: "0px", md: "auto" },
+                  position: "relative",
+                  left: { xs: "auto", md: "auto" },
                   width: { xs: "100%", md: "85vw" },
                   minHeight: "80vh",
                   borderRadius: "20px",
@@ -522,7 +535,7 @@ const MainLayout = (props) => {
                           <img
                             src={Assets.rOneMileImage}
                             alt="R One"
-                            height={"250px"}
+                            height={isMobile ? "130px" : "200px"}
                           />
                         ) : LEVEL === 2 ? (
                           <img
@@ -536,7 +549,7 @@ const MainLayout = (props) => {
                                 : null
                             }
                             alt={`R Step ${props.rStep}`}
-                            height={"200px"}
+                            height={isMobile ? "130px" : "200px"}
                           />
                         ) : null
                       ) : (

@@ -15,7 +15,14 @@ import removeSound from "../../assets/remove.wav";
 import { splitGraphemes } from "split-graphemes";
 import usePreloadAudio from "../../hooks/usePreloadAudio";
 import { practiceSteps, getLocalData } from "../../utils/constants";
-
+import {
+  ThemeProvider,
+  createTheme,
+  useMediaQuery,
+  Grid,
+  CircularProgress,
+} from "@mui/material";
+const theme = createTheme();
 const Mechanics4 = ({
   page,
   setPage,
@@ -60,6 +67,8 @@ const Mechanics4 = ({
   const addSoundAudio = usePreloadAudio(addSound);
   const removeSoundAudio = usePreloadAudio(removeSound);
   const [wordsAfterSplit, setWordsAfterSplit] = useState([]);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
   let progressDatas = getLocalData("practiceProgress");
   const virtualId = String(getLocalData("virtualId"));
@@ -249,7 +258,7 @@ const Mechanics4 = ({
           fontFamily: "Quicksand",
           fontStyle: "normal",
           fontWeight: 600,
-          fontSize: "36px",
+          fontSize: isMobile ? "30px" : "36px",
           lineHeight: "45px",
           alignItems: "center",
           textAlign: "center",
@@ -316,7 +325,9 @@ const Mechanics4 = ({
                     ? "#C30303"
                     : "#333F61",
                 fontWeight: type === "word" ? 600 : 700,
-                fontSize: "clamp(1.5rem, 2.5vw, 2.5rem)",
+                fontSize: isMobile
+                  ? "clamp(1rem, 2vw, 2rem)"
+                  : "clamp(1.5rem, 2.5vw, 2.5rem)",
                 fontFamily: "Quicksand",
                 cursor: "pointer",
                 marginLeft:
