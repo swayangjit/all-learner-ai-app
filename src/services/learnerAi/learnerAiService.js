@@ -84,15 +84,17 @@ export const getSetResultPractice = async ({
   mechanism,
 }) => {
   try {
+    const maxLevel = getLocalData("max_level");
+
     const response = await axios.post(
       `${API_LEARNER_AI_APP_HOST}/${config.URLS.GET_SET_RESULT}`,
       {
         sub_session_id: subSessionId,
-        contentType: currentContentType,
+        contentType: currentContentType || "Paragraph",
         session_id: sessionId,
         totalSyllableCount: totalSyllableCount,
         language: getLocalData("lang"),
-        max_level: 15,
+        max_level: parseInt(maxLevel || process.env.REACT_APP_MAX_LEVEL, 10),
         is_mechanics: mechanism && mechanism?.id ? true : false,
       },
       getHeaders()
