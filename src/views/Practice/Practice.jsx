@@ -844,7 +844,7 @@ const Practice = () => {
 
       const currentGetContent = getCurrentContent(newPracticeStep);
 
-      console.log("cqer", currentQuestion, questions, updatedLevel);
+      console.log("cqer", currentGetContent, level);
 
       // if(updatedLevel === 14){
       //   setCurrentQuestion(currentQuestion + 1);
@@ -942,7 +942,7 @@ const Practice = () => {
           return;
         }
 
-        if (![10, 11, 12, 13, 14, 15].includes(updatedLevel)) {
+        if (![10, 11, 12, 13, 14, 15].includes(level)) {
           const resGetContent = await getContent(
             currentGetContent.criteria,
             lang,
@@ -974,12 +974,12 @@ const Practice = () => {
           setCurrentContentType(resGetContent?.content?.[0]?.contentType);
           setCurrentCollectionId(resGetContent?.content?.[0]?.collectionId);
 
-          // TODO: API returns contents if 200 status
-          quesArr = [...quesArr, ...(resGetContent?.data?.content || [])];
-          setCurrentContentType(resGetContent?.data?.content?.[0]?.contentType);
-          setCurrentCollectionId(
-            resGetContent?.data?.content?.[0]?.collectionId
-          );
+          // // TODO: API returns contents if 200 status
+          // quesArr = [...quesArr, ...(resGetContent?.data?.content || [])];
+          // setCurrentContentType(resGetContent?.data?.content?.[0]?.contentType);
+          // setCurrentCollectionId(
+          //   resGetContent?.data?.content?.[0]?.collectionId
+          // );
 
           // TODO: not required - not using this anywhere
           setAssessmentResponse(resGetContent);
@@ -995,20 +995,20 @@ const Practice = () => {
           setProgressData(practiceProgress);
           setLocalData("storyTitle", resGetContent?.name);
 
-          // TODO: not required - we are geting this data from API
-          practiceProgress = {
-            currentQuestion: newQuestionIndex,
-            currentPracticeProgress,
-            currentPracticeStep: newPracticeStep,
-          };
-          setLocalData("practiceProgress", JSON.stringify(practiceProgress));
-          setProgressData(practiceProgress);
-          localStorage.setItem("storyTitle", resGetContent?.name);
+          // // TODO: not required - we are geting this data from API
+          // practiceProgress = {
+          //   currentQuestion: newQuestionIndex,
+          //   currentPracticeProgress,
+          //   currentPracticeStep: newPracticeStep,
+          // };
+          // setLocalData("practiceProgress", JSON.stringify(practiceProgress));
+          // setProgressData(practiceProgress);
+          // localStorage.setItem("storyTitle", resGetContent?.name);
 
           setQuestions(quesArr);
         }
 
-        if ([10, 11, 12, 13, 14, 15].includes(updatedLevel)) {
+        if ([10, 11, 12, 13, 14, 15].includes(level)) {
           let showcaseLevel =
             currentPracticeStep === 3 || currentPracticeStep === 8;
           setIsShowCase(showcaseLevel);
@@ -1145,7 +1145,7 @@ const Practice = () => {
         Number(getMilestoneDetails?.data?.milestone_level?.replace("m", "")) ||
         1;
 
-      //console.log('lvl', level);
+      console.log("curGetCont3", level, getMilestoneDetails);
 
       setLevel(level);
 
@@ -1182,7 +1182,17 @@ const Practice = () => {
         currentPracticeStep: userState || 0,
       };
 
+      const getCurrentContent = (stepKey) => {
+        const lang = getLocalData("lang") || "en";
+        console.log("curGetCont2", lang, level);
+        return levelGetContent[lang]?.[level]?.find(
+          (elem) => elem.title === practiceSteps?.[stepKey]?.name
+        );
+      };
+
       const currentGetContent = getCurrentContent(userState);
+
+      console.log("curGetCont", userState, currentGetContent);
 
       if (![10, 11, 12, 13, 14, 15].includes(level)) {
         const resWord = await getContent(
@@ -1268,6 +1278,7 @@ const Practice = () => {
 
   const getCurrentContent = (stepKey) => {
     const lang = getLocalData("lang") || "en";
+    console.log("curGetCont2", lang, level);
     return levelGetContent[lang]?.[level]?.find(
       (elem) => elem.title === practiceSteps?.[stepKey]?.name
     );
