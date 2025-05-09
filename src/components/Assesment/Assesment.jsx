@@ -586,17 +586,9 @@ const Assesment = ({ discoverStart }) => {
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
-    // const level = getLocalData('userLevel');
-    // setLevel(level);
     setLocalData("lang", lang);
     let contentSessionId = localStorage.getItem("contentSessionId");
     setLocalData("sessionId", contentSessionId);
-    // const TOKEN = localStorage.getItem("apiToken");
-    // let virtualId;
-    // if (TOKEN) {
-    //   const tokenDetails = jwtDecode(TOKEN);
-    //   virtualId = tokenDetails?.virtual_id;
-    // }
 
     if (discoverStart && username && !TOKEN) {
       (async () => {
@@ -608,31 +600,6 @@ const Assesment = ({ discoverStart }) => {
           "getMilestone",
           JSON.stringify({ ...getMilestoneDetails })
         );
-        // setLevel(
-        //   getMilestoneDetails?.data.data?.milestone_level?.replace("m", "")
-        // );
-
-        // if(usernameDetails?.data?.result?.virtualID === "6760800019"){
-        //   setLevel(12);
-        // }
-        // if(usernameDetails?.data?.result?.virtualID === "1621936833"){
-        //   setLevel(13);
-        // }
-        // if(usernameDetails?.data?.result?.virtualID === "9526496994"){
-        //   setLevel(14);
-        // }
-        // if(usernameDetails?.data?.result?.virtualID === "7656513916"){
-        //   setLevel(4);
-        // }
-        // if(usernameDetails?.data?.result?.virtualID === "3464419415"){
-        //   setLevel(5);
-        // }
-        // if(usernameDetails?.data?.result?.virtualID === "6131132191"){
-        //   setLevel(6);
-        // }
-        // if(usernameDetails?.data?.result?.virtualID === "8909322850"){
-        //   setLevel(7);
-        // }
 
         if (
           levelMapping[usernameDetails?.data?.result?.virtualID] !== undefined
@@ -697,27 +664,6 @@ const Assesment = ({ discoverStart }) => {
         setLevel(
           Number(getMilestoneDetails?.data?.milestone_level?.replace("m", ""))
         );
-        // if(virtualId === "6760800019"){
-        //   setLevel(12);
-        // }
-        // if(virtualId === "1621936833"){
-        //   setLevel(13);
-        // }
-        // if(virtualId === "9526496994"){
-        //   setLevel(14);
-        // }
-        // if(virtualId === "7656513916"){
-        //   setLevel(4);
-        // }
-        // if(virtualId === "3464419415"){
-        //   setLevel(5);
-        // }
-        // if(virtualId === "6131132191"){
-        //   setLevel(6);
-        // }
-        // if(virtualId === "8909322850"){
-        //   setLevel(7);
-        // }
 
         if (levelMapping[virtualId] !== undefined) {
           setLevel(levelMapping[virtualId]);
@@ -742,7 +688,7 @@ const Assesment = ({ discoverStart }) => {
         let sessionId = getLocalData("sessionId");
 
         if (!sessionId || sessionId === "null") {
-          sessionId = uniqueId();
+          sessionId = localStorage.getItem("contentSessionId") || uniqueId();
           setLocalData("sessionId", sessionId);
         }
 

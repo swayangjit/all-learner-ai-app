@@ -1,5 +1,4 @@
 import { CsTelemetryModule } from "@project-sunbird/client-services/telemetry";
-
 import { uniqueId } from "./utilService";
 import { jwtDecode } from "../../node_modules/jwt-decode/build/cjs/index";
 import { getLocalData } from "../utils/constants";
@@ -23,8 +22,8 @@ function checkTokenInLocalStorage() {
 if (localStorage.getItem("contentSessionId") !== null) {
   contentSessionId = localStorage.getItem("contentSessionId");
 } else {
-  contentSessionId =
-    localStorage.getItem("virtualStorySessionID") || uniqueId();
+  contentSessionId = localStorage.getItem("sessionId") || uniqueId();
+  localStorage.setItem("sessionId", contentSessionId);
   localStorage.setItem("allAppContentSessionId", contentSessionId);
 }
 
@@ -42,7 +41,7 @@ export const initialize = async ({ context, config, metadata }) => {
         channel: context.channel,
         did: context.did,
         authtoken: context.authToken || "",
-        uid: "anonymous",
+        uid: localStorage.getItem("virtualId") || "anonymous",
         sid: context.sid,
         batchsize: process.env.REACT_APP_BATCHSIZE,
         mode: context.mode,
@@ -225,7 +224,7 @@ const getVirtualId = () => {
 };
 
 export const getEventOptions = () => {
-  var emis_username = "anonymous";
+  var emis_username = localStorage.getItem("virtualId") || "anonymous";
   var buddyUserId = "";
 
   if (localStorage.getItem("token") !== null) {
@@ -243,7 +242,7 @@ export const getEventOptions = () => {
   const userType = isBuddyLogin ? "Buddy User" : "User";
   const userId = isBuddyLogin
     ? emis_username + "/" + buddyUserId
-    : emis_username || "anonymous";
+    : emis_username || localStorage.getItem("virtualId") || "anonymous";
 
   return {
     object: {},
@@ -258,11 +257,11 @@ export const getEventOptions = () => {
       uid: `${
         isBuddyLogin
           ? emis_username + "/" + buddyUserId
-          : emis_username || "anonymous"
+          : emis_username || localStorage.getItem("virtualId") || "anonymous"
       }`,
       cdata: [
         {
-          id: localStorage.getItem("virtualStorySessionID") || contentSessionId,
+          id: localStorage.getItem("sessionId") || contentSessionId,
           type: "ContentSession",
         },
         { id: playSessionId, type: "PlaySession" },

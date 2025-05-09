@@ -844,7 +844,7 @@ const Practice = () => {
 
       const currentGetContent = getCurrentContent(newPracticeStep);
 
-      console.log("cqer", currentGetContent, level);
+      console.log("cqer", currentQuestion, questions, level);
 
       // if(updatedLevel === 14){
       //   setCurrentQuestion(currentQuestion + 1);
