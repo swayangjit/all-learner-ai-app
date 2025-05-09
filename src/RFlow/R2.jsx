@@ -59,220 +59,7 @@ import {
   level15,
 } from "../utils/levelData";
 
-// const content = {
-//   L1: [
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.panRImg,
-//         type: "text",
-//       },
-//       answer: "panRAudio",
-//       options: [
-//         { id: "panRAudio", value: "panRAudio", type: "audio" },
-//         { id: "dogR1OneAudio", value: "dogR1OneAudio", type: "audio" },
-//         { id: "capR1OneAudio", value: "capR1OneAudio", type: "audio" },
-//       ],
-//       flowName: "P1",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.batRImg,
-//         type: "text",
-//       },
-//       answer: "batRAudio",
-//       options: [
-//         { id: "eggR1OneAudio", value: "eggR1OneAudio", type: "audio" },
-//         { id: "batRAudio", value: "batRAudio", type: "audio" },
-//         { id: "nestR1OneAudio ", value: "nestR1OneAudio", type: "audio" },
-//       ],
-//       flowName: "P2",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.puzzleRImg,
-//         type: "text",
-//       },
-//       answer: "puzzleRAudio",
-//       options: [
-//         { id: "ropeR1OneAudio", value: "ropeR1OneAudio", type: "audio" },
-//         { id: "dogR1OneAudio", value: "dogR1OneAudio", type: "audio" },
-//         { id: "puzzleRAudio", value: "puzzleRAudio", type: "audio" },
-//       ],
-//       flowName: "P3",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.lemonRImg,
-//         type: "text",
-//       },
-//       answer: "lemonRAudio",
-//       options: [
-//         { id: "vanR1OneAudio", value: "vanR1OneAudio", type: "audio" },
-//         { id: "lemonRAudio", value: "lemonRAudio", type: "audio" },
-//         { id: "bellR1OneAudio", value: "bellR1OneAudio", type: "audio" },
-//       ],
-//       flowName: "P4",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.kingRImg,
-//         type: "text",
-//       },
-//       answer: "kingRAudio",
-//       options: [
-//         { id: "kingRAudio", value: "kingRAudio", type: "audio" },
-//         { id: "capR1OneAudio", value: "capR1OneAudio", type: "audio" },
-//         { id: "vanR1OneAudio", value: "vanR1OneAudio", type: "audio" },
-//       ],
-//       flowName: "P5",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.ladderRImg,
-//         type: "text",
-//       },
-//       answer: "ladderRAudio",
-//       options: [
-//         { id: "maskR1OneAudio", value: "maskR1OneAudio", type: "audio" },
-//         { id: "jugR1OneAudio", value: "jugR1OneAudio", type: "audio" },
-//         { id: "ladderRAudio", value: "ladderRAudio", type: "audio" },
-//       ],
-//       flowName: "P6",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.drumRImg,
-//         type: "text",
-//       },
-//       answer: "drumRAudio",
-//       options: [
-//         { id: "goatR1OneAudio", value: "goatR1OneAudio", type: "audio" },
-//         { id: "fanR1OneAudio", value: "fanR1OneAudio", type: "audio" },
-//         { id: "drumRAudio", value: "drumRAudio", type: "audio" },
-//       ],
-//       flowName: "P7",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.coffeeRImg,
-//         type: "text",
-//       },
-//       answer: "coffeeRAudio",
-//       options: [
-//         { id: "coffeeRAudio", value: "coffeeRAudio", type: "audio" },
-//         { id: "ropeR1OneAudio", value: "ropeR1OneAudio", type: "audio" },
-//         { id: "appleR1OneAudio", value: "appleR1OneAudio", type: "audio" },
-//       ],
-//       flowName: "P8",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.busRImg,
-//         type: "text",
-//       },
-//       answer: "busRAudio",
-//       options: [
-//         { id: "cardRAudio", value: "cardRAudio", type: "audio" },
-//         { id: "busRAudio", value: "busRAudio", type: "audio" },
-//         { id: "appleR1OneAudio", value: "appleR1OneAudio", type: "audio" },
-//       ],
-//       flowName: "P9",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.graphRImg,
-//         type: "text",
-//       },
-//       answer: "graphRAudio",
-//       options: [
-//         { id: "cardRAudio", value: "cardRAudio", type: "audio" },
-//         { id: "ropeR1OneAudio", value: "ropeR1OneAudio", type: "audio" },
-//         { id: "graphRAudio", value: "graphRAudio", type: "audio" },
-//       ],
-//       flowName: "P10",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.ovenRImg,
-//         type: "text",
-//       },
-//       answer: "ovenRAudio",
-//       options: [
-//         { id: "cardRAudio", value: "cardRAudio", type: "audio" },
-//         { id: "ropeR1OneAudio", value: "ropeR1OneAudio", type: "audio" },
-//         { id: "ovenRAudio", value: "ovenRAudio", type: "audio" },
-//       ],
-//       flowName: "P11",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.tableRImg,
-//         type: "text",
-//       },
-//       answer: "tableRAudio",
-//       options: [
-//         { id: "cardRAudio", value: "cardRAudio", type: "audio" },
-//         { id: "ropeR1OneAudio", value: "ropeR1OneAudio", type: "audio" },
-//         { id: "tableRAudio", value: "tableRAudio", type: "audio" },
-//       ],
-//       flowName: "P12",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.basketRImg,
-//         type: "text",
-//       },
-//       answer: "basketRAudio",
-//       options: [
-//         { id: "cardRAudio", value: "cardRAudio", type: "audio" },
-//         { id: "ropeR1OneAudio", value: "ropeR1OneAudio", type: "audio" },
-//         { id: "basketRAudio", value: "basketRAudio", type: "audio" },
-//       ],
-//       flowName: "P13",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.cardRImg,
-//         type: "text",
-//       },
-//       answer: "cardRAudio",
-//       options: [
-//         { id: "cardRAudio", value: "cardRAudio", type: "audio" },
-//         { id: "ropeR1OneAudio", value: "ropeR1OneAudio", type: "audio" },
-//         { id: "appleR1OneAudio", value: "appleR1OneAudio", type: "audio" },
-//       ],
-//       flowName: "P14",
-//     },
-//     {
-//       question: {
-//         text: "Which fruit has red color?",
-//         img: Assets.frogRImg,
-//         type: "text",
-//       },
-//       answer: "frogRAudio",
-//       options: [
-//         { id: "frogRAudio", value: "frogRAudio", type: "audio" },
-//         { id: "ropeR1OneAudio", value: "ropeR1OneAudio", type: "audio" },
-//         { id: "appleR1OneAudio", value: "appleR1OneAudio", type: "audio" },
-//       ],
-//       flowName: "P15",
-//     },
-//   ],
-// };
+const theme = createTheme();
 
 const content = {
   L1: [
@@ -775,6 +562,8 @@ const R2 = ({
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
   const transcriptRef = useRef("");
 
@@ -1000,8 +789,8 @@ const R2 = ({
                     style={{
                       position: "relative",
                       left: `${(progress / 100) * 260}px`,
-                      width: "50px",
-                      height: "55px",
+                      width: isMobile ? "45px" : "50px",
+                      height: isMobile ? "50px" : "55px",
                       transition: "left 0.2s linear",
                       marginBottom: "-10px",
                       marginLeft: "-10px",
@@ -1062,7 +851,7 @@ const R2 = ({
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "10px",
-                    maxWidth: "80%",
+                    maxWidth: isMobile ? "90%" : "80%",
                     textAlign: "center",
                   }}
                 >
@@ -1102,7 +891,7 @@ const R2 = ({
                   <div
                     style={{
                       display: "flex",
-                      gap: "50px",
+                      gap: isMobile ? "5px" : "50px",
                       marginTop: "20px",
                     }}
                   >
@@ -1138,7 +927,7 @@ const R2 = ({
                                         left: "-30px",
                                         transform: "rotate(-120deg)",
                                       }),
-                                  height: "80px",
+                                  height: isMobile ? "70px" : "80px",
                                   zIndex: "9999",
                                   transition: "all 0.3s ease",
                                 }}
@@ -1158,7 +947,7 @@ const R2 = ({
                                   color: "#000000",
                                   fontFamily: "Quicksand",
                                   fontWeight: 700,
-                                  fontSize: "36px",
+                                  fontSize: isMobile ? "20px" : "36px",
                                   lineHeight: "60px",
                                   letterSpacing: "0%",
                                   textAlign: "center",
@@ -1170,8 +959,8 @@ const R2 = ({
                               <div
                                 style={{
                                   gap: "5px",
-                                  width: "80px",
-                                  height: "80px",
+                                  width: isMobile ? "50px" : "80px",
+                                  height: isMobile ? "50px" : "80px",
                                   background:
                                     selectedText === audio.value
                                       ? isMatch
@@ -1206,8 +995,8 @@ const R2 = ({
                                   src={Assets.musicIcon}
                                   alt="Mike"
                                   style={{
-                                    width: "40px",
-                                    height: "40px",
+                                    width: isMobile ? "30px" : "40px",
+                                    height: isMobile ? "30px" : "40px",
                                     cursor: "pointer",
                                   }}
                                 />
@@ -1240,8 +1029,8 @@ const R2 = ({
                             /> */}
                             <div
                               style={{
-                                width: "60px",
-                                height: "60px",
+                                width: isMobile ? "50px" : "60px",
+                                height: isMobile ? "50px" : "60px",
                                 backgroundColor:
                                   selectedCheckbox === audio.value
                                     ? "#58CC02"
@@ -1254,7 +1043,7 @@ const R2 = ({
                                 alignItems: "center",
                                 justifyContent: "center",
                                 marginTop: "15px",
-                                marginLeft: "30px",
+                                marginLeft: isMobile ? "20px" : "30px",
                               }}
                               onClick={() => handleCheckboxChange(audio.value)}
                             >
@@ -1270,7 +1059,7 @@ const R2 = ({
                               {/* {selectedCheckbox === audio.value && ( */}
                               <span
                                 style={{
-                                  fontSize: "36px",
+                                  fontSize: isMobile ? "24px" : "36px",
                                   fontWeight: "900",
                                   color: "white",
                                   lineHeight: 1,
@@ -1317,14 +1106,17 @@ const R2 = ({
               {showNextButton && (
                 <div
                   style={{
-                    position: "fixed",
+                    position: isMobile ? "none" : "fixed",
                     bottom: "180px",
                     right: "60px",
                     zIndex: 1000,
                   }}
                 >
                   <div onClick={handleNextClick} style={{ cursor: "pointer" }}>
-                    <NextButtonRound height={60} width={60} />
+                    <NextButtonRound
+                      height={isMobile ? 45 : 60}
+                      width={isMobile ? 45 : 60}
+                    />
                   </div>
                 </div>
               )}
@@ -1342,7 +1134,7 @@ const R2 = ({
                     src={isMatch ? Assets.correctTick : Assets.r3WrongTick}
                     alt="Effect"
                     style={{
-                      height: "80px",
+                      height: isMobile ? "45px" : "80px",
                       transition: "opacity 0.4s ease-in-out",
                     }}
                   />
@@ -1362,7 +1154,7 @@ const R2 = ({
                     src={Assets.r3Reset}
                     alt="Effect"
                     style={{
-                      height: "80px",
+                      height: isMobile ? "45px" : "80px",
                       transition: "opacity 0.4s ease-in-out",
                       cursor: "pointer",
                     }}

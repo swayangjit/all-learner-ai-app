@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Box, CircularProgress } from "@mui/material";
+import {
+  ThemeProvider,
+  createTheme,
+  useMediaQuery,
+  Grid,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 import Confetti from "react-confetti";
 import {
   level13,
@@ -42,6 +49,8 @@ const levelMap = {
   14: level14,
   15: level15,
 };
+
+const theme = createTheme();
 
 const PhoneConversation = ({
   setVoiceText,
@@ -117,6 +126,9 @@ const PhoneConversation = ({
   const intervalRef = useRef(null);
   const indexRef = useRef(0);
   const transcriptRef = useRef("");
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+
   useEffect(() => {
     transcriptRef.current = transcript;
     console.log("Live Transcript:", transcript);
@@ -421,7 +433,7 @@ const PhoneConversation = ({
       fontSize: "16px",
       position: "relative",
       whiteSpace: "pre-wrap",
-      marginLeft: "100px",
+      marginLeft: isMobile ? "10px" : "100px",
     },
     selectedNeutralOption: {
       backgroundColor: "#f0f0f0",
@@ -434,7 +446,7 @@ const PhoneConversation = ({
       borderBottomRightRadius: "24px",
       borderBottomLeftRadius: "1px",
       alignSelf: "flex-start",
-      width: "300px",
+      maxWidth: "300px",
       marginLeft: "80px",
     },
     callerMessage: {
@@ -444,9 +456,9 @@ const PhoneConversation = ({
       borderBottomRightRadius: "1px",
       borderBottomLeftRadius: "24px",
       alignSelf: "flex-end",
-      width: "280px",
-      marginRight: "180px",
-      marginBottom: "-30px",
+      maxWidth: "300px",
+      marginRight: isMobile ? "80px" : "180px",
+      marginBottom: isMobile ? "10px" : "-30px",
     },
     boldText: {
       fontWeight: "bold",
@@ -504,7 +516,7 @@ const PhoneConversation = ({
       fontWeight: "bold",
       //display: "relative",
       border: "1px dashed #d8b6ff",
-      fontSize: "25px",
+      fontSize: isMobile ? "16px" : "25px",
       width: "50%",
       marginLeft: "auto",
       marginRight: "auto",
@@ -519,11 +531,12 @@ const PhoneConversation = ({
     optionsContainer: {
       marginTop: "40px",
       display: "grid",
-      gridTemplateColumns:
-        tasks[currentTaskIndex]?.options?.length === 4 ||
-        tasks[currentTaskIndex]?.options?.length === 5
-          ? "repeat(2, 1fr)"
-          : "repeat(2, 1fr)",
+      gridTemplateColumns: isMobile
+        ? "1fr"
+        : tasks[currentTaskIndex]?.options?.length === 4 ||
+          tasks[currentTaskIndex]?.options?.length === 5
+        ? "repeat(2, 1fr)"
+        : "repeat(2, 1fr)",
       gap: "20px",
       width: "80%",
       marginLeft: "auto",
@@ -540,14 +553,14 @@ const PhoneConversation = ({
       cursor: "pointer",
       textAlign: "center",
       boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.1)",
-      fontSize: "18px",
+      fontSize: isMobile ? "14px" : "18px",
       transition: "background-color 0.3s ease",
     },
 
     thirdOption: {
       gridColumn: "1 / -1",
       justifySelf: "center",
-      width: "50%",
+      width: isMobile ? "80%" : "50%",
     },
 
     correctOption: {
@@ -673,12 +686,13 @@ const PhoneConversation = ({
         setIsNextButtonCalled,
       }}
     >
-      <div style={styles.mainContainer}>
-        {showConfetti && <Confetti height={"350px"} />}
-        <div style={styles.innerContainer}>
-          {!showQuestion ? (
-            <>
-              {/* <div style={styles.phoneIcon}>
+      <ThemeProvider theme={theme}>
+        <div style={styles.mainContainer}>
+          {showConfetti && <Confetti height={"350px"} />}
+          <div style={styles.innerContainer}>
+            {!showQuestion ? (
+              <>
+                {/* <div style={styles.phoneIcon}>
                 <img
                   src={phoneImg}
                   alt="Phone Icon"
@@ -686,243 +700,190 @@ const PhoneConversation = ({
                 />
                 <strong>Phone rings...</strong>
               </div> */}
-              <div
-                style={{
-                  ...styles.messageContainer,
-                  height: "400px",
-                  overflowY: "auto",
-                }}
-              >
-                {/* {visibleMessages?.map((msg, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      ...styles.message,
-                      ...(msg.role === "System"
-                        ? styles.sonMessage
-                        : styles.callerMessage),
-                    }}
-                  >
-                    <span style={styles.boldText}>{msg.name}: </span>
-                    {msg.message}
-                    {msg?.role === "System" && (
-                      <div style={styles.boyIcon}>
-                        <img
-                          src={
-                            isPlaying === msg.audio ? spinnerStop : listenImg2
-                          }
-                          alt="Audio"
-                          style={{
-                            height: "25px",
-                            width: "25px",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => playAudio(msg?.audio)}
-                        />
-                        <img
-                          src={Assets.avatar1}
-                          alt="Boy"
-                          width={"25px"}
-                          height={"25px"}
-                        />
-                      </div>
-                    )}
-                    {msg?.role === "User" && (
-                      <div style={styles.callerIconsContainer}>
-                        <img
-                          src={Assets.avatar2}
-                          alt="Boy"
-                          width={"25px"}
-                          height={"25px"}
-                        />
-                        <img
-                          src={
-                            isPlaying === msg.audio ? spinnerStop : listenImg2
-                          }
-                          alt="Audio"
-                          style={{
-                            height: "25px",
-                            width: "25px",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => playAudio(msg?.audio)}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))} */}
-                {visibleMessages.map((msg, index) => (
-                  <MessageBubble
-                    key={index}
-                    msg={msg}
-                    isPlaying={isPlaying}
-                    playAudio={playAudio}
-                    styles={styles}
-                    Assets={Assets}
-                    isLast={index === visibleMessages.length - 1}
-                  />
-                ))}
-              </div>
-              {/* <img
+                <div
+                  style={{
+                    ...styles.messageContainer,
+                    height: "400px",
+                    overflowY: "auto",
+                  }}
+                >
+                  {visibleMessages.map((msg, index) => (
+                    <MessageBubble
+                      key={index}
+                      msg={msg}
+                      isPlaying={isPlaying}
+                      playAudio={playAudio}
+                      styles={styles}
+                      Assets={Assets}
+                      isLast={index === visibleMessages.length - 1}
+                    />
+                  ))}
+                </div>
+                {/* <img
                 src={Assets.nextimg}
                 alt="Next"
                 style={styles.nextButton}
                 onClick={handleNextClick}
               /> */}
-              <div onClick={handleNextClick} style={styles.nextButton}>
-                <NextButtonRound height={50} width={50} />
-              </div>
-            </>
-          ) : (
-            tasks[currentTaskIndex] && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                {!["S1", "S2"].includes(currentLevel) && (
-                  <img
-                    src={
-                      isPlaying ? Assets.stopVoiceNote : Assets.startVoiceNote
-                    }
-                    alt="Audio"
-                    style={{
-                      height: "40px",
-                      width: "190px",
-                      cursor: "pointer",
-                      marginTop: "10px",
-                    }}
-                    onClick={() =>
-                      playAudio(conversation?.instructions?.completeAudio)
-                    }
-                  />
-                )}
-                <div style={styles.questionBox}>
-                  {tasks[currentTaskIndex]?.question?.value}
+                <div onClick={handleNextClick} style={styles.nextButton}>
+                  <NextButtonRound height={50} width={50} />
                 </div>
-                {/* {recording === "no" && ( */}
-                {currentLevel !== "S1" && currentLevel !== "S2" && (
-                  <div style={styles.optionsContainer}>
-                    {tasks[currentTaskIndex]?.options.map((option, index) => (
-                      <div
-                        key={index}
-                        style={{
-                          ...styles.option,
-                          ...(selectedOption === option.id &&
-                            (currentLevel === "S1" || currentLevel === "S2") &&
-                            styles.selectedNeutralOption),
-                          ...(currentLevel !== "S1" &&
-                            currentLevel !== "S2" &&
-                            selectedOption === option.id &&
-                            isCorrect === true &&
-                            styles.correctOption),
-                          ...(currentLevel !== "S1" &&
-                            currentLevel !== "S2" &&
-                            selectedOption === option.id &&
-                            isCorrect === false &&
-                            styles.incorrectOption),
-                          ...(tasks[currentTaskIndex].options.length === 3 &&
-                            index === 2 &&
-                            styles.thirdOption),
-                        }}
-                        onClick={() => {
-                          if (!showConfetti) {
-                            handleOptionClick(option.id);
-                          }
-                        }}
-                      >
-                        {option.value}
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {/* {recording === "recording" && ( */}
+              </>
+            ) : (
+              tasks[currentTaskIndex] && (
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "center",
-                    marginTop:
-                      currentLevel === "S1" || currentLevel === "S2"
-                        ? "35px"
-                        : "30px",
-                    gap: "10px",
+                    flexDirection: "column",
+                    alignItems: "center",
                   }}
                 >
-                  {isLoading ? (
-                    <Box sx={{ display: "flex" }}>
-                      <CircularProgress size="3rem" sx={{ color: "#E15404" }} />
-                    </Box>
-                  ) : (
-                    <>
-                      {((currentLevel !== "S1" &&
-                        currentLevel !== "S2" &&
-                        selectedOption) ||
-                        currentLevel === "S1" ||
-                        currentLevel === "S2") && (
-                        <VoiceAnalyser
-                          pageName={"m8"}
-                          setVoiceText={setVoiceText}
-                          onAudioProcessed={handleRecordingComplete}
-                          setRecordedAudio={setRecordedAudio}
-                          setVoiceAnimate={setVoiceAnimate}
-                          storyLine={storyLine}
-                          dontShowListen={true}
-                          handleNext={handleNext}
-                          enableNext={enableNext}
-                          originalText={parentWords}
-                          audioLink={audio ? audio : completeAudio}
-                          buttonAnimation={selectedOption}
-                          handleStartRecording={handleStartRecording}
-                          handleStopRecording={handleStopRecording}
-                          {...{
-                            contentId,
-                            contentType,
-                            currentLine: currentStep - 1,
-                            playTeacherAudio,
-                            callUpdateLearner,
-                            isShowCase,
-                            setEnableNext,
-                            //showOnlyListen: answer !== "correct",
-                            showOnlyListen: false,
-                            setOpenMessageDialog,
-                          }}
-                        />
-                      )}
-                      {currentLevel !== "S1" && currentLevel !== "S2"
-                        ? selectedOption !== null &&
-                          recAudio && (
-                            <div
-                              onClick={loadNextTask}
-                              style={{
-                                cursor: "pointer",
-                                marginLeft: "23px",
-                              }}
-                            >
-                              <NextButtonRound height={45} width={45} />
-                            </div>
-                          )
-                        : recAudio && (
-                            <div
-                              onClick={loadNextTask}
-                              style={{
-                                cursor: "pointer",
-                                marginLeft: "23px",
-                              }}
-                            >
-                              <NextButtonRound height={45} width={45} />
-                            </div>
-                          )}
-                    </>
+                  {!["S1", "S2"].includes(currentLevel) && (
+                    <img
+                      src={
+                        isPlaying ? Assets.stopVoiceNote : Assets.startVoiceNote
+                      }
+                      alt="Audio"
+                      style={{
+                        height: "40px",
+                        width: "190px",
+                        cursor: "pointer",
+                        marginTop: "10px",
+                      }}
+                      onClick={() =>
+                        playAudio(conversation?.instructions?.completeAudio)
+                      }
+                    />
                   )}
+                  <div style={styles.questionBox}>
+                    {tasks[currentTaskIndex]?.question?.value}
+                  </div>
+                  {/* {recording === "no" && ( */}
+                  {currentLevel !== "S1" && currentLevel !== "S2" && (
+                    <div style={styles.optionsContainer}>
+                      {tasks[currentTaskIndex]?.options.map((option, index) => (
+                        <div
+                          key={index}
+                          style={{
+                            ...styles.option,
+                            ...(selectedOption === option.id &&
+                              (currentLevel === "S1" ||
+                                currentLevel === "S2") &&
+                              styles.selectedNeutralOption),
+                            ...(currentLevel !== "S1" &&
+                              currentLevel !== "S2" &&
+                              selectedOption === option.id &&
+                              isCorrect === true &&
+                              styles.correctOption),
+                            ...(currentLevel !== "S1" &&
+                              currentLevel !== "S2" &&
+                              selectedOption === option.id &&
+                              isCorrect === false &&
+                              styles.incorrectOption),
+                            ...(tasks[currentTaskIndex].options.length === 3 &&
+                              index === 2 &&
+                              styles.thirdOption),
+                          }}
+                          onClick={() => {
+                            if (!showConfetti) {
+                              handleOptionClick(option.id);
+                            }
+                          }}
+                        >
+                          {option.value}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {/* {recording === "recording" && ( */}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop:
+                        currentLevel === "S1" || currentLevel === "S2"
+                          ? "35px"
+                          : "30px",
+                      gap: "10px",
+                    }}
+                  >
+                    {isLoading ? (
+                      <Box sx={{ display: "flex" }}>
+                        <CircularProgress
+                          size="3rem"
+                          sx={{ color: "#E15404" }}
+                        />
+                      </Box>
+                    ) : (
+                      <>
+                        {((currentLevel !== "S1" &&
+                          currentLevel !== "S2" &&
+                          selectedOption) ||
+                          currentLevel === "S1" ||
+                          currentLevel === "S2") && (
+                          <VoiceAnalyser
+                            pageName={"m8"}
+                            setVoiceText={setVoiceText}
+                            onAudioProcessed={handleRecordingComplete}
+                            setRecordedAudio={setRecordedAudio}
+                            setVoiceAnimate={setVoiceAnimate}
+                            storyLine={storyLine}
+                            dontShowListen={true}
+                            handleNext={handleNext}
+                            enableNext={enableNext}
+                            originalText={parentWords}
+                            audioLink={audio ? audio : completeAudio}
+                            buttonAnimation={selectedOption}
+                            handleStartRecording={handleStartRecording}
+                            handleStopRecording={handleStopRecording}
+                            {...{
+                              contentId,
+                              contentType,
+                              currentLine: currentStep - 1,
+                              playTeacherAudio,
+                              callUpdateLearner,
+                              isShowCase,
+                              setEnableNext,
+                              //showOnlyListen: answer !== "correct",
+                              showOnlyListen: false,
+                              setOpenMessageDialog,
+                            }}
+                          />
+                        )}
+                        {currentLevel !== "S1" && currentLevel !== "S2"
+                          ? selectedOption !== null &&
+                            recAudio && (
+                              <div
+                                onClick={loadNextTask}
+                                style={{
+                                  cursor: "pointer",
+                                  marginLeft: "23px",
+                                }}
+                              >
+                                <NextButtonRound height={45} width={45} />
+                              </div>
+                            )
+                          : recAudio && (
+                              <div
+                                onClick={loadNextTask}
+                                style={{
+                                  cursor: "pointer",
+                                  marginLeft: "23px",
+                                }}
+                              >
+                                <NextButtonRound height={45} width={45} />
+                              </div>
+                            )}
+                      </>
+                    )}
+                  </div>
+                  {/* // )} */}
                 </div>
-                {/* // )} */}
-              </div>
-            )
-          )}
+              )
+            )}
+          </div>
         </div>
-      </div>
+      </ThemeProvider>
     </MainLayout>
   );
 };
