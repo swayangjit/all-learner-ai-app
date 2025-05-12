@@ -1682,7 +1682,7 @@ const Practice = () => {
                 ? `Guess the below image`
                 : `Speak the below ${questions[currentQuestion]?.contentType}`),
             words:
-              level === 1 || level === 2 || level === 3
+              lang === "en" && (level === 1 || level === 2 || level === 3)
                 ? levelOneWord
                 : mechanism?.id === "mechanic_15"
                 ? questions[currentQuestion]?.mechanics_data?.[0]?.text
