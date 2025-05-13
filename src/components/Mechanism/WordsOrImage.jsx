@@ -132,6 +132,8 @@ const WordsOrImage = ({
   const mediaRecorderRef = useRef(null);
   const recordedChunksRef = useRef([]);
 
+  const language = getLocalData("lang");
+
   const mimeType = "audio/webm;codecs=opus";
 
   const startAudioRecording = useCallback(async () => {
@@ -1048,7 +1050,7 @@ const WordsOrImage = ({
             mt: isMobile ? 2 : 0,
           }}
         >
-          {(level === 1 || level === 2 || level === 3) && !isShowCase ? (
+          {language === "en" && (level === 1 || level === 2 || level === 3) && !isShowCase ? (
             <div>
               {showSpeakButton && (
                 <Box

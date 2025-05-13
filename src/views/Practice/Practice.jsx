@@ -623,6 +623,12 @@ const Practice = () => {
   const rFlow = getLocalData("rFlow");
 
   useEffect(() => {
+    if (lang !== "en") {
+      setLocalData("rFlow", false);
+    }
+  }, [lang]);
+
+  useEffect(() => {
     console.log("levelsssss", level);
 
     let currentLevelMap;
@@ -940,7 +946,11 @@ const Practice = () => {
             } catch (e) {
               // catch error
             }
-          } else if (currentLevel === "S2" && (level === 1 || level === 2)) {
+          } else if (
+            currentLevel === "S2" &&
+            lang === "en" &&
+            (level === 1 || level === 2)
+          ) {
             setLocalData("mFail", true);
             setTimeout(() => {
               setLocalData("rFlow", true);
@@ -1682,7 +1692,7 @@ const Practice = () => {
                 ? `Guess the below image`
                 : `Speak the below ${questions[currentQuestion]?.contentType}`),
             words:
-              level === 1 || level === 2 || level === 3
+              lang === "en" && (level === 1 || level === 2 || level === 3)
                 ? levelOneWord
                 : mechanism?.id === "mechanic_15"
                 ? questions[currentQuestion]?.mechanics_data?.[0]?.text
