@@ -6,6 +6,16 @@ import { response } from "../services/telementryService";
 import S3Client from "../config/awsS3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
+const getHeaders = () => {
+  const token = localStorage.getItem("apiToken");
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+};
+
 export const fetchASROutput = async (base64Data, options, setLoader) => {
   try {
     setLoader(true);
@@ -33,7 +43,8 @@ export const fetchASROutput = async (base64Data, options, setLoader) => {
 
     const { data } = await axios.post(
       `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.UPDATE_LEARNER_PROFILE}/${lang}`,
-      requestBody
+      requestBody,
+      getHeaders()
     );
 
     return data;
