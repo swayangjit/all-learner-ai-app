@@ -134,6 +134,21 @@ function ArrangePicture({
   const [isReadAloudPlaying, setIsReadAloudPlaying] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const [isLandscape, setIsLandscape] = useState(
+    window.innerWidth > window.innerHeight
+  );
+
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      setIsLandscape(window.innerWidth > window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleOrientationChange);
+
+    return () => {
+      window.removeEventListener("resize", handleOrientationChange);
+    };
+  }, []);
 
   const getConversation = (level, currentLevel) => {
     const levelData = levelMap[level];
@@ -448,8 +463,16 @@ function ArrangePicture({
                         key={index}
                         style={{
                           gridColumn: isLastRowFirstItem ? "1 / -1" : undefined,
-                          width: isMobile ? "55px" : "120px",
-                          height: isMobile ? "55px" : "120px",
+                          width: isMobile
+                            ? "75px"
+                            : isLandscape
+                            ? "85px"
+                            : "120px",
+                          height: isMobile
+                            ? "75px"
+                            : isLandscape
+                            ? "85px"
+                            : "120px",
                           backgroundColor: "#FFEFE6",
                           border: placedImages[index]
                             ? "none"
@@ -572,8 +595,16 @@ function ArrangePicture({
                         key={image.id}
                         style={{
                           gridColumn: index === 4 ? "1 / -1" : undefined,
-                          width: isMobile ? "55px" : "120px",
-                          height: isMobile ? "55px" : "120px",
+                          width: isMobile
+                            ? "75px"
+                            : isLandscape
+                            ? "85px"
+                            : "120px",
+                          height: isMobile
+                            ? "75px"
+                            : isLandscape
+                            ? "85px"
+                            : "120px",
                           borderRadius: "10px",
                           overflow: "hidden",
                           cursor: "pointer",
