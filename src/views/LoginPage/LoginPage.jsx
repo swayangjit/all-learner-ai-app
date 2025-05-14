@@ -9,8 +9,11 @@ import {
   CircularProgress,
 } from "@mui/material";
 import config from "../../utils/urlConstants.json";
-import "./LoginPage.css";
 import { useMediaQuery } from "@mui/material";
+import { fetchVirtualId } from "../../services/userservice/userService";
+import { jwtDecode } from "jwt-decode";
+import "./LoginPage.css";
+import { setLocalData } from "../../utils/constants";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -27,22 +30,19 @@ const LoginPage = () => {
     localStorage.clear();
 
     try {
-      const usernameDetails = await axios.post(
-        `${process.env.REACT_APP_VIRTUAL_ID_HOST}/${config.URLS.GET_VIRTUAL_ID}?username=${username}`
-      );
+      const usernameDetails = await fetchVirtualId(username);
+      let token = usernameDetails?.result?.token;
 
-      if (usernameDetails?.data?.result?.virtualID) {
-        localStorage.setItem("profileName", username);
-        localStorage.setItem(
-          "virtualId",
-          usernameDetails?.data?.result?.virtualID
-        );
+      localStorage.setItem("apiToken", token);
+      // const tokenDetails = jwtDecode(token);
+      if (token) {
+        setLocalData("profileName", username);
         navigate("/discover-start");
       } else {
         alert("Enter correct username and password");
       }
     } catch (error) {
-      console.error("Error occurred:", error);
+      console.error(error);
       alert("An error occurred. Please try again later.");
     }
   };

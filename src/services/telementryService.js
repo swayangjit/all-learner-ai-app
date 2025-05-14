@@ -62,7 +62,7 @@ export const initialize = async ({ context, config, metadata }) => {
         telemetryConfig
       );
     } catch (error) {
-      console.log(":e", error);
+      console.error(":e", error);
     }
   }
 };
@@ -81,7 +81,7 @@ export const start = (duration) => {
       },
     });
   } catch (error) {
-    console.log("err", error);
+    console.error("err", error);
   }
 };
 
@@ -213,6 +213,16 @@ function checkTelemetryMode(currentMode) {
   );
 }
 
+const getVirtualId = () => {
+  const TOKEN = localStorage.getItem("apiToken");
+  // let virtualId;
+  // if (TOKEN) {
+  //   const tokenDetails = jwtDecode(TOKEN);
+  //   virtualId = JSON.stringify(tokenDetails?.virtual_id);
+  // }
+  return TOKEN;
+};
+
 export const getEventOptions = () => {
   var emis_username = localStorage.getItem("virtualId") || "anonymous";
   var buddyUserId = "";
@@ -256,14 +266,14 @@ export const getEventOptions = () => {
         },
         { id: playSessionId, type: "PlaySession" },
         { id: userId, type: userType },
-        { id: localStorage.getItem("lang") || "ta", type: "language" },
+        { id: getLocalData("lang") || "ta", type: "language" },
         { id: userDetails?.school_name, type: "school_name" },
         {
           id: userDetails?.class_studying_id,
           type: "class_studying_id",
         },
         { id: userDetails?.udise_code, type: "udise_code" },
-        { id: localStorage.getItem("virtualId") || null, type: "virtualId" },
+        { id: getVirtualId() || null, type: "virtualId" },
       ],
       rollup: {},
     },
