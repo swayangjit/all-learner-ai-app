@@ -71,15 +71,15 @@ const Mechanics4 = ({
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
   let progressDatas = getLocalData("practiceProgress");
-  const virtualId = String(getLocalData("virtualId"));
+  //const virtualId = String(getLocalData("virtualId"));
 
   if (typeof progressDatas === "string") {
     progressDatas = JSON.parse(progressDatas);
   }
 
   let currentPracticeStep;
-  if (progressDatas?.[virtualId]) {
-    currentPracticeStep = progressDatas[virtualId].currentPracticeStep;
+  if (progressDatas) {
+    currentPracticeStep = progressDatas?.currentPracticeStep;
   }
 
   let currentLevel = practiceSteps?.[currentPracticeStep]?.name || "L1";
