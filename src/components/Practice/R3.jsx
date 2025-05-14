@@ -521,7 +521,7 @@ const R3 = ({
               <div
                 style={{
                   display: "flex",
-                  gap: isMobile ? "5px" : "50px",
+                  gap: isMobile ? "20px" : "50px",
                   marginTop: "20px",
                 }}
               >

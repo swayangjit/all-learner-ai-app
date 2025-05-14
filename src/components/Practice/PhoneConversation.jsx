@@ -446,7 +446,7 @@ const PhoneConversation = ({
       borderBottomRightRadius: "24px",
       borderBottomLeftRadius: "1px",
       alignSelf: "flex-start",
-      maxWidth: "300px",
+      maxWidth: isMobile ? "230px" : "300px",
       marginLeft: "80px",
     },
     callerMessage: {
@@ -456,7 +456,7 @@ const PhoneConversation = ({
       borderBottomRightRadius: "1px",
       borderBottomLeftRadius: "24px",
       alignSelf: "flex-end",
-      maxWidth: "300px",
+      maxWidth: isMobile ? "230px" : "300px",
       marginRight: isMobile ? "80px" : "180px",
       marginBottom: isMobile ? "10px" : "-30px",
     },
@@ -483,7 +483,7 @@ const PhoneConversation = ({
       width: "25px",
       height: "25px",
       position: "absolute",
-      left: "-70px",
+      left: "-80px",
       bottom: "10%",
       display: "flex",
       alignItems: "center",
@@ -623,14 +623,18 @@ const PhoneConversation = ({
             <img
               src={isPlaying === msg.audio ? spinnerStop : listenImg2}
               alt="Audio"
-              style={{ height: "25px", width: "25px", cursor: "pointer" }}
+              style={{
+                height: isMobile ? "30px" : "25px",
+                width: isMobile ? "30px" : "25px",
+                cursor: "pointer",
+              }}
               onClick={() => playAudio(msg?.audio)}
             />
             <img
               src={Assets.avatar1}
               alt="Boy"
-              width={"25px"}
-              height={"25px"}
+              width={isMobile ? "30px" : "25px"}
+              height={isMobile ? "30px" : "25px"}
             />
           </div>
         )}
@@ -640,13 +644,17 @@ const PhoneConversation = ({
             <img
               src={Assets.avatar2}
               alt="Boy"
-              width={"25px"}
-              height={"25px"}
+              width={isMobile ? "30px" : "25px"}
+              height={isMobile ? "30px" : "25px"}
             />
             <img
               src={isPlaying === msg.audio ? spinnerStop : listenImg2}
               alt="Audio"
-              style={{ height: "25px", width: "25px", cursor: "pointer" }}
+              style={{
+                height: isMobile ? "30px" : "25px",
+                width: isMobile ? "30px" : "25px",
+                cursor: "pointer",
+              }}
               onClick={() => playAudio(msg?.audio)}
             />
           </div>
@@ -745,8 +753,8 @@ const PhoneConversation = ({
                       }
                       alt="Audio"
                       style={{
-                        height: "40px",
-                        width: "190px",
+                        height: isMobile ? "50px" : "40px",
+                        //width: "190px",
                         cursor: "pointer",
                         marginTop: "10px",
                       }}

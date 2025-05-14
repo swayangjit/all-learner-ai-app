@@ -614,13 +614,13 @@ const MainLayout = (props) => {
                                     key={i}
                                     sx={{
                                       width: {
-                                        xs: "24px",
+                                        xs: "16px",
                                         sm: "26px",
                                         md: "28px",
                                         lg: "36px",
                                       },
                                       height: {
-                                        xs: "24px",
+                                        xs: "16px",
                                         sm: "26px",
                                         md: "28px",
                                         lg: "36px",
@@ -656,7 +656,7 @@ const MainLayout = (props) => {
                                               : "#1E2937",
                                           fontWeight: 600,
                                           lineHeight: "20px",
-                                          fontSize: "16px",
+                                          fontSize: isMobile ? "13px" : "16px",
                                           fontFamily: "Quicksand",
                                         }}
                                       >

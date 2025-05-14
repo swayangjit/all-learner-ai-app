@@ -1772,7 +1772,7 @@ const PhrasesInAction = ({
                       ) : (
                         <Grid
                           container
-                          spacing={isMobile ? 1 : isTablet ? 2 : 4}
+                          spacing={isMobile ? 2 : isTablet ? 2 : 4}
                           justifyContent="center"
                           style={{
                             margin: isMobile
@@ -1780,11 +1780,11 @@ const PhrasesInAction = ({
                               : isTablet
                               ? "0"
                               : "8px 0",
-                            paddingLeft: isMobile ? "95px" : "0",
+                            paddingLeft: isMobile ? "40px" : "0",
                           }}
                         >
                           {levelData?.allwordsTwo?.map((item) => (
-                            <Grid item key={item.text} xs={12} sm={4} md={4}>
+                            <Grid item key={item.text} xs={6} sm={4} md={4}>
                               <div
                                 style={{
                                   width: isMobile ? "58%" : "95%",
@@ -1879,16 +1879,8 @@ const PhrasesInAction = ({
                             src={Assets.pause}
                             alt="Stop Recording"
                             style={{
-                              width: isMobile
-                                ? "40px"
-                                : isTablet
-                                ? "50px"
-                                : "60px",
-                              height: isMobile
-                                ? "40px"
-                                : isTablet
-                                ? "50px"
-                                : "60px",
+                              width: "60px",
+                              height: "60px",
                             }}
                           />
                         </button>
@@ -1911,16 +1903,8 @@ const PhrasesInAction = ({
                             src={Assets.mic}
                             alt="Start Recording"
                             style={{
-                              width: isMobile
-                                ? "40px"
-                                : isTablet
-                                ? "50px"
-                                : "60px",
-                              height: isMobile
-                                ? "40px"
-                                : isTablet
-                                ? "50px"
-                                : "60px",
+                              width: "60px",
+                              height: "60px",
                             }}
                           />
                         </button>
@@ -1941,12 +1925,12 @@ const PhrasesInAction = ({
                           alt="Tick"
                           style={{
                             width: isMobile
-                              ? "30px"
+                              ? "40px"
                               : isTablet
                               ? "35px"
                               : "40px",
                             height: isMobile
-                              ? "30px"
+                              ? "40px"
                               : isTablet
                               ? "35px"
                               : "40px",
