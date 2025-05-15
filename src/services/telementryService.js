@@ -1,7 +1,7 @@
 import { CsTelemetryModule } from "@project-sunbird/client-services/telemetry";
 import { uniqueId } from "./utilService";
 import { jwtDecode } from "../../node_modules/jwt-decode/build/cjs/index";
-import { getLocalData } from "../utils/constants";
+import { getLocalData, setLocalData } from "../utils/constants";
 
 let startTime; // Variable to store the timestamp when the start event is raised
 let contentSessionId;
@@ -19,12 +19,20 @@ function checkTokenInLocalStorage() {
   return !!token; // Returns true if token is present, false if token is null or undefined
 }
 
-if (localStorage.getItem("contentSessionId") !== null) {
-  contentSessionId = localStorage.getItem("contentSessionId");
+// if (localStorage.getItem("contentSessionId") !== null) {
+//   contentSessionId = localStorage.getItem("contentSessionId");
+// } else {
+//   contentSessionId = localStorage.getItem("sessionId") || uniqueId();
+//   localStorage.setItem("sessionId", contentSessionId);
+//   localStorage.setItem("allAppContentSessionId", contentSessionId);
+// }
+
+if (getLocalData("contentSessionId") !== null) {
+  contentSessionId = getLocalData("contentSessionId");
 } else {
-  contentSessionId = localStorage.getItem("sessionId") || uniqueId();
-  localStorage.setItem("sessionId", contentSessionId);
-  localStorage.setItem("allAppContentSessionId", contentSessionId);
+  contentSessionId = getLocalData("sessionId") || uniqueId();
+  setLocalData("sessionId", contentSessionId);
+  setLocalData("allAppContentSessionId", contentSessionId);
 }
 
 let getUrl = window.location.href;
@@ -41,7 +49,10 @@ export const initialize = async ({ context, config, metadata }) => {
         channel: context.channel,
         did: context.did,
         authtoken: context.authToken || "",
-        uid: localStorage.getItem("virtualId") || "anonymous",
+        uid:
+          getLocalData("virtualId") ||
+          localStorage.getItem("apiToken") ||
+          "anonymous",
         sid: context.sid,
         batchsize: process.env.REACT_APP_BATCHSIZE,
         mode: context.mode,
@@ -224,7 +235,10 @@ const getVirtualId = () => {
 };
 
 export const getEventOptions = () => {
-  var emis_username = localStorage.getItem("virtualId") || "anonymous";
+  var emis_username =
+    localStorage.getItem("virtualId") ||
+    localStorage.getItem("apiToken") ||
+    "anonymous";
   var buddyUserId = "";
 
   if (localStorage.getItem("token") !== null) {
@@ -242,7 +256,10 @@ export const getEventOptions = () => {
   const userType = isBuddyLogin ? "Buddy User" : "User";
   const userId = isBuddyLogin
     ? emis_username + "/" + buddyUserId
-    : emis_username || localStorage.getItem("virtualId") || "anonymous";
+    : emis_username ||
+      localStorage.getItem("virtualId") ||
+      localStorage.getItem("apiToken") ||
+      "anonymous";
 
   return {
     object: {},
@@ -257,11 +274,14 @@ export const getEventOptions = () => {
       uid: `${
         isBuddyLogin
           ? emis_username + "/" + buddyUserId
-          : emis_username || localStorage.getItem("virtualId") || "anonymous"
+          : emis_username ||
+            getLocalData("virtualId") ||
+            localStorage.getItem("apiToken") ||
+            "anonymous"
       }`,
       cdata: [
         {
-          id: localStorage.getItem("sessionId") || contentSessionId,
+          id: getLocalData("sessionId") || contentSessionId,
           type: "ContentSession",
         },
         { id: playSessionId, type: "PlaySession" },

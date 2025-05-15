@@ -19,7 +19,7 @@ const App = () => {
       await initialize({
         context: {
           mode: process.env.REACT_APP_MODE, // To identify preview used by the user to play/edit/preview
-          authToken: "", // Auth key to make  api calls
+          authToken: localStorage.getItem("apiToken"), // Auth key to make  api calls
           did: localStorage.getItem("deviceId") || visitorId, // Unique id to identify the device or browser
           uid: "anonymous",
           channel: process.env.REACT_APP_CHANNEL, // Unique id of the channel(Channel ID)
@@ -84,8 +84,14 @@ const App = () => {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response && error.response.status === 401) {
-        if (error?.response?.data?.error === "Unauthorized") {
+      if (
+        error.response &&
+        (error.response.status === 401 || error.response.status === 400)
+      ) {
+        if (
+          error?.response?.data?.error === "Unauthorized" ||
+          error?.response?.data?.error === "Invalid token"
+        ) {
           if (
             localStorage.getItem("contentSessionId") &&
             process.env.REACT_APP_IS_APP_IFRAME === "true"
