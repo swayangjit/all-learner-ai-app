@@ -636,7 +636,7 @@ const Practice = () => {
 
   console.log("prog", progressDatas);
 
-  const rFlow = getLocalData("rFlow");
+  const rFlow = String(getLocalData("rFlow"));
 
   useEffect(() => {
     if (lang !== "en") {
@@ -645,7 +645,7 @@ const Practice = () => {
   }, [lang]);
 
   useEffect(() => {
-    console.log("levelsssss", level);
+    console.log("levelsssss", level, rFlow, rStep);
 
     let currentLevelMap;
     let currentImageMap;

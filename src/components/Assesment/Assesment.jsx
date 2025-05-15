@@ -804,7 +804,7 @@ const Assesment = ({ discoverStart }) => {
     desktopLevel15,
   };
 
-  const rFlow = getLocalData("rFlow");
+  const rFlow = String(getLocalData("rFlow"));
   const rStep = Number(getLocalData("rStep")) || 2;
 
   const sectionStyle = {
