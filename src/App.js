@@ -90,7 +90,8 @@ const App = () => {
       ) {
         if (
           error?.response?.data?.error === "Unauthorized" ||
-          error?.response?.data?.error === "Invalid token"
+          error?.response?.data?.error === "Invalid token" ||
+          error?.response?.data?.error === "Token expired"
         ) {
           if (
             localStorage.getItem("contentSessionId") &&
