@@ -3776,7 +3776,7 @@ export const level11 = [
           speaker: "Nila, are you ready for school?",
           user: "Yes, Dad! But I can’t find my water bottle.",
           audio: "level11P8OneUAudio",
-          speakerAudio: "level11P8OneUAudio",
+          speakerAudio: "level11P8OneSAudio",
         },
         {
           speaker: "Check your bag. Is it inside?",
