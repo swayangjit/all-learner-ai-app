@@ -487,7 +487,7 @@ const Practice = () => {
     P4: [
       { completeWord: "Circle", syllable: ["Cir", "cle"] },
       { completeWord: "Rabbit", syllable: ["Rab", "bit"] },
-      { completeWord: "Color", syllable: ["Co", "lor"] },
+      { completeWord: "Colour", syllable: ["Co", "lour"] },
       { completeWord: "Village", syllable: ["Vil", "lage"] },
       { completeWord: "Farmer", syllable: ["Far", "mer"] },
     ],
@@ -560,8 +560,8 @@ const Practice = () => {
     S1: [
       { completeWord: "Cats meow.", syllable: ["Cats", "meow."] },
       { completeWord: "Dogs bark.", syllable: ["Dogs", "bark."] },
-      { completeWord: "Fish swim.", syllable: ["Fish", "swim."] },
-      { completeWord: "Sun shines.", syllable: ["Sun", "shines."] },
+      { completeWord: "Fish swims.", syllable: ["Fish", "swims."] },
+      { completeWord: "The sun shines.", syllable: ["Sun", "shines."] },
       { completeWord: "Stars twinkle.", syllable: ["Stars", "twinkle."] },
     ],
     S2: [
