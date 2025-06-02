@@ -3,10 +3,10 @@ import config from "../../utils/urlConstants.json";
 import { getLocalData } from "../../utils/constants";
 import { getVirtualId } from "../userservice/userService";
 
-const API_LEARNER_AI_APP_HOST = process.env.REACT_APP_LEARNER_AI_APP_HOST;
+const API_LEARNER_AI_APP_HOST = import.meta.env.VITE_LEARNER_AI_APP_HOST;
 
 const getHeaders = () => {
-  const token = localStorage.getItem("apiToken");
+  const token = localStorage.getItem("token");
   return {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ export const getContent = async (criteria, lang, limit, options = {}) => {
 };
 
 export const getFetchMilestoneDetails = async (lang) => {
-  if (localStorage.getItem("apiToken")) {
+  if (localStorage.getItem("token")) {
     try {
       const response = await axios.get(
         `${API_LEARNER_AI_APP_HOST}/${config.URLS.GET_MILESTONE}?language=${lang}`,
@@ -94,7 +94,7 @@ export const getSetResultPractice = async ({
         session_id: sessionId,
         totalSyllableCount: totalSyllableCount,
         language: getLocalData("lang"),
-        max_level: parseInt(maxLevel || process.env.REACT_APP_MAX_LEVEL, 10),
+        max_level: parseInt(maxLevel || import.meta.env.VITE_MAX_LEVEL, 10),
         is_mechanics: mechanism && mechanism?.id ? true : false,
       },
       getHeaders()

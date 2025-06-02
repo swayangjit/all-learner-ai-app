@@ -7,24 +7,24 @@ export const initialize = ({ did }) => {
     const telemetryConfig = {
       config: {
         pdata: {
-          id: process.env.REACT_APP_ID,
-          ver: process.env.REACT_APP_VER,
-          pid: process.env.REACT_APP_PID,
+          id: import.meta.env.VITE_ID,
+          ver: import.meta.env.VITE_VER,
+          pid: import.meta.env.VITE_PID,
         },
-        env: process.env.REACT_APP_ENV,
-        channel: process.env.REACT_APP_CHANNEL,
+        env: import.meta.env.VITE_ENV,
+        channel: import.meta.env.VITE_CHANNEL,
         did: did,
         authtoken: "",
         uid:
           localStorage.getItem("virtualId") ||
-          localStorage.getItem("apiToken") ||
+          localStorage.getItem("token") ||
           "anonymous",
         sid: "",
         batchsize: 1,
         mode: "",
-        host: process.env.REACT_APP_BASE_URL,
-        apislug: process.env.REACT_APP_API_SLUG,
-        endpoint: process.env.REACT_APP_ENDPOINT,
+        host: import.meta.env.VITE_BASE_URL,
+        apislug: import.meta.env.VITE_API_SLUG,
+        endpoint: import.meta.env.VITE_ENDPOINT,
         tags: [],
         cdata: [
           { id: "", type: "ContentSession" },
@@ -65,10 +65,10 @@ export const getEventOptions = () => {
         ver: "",
         pid: "",
       },
-      env: process.env.ENV,
+      env: import.meta.env.ENV,
       uid:
         localStorage.getItem("virtualId") ||
-        localStorage.getItem("apiToken") ||
+        localStorage.getItem("token") ||
         "anonymous",
       cdata: [],
       rollup: {},

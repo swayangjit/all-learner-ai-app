@@ -785,7 +785,6 @@ const BingoCard = ({
       MARKET: ["MAR", "KET"],
       BASKET: ["BAS", "KET"],
       TABLE: ["TA", "BLE"],
-      WINDOW: ["WIN", "DOW"],
       POCKET: ["POCK", "ET"],
       WINDOW: ["WIN", "DOW"],
       CRICKET: ["CRICK", "ET"],

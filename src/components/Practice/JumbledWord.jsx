@@ -27,7 +27,7 @@ import {
   SpeakButton,
   ListenButton,
   NextButtonRound,
-  RetryIconn,
+  RetryIcon,
 } from "../../utils/constants";
 import {
   level13,

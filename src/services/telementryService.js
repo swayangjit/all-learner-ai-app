@@ -1,6 +1,7 @@
 import { CsTelemetryModule } from "@project-sunbird/client-services/telemetry";
 import { uniqueId } from "./utilService";
-import { jwtDecode } from "../../node_modules/jwt-decode/build/cjs/index";
+//import { jwtDecode } from "../../node_modules/jwt-decode/build/cjs/index";
+import { jwtDecode } from "jwt-decode";
 import { getLocalData, setLocalData } from "../utils/constants";
 
 let startTime; // Variable to store the timestamp when the start event is raised
@@ -51,10 +52,10 @@ export const initialize = async ({ context, config, metadata }) => {
         authtoken: context.authToken || "",
         uid:
           getLocalData("virtualId") ||
-          localStorage.getItem("apiToken") ||
+          localStorage.getItem("token") ||
           "anonymous",
         sid: context.sid,
-        batchsize: process.env.REACT_APP_BATCHSIZE,
+        batchsize: import.meta.env.VITE_BATCHSIZE,
         mode: context.mode,
         host: context.host,
         apislug: context.apislug,
@@ -216,16 +217,16 @@ export const feedback = (data, contentId, telemetryMode) => {
 
 function checkTelemetryMode(currentMode) {
   return (
-    (process.env.REACT_APP_TELEMETRY_MODE === "ET" && currentMode === "ET") ||
-    (process.env.REACT_APP_TELEMETRY_MODE === "NT" &&
+    (import.meta.env.VITE_TELEMETRY_MODE === "ET" && currentMode === "ET") ||
+    (import.meta.env.VITE_TELEMETRY_MODE === "NT" &&
       (currentMode === "ET" || currentMode === "NT")) ||
-    (process.env.REACT_APP_TELEMETRY_MODE === "DT" &&
+    (import.meta.env.VITE_TELEMETRY_MODE === "DT" &&
       (currentMode === "ET" || currentMode === "NT" || currentMode === "DT"))
   );
 }
 
 const getVirtualId = () => {
-  const TOKEN = localStorage.getItem("apiToken");
+  const TOKEN = localStorage.getItem("token");
   // let virtualId;
   // if (TOKEN) {
   //   const tokenDetails = jwtDecode(TOKEN);
@@ -237,12 +238,14 @@ const getVirtualId = () => {
 export const getEventOptions = () => {
   var emis_username =
     localStorage.getItem("virtualId") ||
-    localStorage.getItem("apiToken") ||
+    localStorage.getItem("token") ||
     "anonymous";
   var buddyUserId = "";
 
   if (localStorage.getItem("token") !== null) {
     let jwtToken = localStorage.getItem("token");
+    console.log("newToken", jwtToken);
+
     var userDetails = jwtDecode(jwtToken);
     emis_username = userDetails.emis_username;
   }
@@ -258,7 +261,7 @@ export const getEventOptions = () => {
     ? emis_username + "/" + buddyUserId
     : emis_username ||
       localStorage.getItem("virtualId") ||
-      localStorage.getItem("apiToken") ||
+      localStorage.getItem("token") ||
       "anonymous";
 
   return {
@@ -266,17 +269,17 @@ export const getEventOptions = () => {
     context: {
       pdata: {
         // optional
-        id: process.env.REACT_APP_ID, // Producer ID. For ex: For sunbird it would be "portal" or "genie"
-        ver: process.env.REACT_APP_VER, // Version of the App
-        pid: process.env.REACT_APP_PID, // Optional. In case the component is distributed, then which instance of that component
+        id: import.meta.env.VITE_ID, // Producer ID. For ex: For sunbird it would be "portal" or "genie"
+        ver: import.meta.env.VITE_VER, // Version of the App
+        pid: import.meta.env.VITE_PID, // Optional. In case the component is distributed, then which instance of that component
       },
-      env: process.env.REACT_APP_ENV,
+      env: import.meta.env.VITE_ENV,
       uid: `${
         isBuddyLogin
           ? emis_username + "/" + buddyUserId
           : emis_username ||
             getLocalData("virtualId") ||
-            localStorage.getItem("apiToken") ||
+            localStorage.getItem("token") ||
             "anonymous"
       }`,
       cdata: [

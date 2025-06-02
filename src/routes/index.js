@@ -68,7 +68,7 @@ const routData = [
   },
 ];
 // add login route for test rig
-const TOKEN = localStorage.getItem("apiToken");
+const TOKEN = localStorage.getItem("token");
 // let virtualId;
 // if (TOKEN) {
 //   const tokenDetails = jwtDecode(TOKEN);
@@ -76,7 +76,7 @@ const TOKEN = localStorage.getItem("apiToken");
 // }else{
 //   virtualId = null;
 // }
-const isLogin = process.env.REACT_APP_IS_IN_APP_AUTHORISATION === "true";
+const isLogin = import.meta.env.VITE_IS_IN_APP_AUTHORISATION === "true";
 
 if (isLogin && !TOKEN) {
   routData.push({

@@ -1,5 +1,10 @@
+console.log("Main.jsx loaded");
+
 import React from "react";
 import { render } from "react-dom";
+import ReactDOM from "react-dom/client";
+import "regenerator-runtime/runtime";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
 import "./assets/styles/index.scss";
@@ -10,7 +15,7 @@ import { getCSP } from "./csp";
 
 const injectCSP = () => {
   try {
-    const cspContent = getCSP(process.env); // Pass environment variables
+    const cspContent = getCSP(import.meta.env); // Pass environment variables
     const metaTag = document.createElement("meta");
     metaTag.httpEquiv = "Content-Security-Policy";
     metaTag.content = cspContent.trim();
@@ -22,13 +27,14 @@ const injectCSP = () => {
 
 injectCSP();
 
-render(
-  <React.StrictMode>
-    <Router>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </Router>
-  </React.StrictMode>,
-  document.getElementById("root")
+console.log("Index loaded");
+
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <Router>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </Router>
 );

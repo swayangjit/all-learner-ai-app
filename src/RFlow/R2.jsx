@@ -697,7 +697,7 @@ const R2 = ({
         setShowRecordButton(false);
         if (currentQuestionIndex === content?.L1.length - 1) {
           // setLocalData("rFlow", false);
-          // if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+          // if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
           //   navigate("/");
           // } else {
           //   navigate("/discover-start");
@@ -1202,7 +1202,7 @@ const R2 = ({
                     setRecording("no");
                     if (currentQuestionIndex === content.L1.length - 1) {
                       // setLocalData("rFlow", false);
-                      // if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+                      // if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
                       //   navigate("/");
                       // } else {
                       //   navigate("/discover-start");

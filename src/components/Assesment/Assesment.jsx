@@ -385,7 +385,7 @@ export const ProfileHeader = ({
 
   const handleProfileBack = () => {
     try {
-      if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+      if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
         window.parent.postMessage(
           { type: "restore-iframe-content" },
           window?.location?.ancestorOrigins?.[0] ||
@@ -515,7 +515,7 @@ export const ProfileHeader = ({
             alignItems: "center",
           }}
         >
-          {process.env.REACT_APP_IS_IN_APP_AUTHORISATION === "true" && (
+          {import.meta.env.VITE_IS_IN_APP_AUTHORISATION === "true" && (
             <Box sx={{ position: "relative" }} mr="10px">
               <img
                 src={scoreView}
@@ -578,7 +578,7 @@ export const ProfileHeader = ({
               </Box>
             </Box>
           </Box>
-          {process.env.REACT_APP_IS_IN_APP_AUTHORISATION === "true" && (
+          {import.meta.env.VITE_IS_IN_APP_AUTHORISATION === "true" && (
             <CustomTooltip title="Logout">
               <Box>
                 <CustomIconButton onClick={handleLogout}>
@@ -670,7 +670,7 @@ const Assesment = ({ discoverStart }) => {
 
         setLocalData("lang", lang || "ta");
         if (
-          process.env.REACT_APP_IS_APP_IFRAME !== "true" &&
+          import.meta.env.VITE_IS_APP_IFRAME !== "true" &&
           localStorage.getItem("contentSessionId") !== null
         ) {
           fetchUserPoints()
@@ -725,7 +725,7 @@ const Assesment = ({ discoverStart }) => {
         }
 
         if (
-          process.env.REACT_APP_IS_APP_IFRAME !== "true" &&
+          import.meta.env.VITE_IS_APP_IFRAME !== "true" &&
           TOKEN &&
           localStorage.getItem("contentSessionId") !== null
         ) {
@@ -742,7 +742,7 @@ const Assesment = ({ discoverStart }) => {
     }
   }, [lang]);
 
-  const TOKEN = localStorage.getItem("apiToken");
+  const TOKEN = localStorage.getItem("token");
   let virtualId;
   // if (TOKEN) {
   //   const tokenDetails = jwtDecode(TOKEN);
@@ -750,17 +750,14 @@ const Assesment = ({ discoverStart }) => {
   // }
 
   const handleOpenVideo = () => {
-    if (process.env.REACT_APP_SHOW_HELP_VIDEO === "true") {
+    if (import.meta.env.VITE_SHOW_HELP_VIDEO === "true") {
       let allowedOrigins = [];
       try {
         allowedOrigins = JSON.parse(
-          process.env.REACT_APP_PARENT_ORIGIN_URL || "[]"
+          import.meta.env.VITE_PARENT_ORIGIN_URL || "[]"
         );
       } catch (error) {
-        console.error(
-          "Invalid JSON format in REACT_APP_PARENT_ORIGIN_URL:",
-          error
-        );
+        console.error("Invalid JSON format in VITE_PARENT_ORIGIN_URL:", error);
       }
 
       const parentOrigin =
@@ -867,7 +864,7 @@ const Assesment = ({ discoverStart }) => {
             {...{ level, lang, setOpenLangModal, points, setOpenMessageDialog }}
           />
           <Box>
-            {process.env.REACT_APP_SHOW_HELP_VIDEO === "true" && (
+            {import.meta.env.VITE_SHOW_HELP_VIDEO === "true" && (
               <Box
                 onClick={handleOpenVideo}
                 sx={{
@@ -988,7 +985,7 @@ const Assesment = ({ discoverStart }) => {
               </Typography>
             </Box>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              {process.env.REACT_APP_SHOW_HELP_VIDEO === "true" && (
+              {import.meta.env.VITE_SHOW_HELP_VIDEO === "true" && (
                 <Box
                   onClick={handleOpenVideo}
                   sx={{

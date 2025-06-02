@@ -33,7 +33,7 @@ const LoginPage = () => {
       const usernameDetails = await fetchVirtualId(username);
       let token = usernameDetails?.result?.token;
 
-      localStorage.setItem("apiToken", token);
+      localStorage.setItem("token", token);
       // const tokenDetails = jwtDecode(token);
       if (token) {
         setLocalData("profileName", username);

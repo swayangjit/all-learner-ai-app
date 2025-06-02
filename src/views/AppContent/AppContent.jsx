@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 
 const PrivateRoute = (props) => {
   let virtualId;
-  const TOKEN = localStorage.getItem("apiToken");
+  const TOKEN = localStorage.getItem("token");
   // if (TOKEN) {
   //   const tokenDetails = jwtDecode(TOKEN);
   //   virtualId = JSON.stringify(tokenDetails?.virtual_id);

@@ -698,7 +698,7 @@ const R4 = ({
                     setLocalData("mFail", false);
                     setLocalData("rStep", 0);
                     //window.location.reload();
-                    if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+                    if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
                       navigate("/");
                     } else {
                       navigate("/discover-start");
@@ -755,7 +755,7 @@ const R4 = ({
                       setLocalData("mFail", false);
                       setLocalData("rStep", 0);
                       //window.location.reload();
-                      if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+                      if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
                         navigate("/");
                       } else {
                         navigate("/discover-start");

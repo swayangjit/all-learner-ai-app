@@ -1,13 +1,13 @@
 import axios from "axios";
 import { compareArrays, getLocalData, replaceAll } from "./constants";
 import config from "./urlConstants.json";
-import calcCER from "../../node_modules/character-error-rate/index";
+import calcCER from "character-error-rate";
 import { response } from "../services/telementryService";
 import S3Client from "../config/awsS3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 const getHeaders = () => {
-  const token = localStorage.getItem("apiToken");
+  const token = localStorage.getItem("token");
   return {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -42,7 +42,9 @@ export const fetchASROutput = async (base64Data, options, setLoader) => {
     };
 
     const { data } = await axios.post(
-      `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.UPDATE_LEARNER_PROFILE}/${lang}`,
+      `${import.meta.env.VITE_LEARNER_AI_APP_HOST}/${
+        config.URLS.UPDATE_LEARNER_PROFILE
+      }/${lang}`,
       requestBody,
       getHeaders()
     );
@@ -161,16 +163,16 @@ export const callTelemetryApi = async (
 
   let word_result = finalScore === 100 ? "correct" : "incorrect";
 
-  // TODO: Remove false when REACT_APP_AWS_S3_BUCKET_NAME and keys added
+  // TODO: Remove false when VITE_AWS_S3_BUCKET_NAME and keys added
   let audioFileName = "";
-  if (process.env.REACT_APP_CAPTURE_AUDIO === "true") {
+  if (import.meta.env.VITE_CAPTURE_AUDIO === "true") {
     let getContentId = currentLine;
     audioFileName = `${
-      process.env.REACT_APP_CHANNEL
+      import.meta.env.VITE_CHANNEL
     }/${sessionId}-${Date.now()}-${getContentId}.wav`;
 
     const command = new PutObjectCommand({
-      Bucket: process.env.REACT_APP_AWS_S3_BUCKET_NAME,
+      Bucket: import.meta.env.VITE_AWS_S3_BUCKET_NAME,
       Key: audioFileName,
       Body: Uint8Array.from(window.atob(base64Data), (c) => c.charCodeAt(0)),
       ContentType: "audio/wav",
@@ -184,9 +186,7 @@ export const callTelemetryApi = async (
     {
       // Required
       target:
-        process.env.REACT_APP_CAPTURE_AUDIO === "true"
-          ? `${audioFileName}`
-          : "", // Required. Target of the response
+        import.meta.env.VITE_CAPTURE_AUDIO === "true" ? `${audioFileName}` : "", // Required. Target of the response
       //"qid": "", // Required. Unique assessment/question id
       type: "SPEAK", // Required. Type of response. CHOOSE, DRAG, SELECT, MATCH, INPUT, SPEAK, WRITE
       values: [

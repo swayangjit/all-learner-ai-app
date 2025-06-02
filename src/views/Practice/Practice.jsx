@@ -887,7 +887,7 @@ const Practice = () => {
           Log(data, "practice", "ET");
           setPercentage(getSetData?.percentage);
           checkFluency(currentContentType, getSetData?.fluency);
-          if (process.env.REACT_APP_POST_LEARNER_PROGRESS === "true") {
+          if (import.meta.env.VITE_POST_LEARNER_PROGRESS === "true") {
             await createLearnerProgress(
               sub_session_id,
               getSetData?.currentLevel,
@@ -1123,12 +1123,16 @@ const Practice = () => {
   const playTeacherAudio = () => {
     const contentId = questions[currentQuestion]?.contentId;
     let audio = new Audio(
-      `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/all-audio-files/${lang}/${contentId}.wav`
+      `${
+        import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+      }/all-audio-files/${lang}/${contentId}.wav`
     );
     audio.addEventListener("canplaythrough", () => {
       set_temp_audio(
         new Audio(
-          `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/all-audio-files/${lang}/${contentId}.wav`
+          `${
+            import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+          }/all-audio-files/${lang}/${contentId}.wav`
         )
       );
     });
@@ -1164,9 +1168,9 @@ const Practice = () => {
       // TODO: Handle Error for lessons - no lesson progress - starting point should be P1
 
       if (
-        process.env.REACT_APP_IS_APP_IFRAME !== "true" &&
+        import.meta.env.VITE_IS_APP_IFRAME !== "true" &&
         (localStorage.getItem("contentSessionId") !== null ||
-          process.env.REACT_APP_IS_IN_APP_AUTHORISATION === "true")
+          import.meta.env.VITE_IS_IN_APP_AUTHORISATION === "true")
       ) {
         fetchUserPoints()
           .then((points) => {
@@ -1369,7 +1373,7 @@ const Practice = () => {
       setCurrentQuestion(practiceProgress?.currentQuestion || 0);
       setLocalData("practiceProgress", JSON.stringify(practiceProgress));
     } else {
-      if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+      if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
         navigate("/");
       } else {
         navigate("/discover-start");
@@ -1499,7 +1503,7 @@ const Practice = () => {
 
   useEffect(() => {
     if (questions[currentQuestion]?.contentSourceData) {
-      if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+      if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
         const contentSourceData =
           questions[currentQuestion]?.contentSourceData || [];
         const stringLengths = contentSourceData.map((item) => item.text.length);
@@ -1535,7 +1539,9 @@ const Practice = () => {
             level: level,
             audioLink:
               mechanism?.id === "mechanic_15"
-                ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_audios/${mechanics_data?.[0]?.audio_url}`
+                ? `${
+                    import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                  }/mechanics_audios/${mechanics_data?.[0]?.audio_url}`
                 : null,
             mechanism_id: mechanism?.id,
             header:
@@ -1562,7 +1568,11 @@ const Practice = () => {
             type: questions[currentQuestion]?.contentType,
             image:
               mechanism?.id === "mechanic_15"
-                ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_images/${questions[currentQuestion]?.mechanics_data[0]?.image_url}`
+                ? `${
+                    import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                  }/mechanics_images/${
+                    questions[currentQuestion]?.mechanics_data[0]?.image_url
+                  }`
                 : "",
             // image: elephant,
             enableNext,
@@ -1801,11 +1811,15 @@ const Practice = () => {
             storyLine,
             handleNext,
             image: questions[currentQuestion]?.mechanics_data
-              ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_images/` +
+              ? `${
+                  import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                }/mechanics_images/` +
                 questions[currentQuestion]?.mechanics_data[0]?.image_url
               : null,
             audio: questions[currentQuestion]?.mechanics_data
-              ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_audios/` +
+              ? `${
+                  import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                }/mechanics_audios/` +
                 questions[currentQuestion]?.mechanics_data[0]?.audio_url
               : null,
             enableNext,
@@ -2039,8 +2053,9 @@ const Practice = () => {
               : questions[currentQuestion]?.contentSourceData?.[0]?.text,
             contentType: currentContentType,
             question_audio: mechanics_data
-              ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_audios/` +
-                mechanics_data[0].audio_url
+              ? `${
+                  import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                }/mechanics_audios/` + mechanics_data[0].audio_url
               : questions[currentQuestion]?.contentSourceData?.[0]?.audio_url,
             contentId: questions[currentQuestion]?.contentId,
             setVoiceText,
@@ -2053,13 +2068,15 @@ const Practice = () => {
             type: "word",
             mechanism: mechanism?.id,
             image: mechanics_data
-              ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_images/` +
-                mechanics_data[0]?.image_url
+              ? `${
+                  import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                }/mechanics_images/` + mechanics_data[0]?.image_url
               : null,
 
             audio: mechanics_data
-              ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_audios/` +
-                audioLink
+              ? `${
+                  import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                }/mechanics_audios/` + audioLink
               : null,
             enableNext,
             showTimer: false,
@@ -2115,7 +2132,9 @@ const Practice = () => {
             handleNext,
             // image: elephant,
             audio: questions[currentQuestion]?.mechanics_data
-              ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_audios/` +
+              ? `${
+                  import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                }/mechanics_audios/` +
                 questions[currentQuestion]?.mechanics_data[0]?.audio_url
               : null,
             enableNext,
@@ -2699,11 +2718,15 @@ const Practice = () => {
             storyLine,
             handleNext,
             image: questions[currentQuestion]?.mechanics_data
-              ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_images/` +
+              ? `${
+                  import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                }/mechanics_images/` +
                 questions[currentQuestion]?.mechanics_data[0]?.image_url
               : null,
             audio: questions[currentQuestion]?.mechanics_data
-              ? `${process.env.REACT_APP_AWS_S3_BUCKET_CONTENT_URL}/mechanics_audios/` +
+              ? `${
+                  import.meta.env.VITE_AWS_S3_BUCKET_CONTENT_URL
+                }/mechanics_audios/` +
                 questions[currentQuestion]?.mechanics_data[0]?.audio_url
               : null,
             enableNext,

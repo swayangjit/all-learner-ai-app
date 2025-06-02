@@ -121,7 +121,7 @@ const SpeakSentenceComponent = () => {
       const lang = getLocalData("lang");
 
       // await axios.post(
-      //   `${process.env.REACT_APP_LEARNER_AI_ORCHESTRATION_HOST}/${config.URLS.ADD_LESSON}`,
+      //   `${import.meta.env.VITE_LEARNER_AI_ORCHESTRATION_HOST}/${config.URLS.ADD_LESSON}`,
       //   {
       //     userId: localStorage.getItem("virtualId"),
       //     sessionId: localStorage.getItem("sessionId"),
@@ -162,7 +162,7 @@ const SpeakSentenceComponent = () => {
         const { data: getSetData } = getSetResultRes;
         const data = JSON.stringify(getSetData);
         Log(data, "discovery", "ET");
-        if (process.env.REACT_APP_POST_LEARNER_PROGRESS === "true") {
+        if (import.meta.env.VITE_POST_LEARNER_PROGRESS === "true") {
           try {
             const milestoneLevel = getSetData?.currentLevel;
             const result = await createLearnerProgress(
@@ -228,7 +228,7 @@ const SpeakSentenceComponent = () => {
           //   (elem) => elem.category === "Char"
           // );
           // const resCharPagination = await axios.get(
-          //   `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/content-service/v1/content/pagination?page=1&limit=5&collectionId=${char?.content?.[0]?.collectionId}`
+          //   `${import.meta.env.VITE_LEARNER_AI_APP_HOST}/content-service/v1/content/pagination?page=1&limit=5&collectionId=${char?.content?.[0]?.collectionId}`
           // );
           // setCurrentContentType("Char");
           // setCurrentCollectionId(char?.content?.[0]?.collectionId);
@@ -280,9 +280,9 @@ const SpeakSentenceComponent = () => {
 
   const handleBack = () => {
     const destination =
-      process.env.REACT_APP_IS_APP_IFRAME === "true" ? "/" : "/discover-start";
+      import.meta.env.VITE_IS_APP_IFRAME === "true" ? "/" : "/discover-start";
     navigate(destination);
-    // if (process.env.REACT_APP_IS_APP_IFRAME === 'true') {
+    // if (import.meta.env.VITE_IS_APP_IFRAME === 'true') {
     //   navigate("/");
     // } else {
     //   navigate("/discover-start")
