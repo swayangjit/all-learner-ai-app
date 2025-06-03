@@ -633,7 +633,7 @@ const AnouncementFlow = ({
       height: "100%",
       //minHeight: "70vh",
       display: "flex",
-      alignItems: "center",
+      //alignItems: "center",
       justifyContent: "center",
       alignItems: "flex-end",
       padding: "20px 20px",

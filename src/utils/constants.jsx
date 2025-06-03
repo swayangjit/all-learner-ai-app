@@ -9647,8 +9647,8 @@ const AllLanguages = [
   { name: "ଓଡିଆ", lang: "or", symbol: "କ" },
 ];
 
-const appLanguages = process.env.REACT_APP_LANGUAGES
-  ? JSON.parse(process.env.REACT_APP_LANGUAGES)
+const appLanguages = import.meta.env.VITE_LANGUAGES
+  ? JSON.parse(import.meta.env.VITE_LANGUAGES)
   : [];
 
 export const languages = AllLanguages.filter((lang) =>
@@ -9667,7 +9667,11 @@ export const randomizeArray = (arr) => {
 };
 
 export function handleEncrypt(value) {
-  const API_SECRET_KEY = localStorage.getItem("apiToken");
+  const API_SECRET_KEY = localStorage.getItem("token");
+  if (!API_SECRET_KEY) {
+    console.warn("Encryption key missing");
+    return null;
+  }
   try {
     var ciphertext = CryptoJS.AES.encrypt(
       JSON.stringify(value),
@@ -9681,7 +9685,13 @@ export function handleEncrypt(value) {
 }
 
 export function handleDecrypt(value) {
-  const API_SECRET_KEY = localStorage.getItem("apiToken");
+  const API_SECRET_KEY = localStorage.getItem("token");
+  console.log("newToken", API_SECRET_KEY);
+
+  if (!API_SECRET_KEY) {
+    console.warn("Encryption key missing");
+    return null;
+  }
   try {
     var bytes = CryptoJS.AES.decrypt(value, API_SECRET_KEY);
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
@@ -9693,7 +9703,7 @@ export function handleDecrypt(value) {
 }
 
 export const sendTestRigScore = (score) => {
-  if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+  if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
     window.parent.postMessage(
       {
         score,

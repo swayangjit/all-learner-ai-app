@@ -14,7 +14,7 @@
     />
 
     <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,9 +42,9 @@
   https://s3.ap-south-1.amazonaws.com 
   https://raw.githubusercontent.com 
   https://cdn.jsdelivr.net;
-  https://github.com
+
   manifest-src 'self';
-  media-src 'self' blob: https://all-prod-content-service.s3.ap-south-1.amazonaws.com https://all-dev-content-service.s3.ap-south-1.amazonaws.com https://raw.githubusercontent.com https://github.com;
+  media-src 'self' blob: https://all-prod-content-service.s3.ap-south-1.amazonaws.com https://all-dev-content-service.s3.ap-south-1.amazonaws.com https://raw.githubusercontent.com;
   worker-src 'self' blob: https://d114esnbvw5tst.cloudfront.net;
   form-action 'self';
   frame-ancestors 'self';
@@ -53,6 +53,10 @@
 
   </head>
   <body>
-    <div id="root" />
+    <div id="root">
+    <script type="module" src="/src/index.jsx"></script>
+    <script>
+      console.log("HTML loaded");
+    </script>
   </body>
 </html>

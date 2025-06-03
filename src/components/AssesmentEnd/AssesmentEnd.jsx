@@ -49,7 +49,7 @@ const AssesmentEnd = () => {
         setLocalData("sessionId", sessionId);
       }
       if (
-        process.env.REACT_APP_IS_APP_IFRAME !== "true" &&
+        import.meta.env.VITE_IS_APP_IFRAME !== "true" &&
         localStorage.getItem("contentSessionId") !== null
       ) {
         fetchUserPoints()

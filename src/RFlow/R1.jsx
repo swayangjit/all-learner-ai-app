@@ -698,7 +698,7 @@ const R1 = ({
                     setLocalData("rFlow", false);
                     setLocalData("mFail", false);
                     //window.location.reload();
-                    if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+                    if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
                       navigate("/");
                     } else {
                       navigate("/discover-start");
@@ -752,7 +752,7 @@ const R1 = ({
                     if (currentQuestionIndex === content.L1.length - 1) {
                       setLocalData("rFlow", false);
                       setLocalData("mFail", false);
-                      if (process.env.REACT_APP_IS_APP_IFRAME === "true") {
+                      if (import.meta.env.VITE_IS_APP_IFRAME === "true") {
                         navigate("/");
                       } else {
                         navigate("/discover-start");

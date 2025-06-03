@@ -3,11 +3,11 @@ import { getLocalData } from "../../utils/constants";
 import config from "../../utils/urlConstants.json";
 import { getVirtualId } from "../userservice/userService";
 
-const API_BASE_URL_ORCHESTRATION =
-  process.env.REACT_APP_LEARNER_AI_ORCHESTRATION_HOST;
+const API_BASE_URL_ORCHESTRATION = import.meta.env
+  .VITE_LEARNER_AI_ORCHESTRATION_HOST;
 
 const getHeaders = () => {
-  const token = localStorage.getItem("apiToken");
+  const token = localStorage.getItem("token");
   return {
     headers: {
       Authorization: `Bearer ${token}`,
