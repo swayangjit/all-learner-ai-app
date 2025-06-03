@@ -10,9 +10,9 @@ let playSessionId;
 let url;
 let isBuddyLogin = checkTokenInLocalStorage();
 
-if (localStorage.getItem("token") !== null) {
-  let jwtToken = localStorage.getItem("token");
-  let userDetails = jwtDecode(jwtToken);
+if (getLocalData("token") !== null) {
+  let jwtToken = getLocalData("token");
+  var userDetails = jwtDecode(jwtToken);
 }
 
 function checkTokenInLocalStorage() {
@@ -246,8 +246,8 @@ export const getEventOptions = () => {
     let jwtToken = localStorage.getItem("token");
     console.log("newToken", jwtToken);
 
-    var userDetails = jwtDecode(jwtToken);
-    emis_username = userDetails.emis_username;
+    //var userDetails = jwtDecode(jwtToken);
+    //emis_username = userDetails.emis_username;
   }
 
   if (isBuddyLogin) {

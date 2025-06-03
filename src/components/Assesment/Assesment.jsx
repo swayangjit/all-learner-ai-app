@@ -602,9 +602,9 @@ const Assesment = ({ discoverStart }) => {
   let username;
   if (localStorage.getItem("token") !== null) {
     let jwtToken = localStorage.getItem("token");
-    var userDetails = jwtDecode(jwtToken);
-    username = userDetails.student_name;
-    setLocalData("profileName", username);
+    //var userDetails = jwtDecode(jwtToken);
+    //username = userDetails.student_name;
+    //setLocalData("profileName", username);
   }
   // const [searchParams, setSearchParams] = useSearchParams();
   // const [profileName, setProfileName] = useState(username);
