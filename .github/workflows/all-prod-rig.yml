@@ -3,12 +3,12 @@ name: ALL rig prod Deployment
 on:
   push:
     branches:
-      - test-rig-1.1-prod
+      - all-1.4.0.1
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: all-prod-rig
+    environment: all-temp-staging
 
     steps:
       - name: Checkout code
