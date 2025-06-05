@@ -1699,7 +1699,7 @@ const Practice = () => {
             header:
               mechanism?.id &&
               (mechanism?.id === "mechanic_15"
-                ? "Read the question and record your response"
+                ? "Look at the picture and respond to the sentence given below"
                 : questions[currentQuestion]?.contentType === "image"
                 ? `Guess the below image`
                 : `Speak the below ${questions[currentQuestion]?.contentType}`),
