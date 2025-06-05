@@ -986,9 +986,13 @@ const Practice = () => {
         console.log("levelNew", level);
 
         if (![10, 11, 12, 13, 14, 15].includes(level)) {
+          const shouldIncludeMechanicsId = !(
+            level === 4 && currentGetContent?.currentLevel === "P8"
+          );
+
           const resGetContent = await axios.get(
             `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.GET_CONTENT}/${currentGetContent.criteria}/${virtualId}?language=${lang}&contentlimit=${limit}&gettargetlimit=${limit}` +
-              (currentGetContent?.mechanism?.id
+              (shouldIncludeMechanicsId && currentGetContent?.mechanism?.id
                 ? `&mechanics_id=${currentGetContent?.mechanism?.id}`
                 : "") +
               (currentGetContent?.competency
@@ -1330,9 +1334,13 @@ const Practice = () => {
       console.log("crg", currentGetContent, level, virtualId, updatedLevel);
 
       if (![10, 11, 12, 13, 14, 15].includes(level)) {
+        const shouldIncludeMechanicsId = !(
+          level === 4 && currentGetContent?.currentLevel === "P8"
+        );
+
         const resWord = await axios.get(
           `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.GET_CONTENT}/${currentGetContent.criteria}/${virtualId}?language=${lang}&contentlimit=${limit}&gettargetlimit=${limit}` +
-            (currentGetContent?.mechanism?.id
+            (shouldIncludeMechanicsId && currentGetContent?.mechanism?.id
               ? `&mechanics_id=${currentGetContent?.mechanism?.id}`
               : "") +
             (currentGetContent?.competency
@@ -1462,9 +1470,13 @@ const Practice = () => {
       let quesArr = [];
 
       if (![10, 11, 12, 13, 14, 15].includes(level)) {
+        const shouldIncludeMechanicsId = !(
+          level === 4 && currentGetContent?.currentLevel === "P8"
+        );
+
         const resWord = await axios.get(
           `${process.env.REACT_APP_LEARNER_AI_APP_HOST}/${config.URLS.GET_CONTENT}/${currentGetContent.criteria}/${virtualId}?language=${lang}&contentlimit=${limit}&gettargetlimit=${limit}` +
-            (currentGetContent?.mechanism?.id
+            (shouldIncludeMechanicsId && currentGetContent?.mechanism?.id
               ? `&mechanics_id=${currentGetContent?.mechanism?.id}`
               : "") +
             (currentGetContent?.competency
