@@ -44,7 +44,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import correctSound from "../../assets/correct.wav";
 import wrongSound from "../../assets/audio/wrong.wav";
-
+import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
 const levelMap = {
   10: level10,
   11: level11,
@@ -125,6 +125,9 @@ const AnouncementFlow = ({
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isPressedOnce, setIsPressedOnce] = useState(false);
+  const [abusiveFound, setAbusiveFound] = useState(false);
+  const [detectedWord, setDetectedWord] = useState("");
+  const [language, setLanguage] = useState(getLocalData("lang") || "en");
   const {
     transcript,
     interimTranscript,
@@ -138,6 +141,20 @@ const AnouncementFlow = ({
   useEffect(() => {
     transcriptRef.current = transcript;
     console.log("Live Transcript:", transcript);
+
+    if (transcript) {
+      const filteredText = filterBadWords(transcript, language);
+      if (filteredText.includes("*")) {
+        handleStopRecording();
+
+        setOpenMessageDialog({
+          open: true,
+          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
+          severity: "warning",
+          isError: true,
+        });
+      }
+    }
   }, [transcript]);
 
   // let mediaRecorder;
@@ -220,15 +237,21 @@ const AnouncementFlow = ({
     setRecAudio(null);
     resetTranscript();
     setIsRecording(true);
+    setLanguage(language);
+    setAbusiveFound(false);
+    setDetectedWord("");
     SpeechRecognition.startListening({
       continuous: true,
       interimResults: true,
+      language: language || "en-US",
     });
   };
 
   const handleStopRecording = () => {
     SpeechRecognition.stopListening();
     setFinalTranscript(transcriptRef.current);
+    setAbusiveFound(false);
+
     setIsRecording(false);
     //console.log("Final Transcript:", transcriptRef.current);
   };
@@ -242,7 +265,6 @@ const AnouncementFlow = ({
       setRecAudio("");
     }
   };
-
   // const playAudio = (audioKey) => {
   //   if (Assets[audioKey]) {
   //     const audio = new Audio(Assets[audioKey]);
@@ -584,6 +606,14 @@ const AnouncementFlow = ({
       audioInstance.pause();
       audioInstance.currentTime = 0;
       setIsPlaying(false);
+    }
+    if (finalTranscript && filterBadWords(finalTranscript)) {
+      setOpenMessageDialog({
+        open: true,
+        message: `Cannot proceed - inappropriate language detected (${detectedWord}). Please try again.`,
+        severity: "error",
+      });
+      return;
     }
     setIsLoading(true);
 
@@ -1130,6 +1160,25 @@ const AnouncementFlow = ({
                       </Box>
                     )}
                   </>
+                )}
+
+                {abusiveFound && (
+                  <div
+                    style={{
+                      position: "fixed",
+                      top: "20px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      backgroundColor: "#ffebee",
+                      color: "#c62828",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                      zIndex: 1000,
+                    }}
+                  >
+                    Warning: Inappropriate word detected ({detectedWord})
+                  </div>
                 )}
 
                 {/* Stop Button */}

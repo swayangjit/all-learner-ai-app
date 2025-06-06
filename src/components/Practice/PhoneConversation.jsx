@@ -8,6 +8,8 @@ import {
   CircularProgress,
 } from "@mui/material";
 import Confetti from "react-confetti";
+import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
+
 import {
   level13,
   level14,
@@ -116,6 +118,9 @@ const PhoneConversation = ({
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [visibleMessages, setVisibleMessages] = useState([]);
+  const [abusiveFound, setAbusiveFound] = useState(false);
+  const [detectedWord, setDetectedWord] = useState("");
+  const [language, setLanguage] = useState(getLocalData("lang") || "en");
   const {
     transcript,
     interimTranscript,
@@ -132,6 +137,20 @@ const PhoneConversation = ({
   useEffect(() => {
     transcriptRef.current = transcript;
     console.log("Live Transcript:", transcript);
+
+    if (transcript) {
+      const filteredText = filterBadWords(transcript, language);
+      if (filteredText.includes("*")) {
+        handleStopRecording();
+
+        setOpenMessageDialog({
+          open: true,
+          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
+          severity: "warning",
+          isError: true,
+        });
+      }
+    }
   }, [transcript]);
 
   console.log("showcases", isShowCase, startShowCase);
@@ -263,9 +282,13 @@ const PhoneConversation = ({
     setRecAudio(null);
     resetTranscript();
     setIsRecording(true);
+    setLanguage(language);
+    setAbusiveFound(false);
+    setDetectedWord("");
     SpeechRecognition.startListening({
       continuous: true,
       interimResults: true,
+      language: language || "en-US",
     });
   };
 
@@ -273,6 +296,7 @@ const PhoneConversation = ({
     SpeechRecognition.stopListening();
     setFinalTranscript(transcriptRef.current);
     setIsRecording(false);
+    setAbusiveFound(false);
     //console.log("Final Transcript:", transcriptRef.current);
   };
 

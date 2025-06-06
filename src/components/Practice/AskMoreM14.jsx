@@ -32,6 +32,7 @@ import {
 import correctSound from "../../assets/correct.wav";
 import wrongSound from "../../assets/audio/wrong.wav";
 import VoiceAnalyser from "../../utils/VoiceAnalyser";
+
 import {
   fetchASROutput,
   handleTextEvaluation,
@@ -40,6 +41,7 @@ import {
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
 
 const levelMap = {
   10: level10,
@@ -139,6 +141,9 @@ const AskMoreM14 = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioInstance, setAudioInstance] = useState(null);
+  const [abusiveFound, setAbusiveFound] = useState(false);
+  const [detectedWord, setDetectedWord] = useState("");
+  const [language, setLanguage] = useState(getLocalData("lang") || "en");
   const {
     transcript,
     interimTranscript,
@@ -154,6 +159,19 @@ const AskMoreM14 = ({
   useEffect(() => {
     transcriptRef.current = transcript;
     console.log("Live Transcript:", transcript);
+    if (transcript) {
+      const filteredText = filterBadWords(transcript, language);
+      if (filteredText.includes("*")) {
+        handleStopRecording();
+
+        setOpenMessageDialog({
+          open: true,
+          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
+          severity: "warning",
+          isError: true,
+        });
+      }
+    }
   }, [transcript]);
 
   const handleStartRecording = () => {
@@ -165,9 +183,13 @@ const AskMoreM14 = ({
     resetTranscript();
     setIsRecording(true);
     handleMikeClick();
+    setLanguage(language);
+    setAbusiveFound(false);
+    setDetectedWord("");
     SpeechRecognition.startListening({
       continuous: true,
       interimResults: true,
+      language: language || "en-US",
     });
   };
 
@@ -190,6 +212,7 @@ const AskMoreM14 = ({
       audioInstance.pause();
       audioInstance.currentTime = 0;
       setIsPlaying(false);
+      setAbusiveFound(false);
     }
   };
 

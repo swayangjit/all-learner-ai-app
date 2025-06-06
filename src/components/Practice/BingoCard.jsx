@@ -36,6 +36,7 @@ import {
   handleTextEvaluation,
   callTelemetryApi,
 } from "../../utils/apiUtil";
+import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
 
 // const isChrome =
 //   /Chrome/.test(navigator.userAgent) &&
@@ -94,6 +95,12 @@ const BingoCard = ({
   const [showInitialEffect, setShowInitialEffect] = useState(false);
   const [startGame, setStartGame] = useState(true);
   const [showRecording, setShowRecording] = useState(false);
+  const [abusiveFound, setAbusiveFound] = useState(false);
+  const [detectedWord, setDetectedWord] = useState("");
+  const [language, setLanguage] = useState(getLocalData("lang") || "en");
+  const [showWrongTick, setShowWrongTick] = useState(true);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const {
     transcript,
     interimTranscript,
@@ -101,13 +108,27 @@ const BingoCard = ({
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
-  const [showWrongTick, setShowWrongTick] = useState(true);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
   const transcriptRef = useRef("");
   useEffect(() => {
     transcriptRef.current = transcript;
+    console.log("Live Transcript:", transcript);
+
+    if (transcript) {
+      const filteredText = filterBadWords(transcript, language);
+      console.log("filteredText", filteredText);
+
+      if (filteredText.includes("*")) {
+        stopRecording();
+
+        setOpenMessageDialog({
+          open: true,
+          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
+          severity: "warning",
+          isError: true,
+        });
+      }
+    }
   }, [transcript]);
 
   const [wordsAfterSplit, setWordsAfterSplit] = useState([]);
@@ -241,9 +262,12 @@ const BingoCard = ({
       // }
       resetTranscript();
       startAudioRecording();
+      setAbusiveFound(false);
+      setDetectedWord("");
       SpeechRecognition.startListening({
         continuous: true,
         interimResults: true,
+        language: language || "en-US",
       });
     }
     setIsRecording(true);
@@ -259,6 +283,7 @@ const BingoCard = ({
       setIsMicOn(false);
       setIsRecording(false);
       setIsProcessing(false);
+      setAbusiveFound(false);
     } else {
       // if (recognition) {
       //   recognition.stop();

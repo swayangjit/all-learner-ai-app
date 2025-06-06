@@ -39,6 +39,7 @@ import {
   handleTextEvaluation,
   callTelemetryApi,
 } from "../../utils/apiUtil";
+import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
 
 // const isChrome =
 //   /Chrome/.test(navigator.userAgent) &&
@@ -110,7 +111,12 @@ const WordsOrImage = ({
   const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-
+  const [abusiveFound, setAbusiveFound] = useState(false);
+  const [detectedWord, setDetectedWord] = useState("");
+  const [language, setLanguage] = useState(getLocalData("lang") || "en");
+  const [recAudio, setRecAudio] = useState("");
+  const [finalTranscript, setFinalTranscript] = useState("");
+  const [isRecordingComplete, setIsRecordingComplete] = useState(false);
   const audioRef = useRef(null);
   const audioRefNew = useRef(null);
   const currentWordRef = useRef(null);
@@ -127,14 +133,67 @@ const WordsOrImage = ({
   const transcriptRef = useRef("");
   useEffect(() => {
     transcriptRef.current = transcript;
+    console.log("Live Transcript:", transcript);
+
+    if (transcript) {
+      const filteredText = filterBadWords(transcript, language);
+      console.log("filteredText", filteredText);
+
+      if (filteredText.includes("*")) {
+        handleStopRecording();
+
+        setOpenMessageDialog({
+          open: true,
+          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
+          severity: "warning",
+        });
+      }
+    }
   }, [transcript]);
   const [recordedBlob, setRecordedBlob] = useState(null);
   const mediaRecorderRef = useRef(null);
   const recordedChunksRef = useRef([]);
 
-  const language = getLocalData("lang");
+  // const language = getLocalData("lang");
 
   const mimeType = "audio/webm;codecs=opus";
+
+  const handleStartRecording = () => {
+    // if (!browserSupportsSpeechRecognition) {
+    //   //alert("Speech recognition is not supported in your browser.");
+    //   return;
+    // }
+    setRecAudio(null);
+    resetTranscript();
+    setIsRecording(true);
+    setLanguage(language);
+    setAbusiveFound(false);
+    setDetectedWord("");
+    SpeechRecognition.startListening({
+      continuous: true,
+      interimResults: true,
+      language: language || "en-US",
+    });
+  };
+
+  const handleStopRecording = () => {
+    SpeechRecognition.stopListening();
+    setFinalTranscript(transcriptRef.current);
+    setAbusiveFound(false);
+
+    setIsRecording(false);
+    //console.log("Final Transcript:", transcriptRef.current);
+  };
+
+  const handleRecordingComplete = (base64Data) => {
+    if (base64Data) {
+      setIsRecordingComplete(true);
+      setRecAudio(base64Data);
+    } else {
+      setIsRecordingComplete(false);
+      setRecAudio("");
+    }
+  };
 
   const startAudioRecording = useCallback(async () => {
     setRecordedBlob(null);
@@ -1050,7 +1109,9 @@ const WordsOrImage = ({
             mt: isMobile ? 2 : 0,
           }}
         >
-          {language === "en" && (level === 1 || level === 2 || level === 3) && !isShowCase ? (
+          {language === "en" &&
+          (level === 1 || level === 2 || level === 3) &&
+          !isShowCase ? (
             <div>
               {showSpeakButton && (
                 <Box
@@ -1190,6 +1251,9 @@ const WordsOrImage = ({
               handleNext={handleNext}
               enableNext={enableNext}
               isShowCase={isShowCase || isDiscover}
+              handleRecordingComplete={handleRecordingComplete}
+              handleStartRecording={handleStartRecording}
+              handleStopRecording={handleStopRecording}
               audioLink={audioLink ? audioLink : null}
               {...{
                 contentId,
