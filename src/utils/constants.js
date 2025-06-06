@@ -8038,7 +8038,7 @@ export const levelGetContent = {
         title: "P2",
         criteria: "sentence",
         template: "simple",
-        competency: "L1.2",
+        competency: "L1.6",
         mechanism: { id: "mechanic_3", name: "formASentence" },
       },
       {
@@ -8072,7 +8072,7 @@ export const levelGetContent = {
         title: "P6",
         criteria: "sentence",
         template: "simple",
-        competency: "L1.1",
+        competency: "L1.5",
         mechanism: { id: "mechanic_3", name: "formASentence" },
       },
       {
@@ -8110,7 +8110,7 @@ export const levelGetContent = {
         title: "P2",
         criteria: "sentence",
         template: "simple",
-        competency: "L1.6",
+        competency: "L1.2",
         mechanism: { id: "mechanic_3", name: "formASentence" },
       },
       {
@@ -8144,7 +8144,7 @@ export const levelGetContent = {
         title: "P6",
         criteria: "sentence",
         template: "simple",
-        competency: "L1.5",
+        competency: "L1.1",
         mechanism: { id: "mechanic_3", name: "formASentence" },
       },
       {
@@ -8233,14 +8233,12 @@ export const levelGetContent = {
         criteria: "sentence",
         template: "simple",
         competency: "L1.8",
-        storyMode: true,
       },
       {
         title: "P2",
         criteria: "sentence",
         template: "simple",
         competency: "L1.8",
-        storyMode: true,
         mechanism: { id: "mechanic_2", name: "readTheImage" },
       },
       {
@@ -8266,14 +8264,12 @@ export const levelGetContent = {
         criteria: "paragraph",
         template: "simple",
         competency: "L1.8",
-        storyMode: true,
       },
       {
         title: "P6",
         criteria: "paragraph",
         template: "simple",
         competency: "L1.8",
-        storyMode: true,
       },
       {
         title: "P7",

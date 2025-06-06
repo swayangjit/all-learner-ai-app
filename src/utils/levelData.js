@@ -3727,7 +3727,7 @@ export const level11 = [
     data: {
       images: {
         imageOne: "salesPerson",
-        imageTwo: "vegVendor",
+        imageTwo: "boyChildImg",
       },
       conversation: [
         {
@@ -3768,7 +3768,7 @@ export const level11 = [
     mechanics: "askMore",
     data: {
       images: {
-        imageOne: "vegVendor",
+        imageOne: "humanImg",
         imageTwo: "child",
       },
       conversation: [
@@ -5119,7 +5119,7 @@ export const level10 = [
         {
           question: {
             type: "text",
-            value: "Who helped move the baby elephant from the track?",
+            value: "Who helped to move the baby elephant from the track?",
           },
           options: [
             { type: "text", id: "option1", value: "The train driver" },
@@ -5593,11 +5593,11 @@ export const level10 = [
             text: "Which of the following is Not part of the classroom announcement?",
             type: "text",
           },
-          answer: "audio1",
+          answer: "audio3",
           options: [
-            { id: "audio1", value: "gymAudio", type: "audio" },
+            { id: "audio1", value: "level10P7FiveAudio2", type: "audio" },
             { id: "audio2", value: "level10P7FourAudio2", type: "audio" },
-            { id: "audio3", value: "level10P7ThreeAudio3", type: "audio" },
+            { id: "audio3", value: "gymAudio", type: "audio" },
           ],
         },
       ],
