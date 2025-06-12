@@ -11,6 +11,7 @@ import R1 from "../../RFlow/R1";
 import R2 from "../../RFlow/R2";
 import R3Flow from "../../RFlow/R3";
 import R4 from "../../RFlow/R4";
+import TowreFlow from "../../components/Practice/TowreFlow";
 import McqFlow from "../../components/Practice/McqFlow";
 import JumbledWord from "../../components/Practice/JumbledWord";
 import AskMoreM14 from "../../components/Practice/AskMoreM14";
@@ -637,12 +638,17 @@ const Practice = () => {
   console.log("prog", progressDatas);
 
   const rFlow = String(getLocalData("rFlow"));
+  const tFlow = String(getLocalData("tFlow"));
 
   useEffect(() => {
     if (lang !== "en") {
       setLocalData("rFlow", false);
     }
   }, [lang]);
+
+  // useEffect(() => {
+  //   setLocalData("tFlow", true)
+  // }, []);
 
   useEffect(() => {
     console.log("levelsssss", level, rFlow, rStep);
@@ -1524,8 +1530,8 @@ const Practice = () => {
 
   const renderMechanics = () => {
     if (
-      (!mechanism && rFlow !== "true") ||
-      (mechanism?.id === "mechanic_15" && rFlow !== "true")
+      (!mechanism && rFlow !== "true" && tFlow !== "true") ||
+      (mechanism?.id === "mechanic_15" && rFlow !== "true" && tFlow !== "true")
     ) {
       const mechanics_data = questions[currentQuestion]?.mechanics_data;
 
@@ -1594,6 +1600,50 @@ const Practice = () => {
             setEnableNext,
             isNextButtonCalled,
             setIsNextButtonCalled,
+          }}
+        />
+      );
+    } else if (tFlow === "true") {
+      return (
+        <TowreFlow
+          page={page}
+          setPage={setPage}
+          {...{
+            level: level,
+            header:
+              questions[currentQuestion]?.contentType === "image"
+                ? `Guess the below image`
+                : `Speak the below word`,
+            //
+            currentImg: currentImage,
+            parentWords: parentWords,
+            contentType: currentContentType,
+            contentId: questions[currentQuestion]?.contentId,
+            setVoiceText,
+            setRecordedAudio,
+            setVoiceAnimate,
+            storyLine,
+            handleNext,
+            type: "word",
+            // image: elephant,
+            enableNext,
+            showTimer: false,
+            points,
+            steps: questions?.length,
+            currentStep: currentQuestion + 1,
+            progressData,
+            showProgress: true,
+            background:
+              isShowCase &&
+              "linear-gradient(281.02deg, #AE92FF 31.45%, #555ADA 100%)",
+            playTeacherAudio,
+            callUpdateLearner: isShowCase,
+            disableScreen,
+            isShowCase,
+            handleBack: !isShowCase && handleBack,
+            setEnableNext,
+            loading,
+            setOpenMessageDialog,
           }}
         />
       );

@@ -162,6 +162,7 @@ const MainLayout = (props) => {
   };
 
   const rFlow = String(getLocalData("rFlow"));
+  const tFlow = String(getLocalData("tFlow"));
   const mFlow = getLocalData("mFail");
   const allCompleted = getLocalData("allCompleted");
 

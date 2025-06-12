@@ -25,6 +25,7 @@ import { getAssetAudioUrl } from "../../utils/s3Links";
 import {
   practiceSteps,
   getLocalData,
+  setLocalData,
   NextButtonRound,
   RetryIcon,
   ListenButton,
@@ -44,6 +45,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import correctSound from "../../assets/correct.wav";
 import wrongSound from "../../assets/audio/wrong.wav";
+import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
 
 const levelMap = {
   10: level10,
@@ -125,6 +127,9 @@ const AnouncementFlow = ({
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isPressedOnce, setIsPressedOnce] = useState(false);
+  const [abusiveFound, setAbusiveFound] = useState(false);
+  const [detectedWord, setDetectedWord] = useState("");
+  const [language, setLanguage] = useState(getLocalData("lang") || "en");
   const {
     transcript,
     interimTranscript,
@@ -138,6 +143,29 @@ const AnouncementFlow = ({
   useEffect(() => {
     transcriptRef.current = transcript;
     console.log("Live Transcript:", transcript);
+    if (transcript) {
+      const filteredText = filterBadWords(transcript, language);
+      if (
+        filteredText.includes("*") ||
+        filteredText.toLowerCase().includes("hello") ||
+        filteredText.toLowerCase().includes("duck")
+      ) {
+        const count = parseInt(getLocalData("profanityCheck") || "0");
+
+        if (count > 2) {
+          setOpenMessageDialog({
+            open: true,
+            message: `Please speak appropriately.`,
+            severity: "warning",
+            isError: true,
+          });
+        }
+
+        handleStopRecording();
+
+        setLocalData("profanityCheck", (count + 1).toString());
+      }
+    }
   }, [transcript]);
 
   // let mediaRecorder;
@@ -220,9 +248,13 @@ const AnouncementFlow = ({
     setRecAudio(null);
     resetTranscript();
     setIsRecording(true);
+    setLanguage(language);
+    setAbusiveFound(false);
+    setDetectedWord("");
     SpeechRecognition.startListening({
       continuous: true,
       interimResults: true,
+      language: language || "en-US",
     });
   };
 
@@ -230,6 +262,7 @@ const AnouncementFlow = ({
     SpeechRecognition.stopListening();
     setFinalTranscript(transcriptRef.current);
     setIsRecording(false);
+    setAbusiveFound(false);
     //console.log("Final Transcript:", transcriptRef.current);
   };
 
@@ -251,6 +284,8 @@ const AnouncementFlow = ({
   //     console.error("Audio file not found:", audioKey);
   //   }
   // };
+
+  console.log("token", localStorage.getItem("apiToken"));
 
   const handleHintClick = () => {
     if (isPlaying) {

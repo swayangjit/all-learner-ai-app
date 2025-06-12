@@ -28,6 +28,7 @@ import {
   NextButtonRound,
   RetryIcon,
   getLocalData,
+  setLocalData,
 } from "../../utils/constants";
 import { phoneticMatch } from "../../utils/phoneticUtils";
 import SpeechRecognition, {
@@ -40,6 +41,7 @@ import {
   handleTextEvaluation,
   callTelemetryApi,
 } from "../../utils/apiUtil";
+import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
 
 // const isChrome =
 //   /Chrome/.test(navigator.userAgent) &&
@@ -113,6 +115,29 @@ const Mechanics7 = ({
 
   useEffect(() => {
     transcriptRef.current = transcript;
+    if (transcript) {
+      const filteredText = filterBadWords(transcript, language);
+      if (
+        filteredText.includes("*") ||
+        filteredText.toLowerCase().includes("hello") ||
+        filteredText.toLowerCase().includes("duck")
+      ) {
+        const count = parseInt(getLocalData("profanityCheck") || "0");
+
+        if (count > 2) {
+          setOpenMessageDialog({
+            open: true,
+            message: `Please speak appropriately.`,
+            severity: "warning",
+            isError: true,
+          });
+        }
+
+        stopRecording();
+
+        setLocalData("profanityCheck", (count + 1).toString());
+      }
+    }
   }, [transcript]);
 
   const [wordsAfterSplit, setWordsAfterSplit] = useState([]);
@@ -146,7 +171,9 @@ const Mechanics7 = ({
   const chunksRef = useRef([]);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-
+  const [abusiveFound, setAbusiveFound] = useState(false);
+  const [detectedWord, setDetectedWord] = useState("");
+  const [language, setLanguage] = useState(getLocalData("lang") || "en");
   const syllableCount = currentImg?.syllablesAudio?.length || 0;
   const isLastSyllable = stepIndex === syllableCount;
   const [currentText, setCurrentText] = useState("");
@@ -448,9 +475,13 @@ const Mechanics7 = ({
       // }
       resetTranscript();
       startAudioRecording();
+      setLanguage(language);
+      setAbusiveFound(false);
+      setDetectedWord("");
       SpeechRecognition.startListening({
         continuous: true,
         interimResults: true,
+        language: language || "en-US",
       });
     }
     setRecordingStates((prev) => ({
@@ -495,6 +526,7 @@ const Mechanics7 = ({
       }
       setIsProcessing(true);
     }
+    setAbusiveFound(false);
     setRecordingStates((prev) => ({
       ...prev,
       [word]: false,

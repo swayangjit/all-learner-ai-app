@@ -820,6 +820,7 @@ const Assesment = ({ discoverStart }) => {
   };
 
   const rFlow = String(getLocalData("rFlow"));
+  const tFlow = String(getLocalData("tFlow"));
   const rStep = Number(getLocalData("rStep")) || 2;
 
   const sectionStyle = {
