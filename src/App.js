@@ -11,8 +11,6 @@ import { startEvent } from "./services/callTelemetryIntract";
 import "@tekdi/all-telemetry-sdk/index.js";
 import axios from "axios";
 
-axios.defaults.withCredentials = true;
-
 const App = () => {
   const navigate = useNavigate();
   const ranonce = useRef(false);
