@@ -65,7 +65,10 @@ import { uniqueId } from "../../services/utilService";
 import { end } from "../../services/telementryService";
 import { levelMapping } from "../../utils/levelData";
 import scoreView from "../../assets/images/scoreView.svg";
-import { fetchUserPoints } from "../../services/orchestration/orchestrationService";
+import {
+  fetchUserPoints,
+  logoutUser,
+} from "../../services/orchestration/orchestrationService";
 import { fetchVirtualId } from "../../services/userservice/userService";
 import { getFetchMilestoneDetails } from "../../services/learnerAi/learnerAiService";
 import * as Assets from "../../utils/imageAudioLinks";
@@ -400,10 +403,16 @@ export const ProfileHeader = ({
     }
   };
 
-  const handleLogout = () => {
-    localStorage.clear();
-    end({});
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error("Logout failed, but proceeding with local logout");
+    } finally {
+      localStorage.clear();
+      end({});
+      navigate("/login");
+    }
   };
 
   const CustomIconButton = styled(IconButton)({
