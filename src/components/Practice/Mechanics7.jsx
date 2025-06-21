@@ -20,6 +20,7 @@ import correctSound from "../../assets/correct.wav";
 import wrongSound from "../../assets/audio/wrong.wav";
 import addSound from "../../assets/audio/add.mp3";
 import removeSound from "../../assets/remove.wav";
+import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
 import {
   WordRedCircle,
   StopButton,
@@ -36,12 +37,12 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import RecordVoiceVisualizer from "../../utils/RecordVoiceVisualizer";
 import Joyride from "react-joyride";
+
 import {
   fetchASROutput,
   handleTextEvaluation,
   callTelemetryApi,
 } from "../../utils/apiUtil";
-import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
 
 // const isChrome =
 //   /Chrome/.test(navigator.userAgent) &&
@@ -184,7 +185,21 @@ const Mechanics7 = ({
       ? currentImg?.completeWord
       : currentImg?.syllablesAudio?.[stepIndex]?.name || "";
     setCurrentText(text);
-  }, [currentImg, stepIndex, isLastSyllable]);
+    if (transcript) {
+      const filteredText = filterBadWords(transcript, language);
+      console.log("filtered", filteredText);
+      if (filteredText.includes("*")) {
+        stopRecording();
+
+        setOpenMessageDialog({
+          open: true,
+          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
+          severity: "warning",
+          isError: true,
+        });
+      }
+    }
+  }, [currentImg, stepIndex, isLastSyllable, transcript]);
 
   // const currentText = isLastSyllable
   //   ? currentImg?.completeWord
@@ -500,8 +515,8 @@ const Mechanics7 = ({
       SpeechRecognition.stopListening();
       stopAudioRecording();
       const finalTranscript = transcriptRef.current;
+      setAbusiveFound(false);
       console.log("textR", word, finalTranscript);
-
       const matchPercentage = phoneticMatch(word, finalTranscript);
 
       if (matchPercentage < 40) {
@@ -1112,6 +1127,25 @@ const Mechanics7 = ({
                   </Box>
                 </Box>
               </Box>
+            )}
+
+            {abusiveFound && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: "20px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  backgroundColor: "#ffebee",
+                  color: "#c62828",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                  zIndex: 1000,
+                }}
+              >
+                Warning: Inappropriate word detected ({detectedWord})
+              </div>
             )}
 
             {isRecorded && (

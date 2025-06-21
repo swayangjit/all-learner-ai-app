@@ -46,7 +46,6 @@ import SpeechRecognition, {
 import correctSound from "../../assets/correct.wav";
 import wrongSound from "../../assets/audio/wrong.wav";
 import { filterBadWords } from "@tekdi/multilingual-profanity-filter";
-
 const levelMap = {
   10: level10,
   11: level11,
@@ -261,6 +260,8 @@ const AnouncementFlow = ({
   const handleStopRecording = () => {
     SpeechRecognition.stopListening();
     setFinalTranscript(transcriptRef.current);
+    setAbusiveFound(false);
+
     setIsRecording(false);
     setAbusiveFound(false);
     //console.log("Final Transcript:", transcriptRef.current);
@@ -275,7 +276,6 @@ const AnouncementFlow = ({
       setRecAudio("");
     }
   };
-
   // const playAudio = (audioKey) => {
   //   if (Assets[audioKey]) {
   //     const audio = new Audio(Assets[audioKey]);
@@ -619,6 +619,14 @@ const AnouncementFlow = ({
       audioInstance.pause();
       audioInstance.currentTime = 0;
       setIsPlaying(false);
+    }
+    if (finalTranscript && filterBadWords(finalTranscript)) {
+      setOpenMessageDialog({
+        open: true,
+        message: `Cannot proceed - inappropriate language detected (${detectedWord}). Please try again.`,
+        severity: "error",
+      });
+      return;
     }
     setIsLoading(true);
 
@@ -1165,6 +1173,25 @@ const AnouncementFlow = ({
                       </Box>
                     )}
                   </>
+                )}
+
+                {abusiveFound && (
+                  <div
+                    style={{
+                      position: "fixed",
+                      top: "20px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      backgroundColor: "#ffebee",
+                      color: "#c62828",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+                      zIndex: 1000,
+                    }}
+                  >
+                    Warning: Inappropriate word detected ({detectedWord})
+                  </div>
                 )}
 
                 {/* Stop Button */}
