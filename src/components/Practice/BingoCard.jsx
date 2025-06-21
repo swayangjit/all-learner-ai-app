@@ -532,49 +532,83 @@ const BingoCard = ({
   const levels = {
     L1: {
       words: [
-        "MAN",
-        "WA",
-        "GO",
-        "CIL",
-        "MO",
-        "THER",
-        "FA",
-        "TER",
-        "SIS",
-        "BRO",
-        "PEN",
-        "E",
+        "म",
+        "मं",
+        "का",
+        "ददू",
+        "लंग",
+        "क",
+        "टर",
+        "दू",
+        "मट",
+        "प",
+        "ट",
+        "दिर",
       ],
       imageAudioMap: {
-        MANGO: {
-          image: getAssetUrl(s3Assets.mangoR1OneImg) || Assets.mangoR1OneImg,
-          audio:
-            getAssetAudioUrl(s3Assets.mangoNewAudio) || Assets.mangoNewAudio,
+        मटर: {
+          image: Assets.matarM2Hin,
+          audio: Assets.matarM2Audio,
         },
-        WATER: {
-          image: getAssetUrl(s3Assets.waterImg) || Assets.waterImg,
-          audio:
-            getAssetAudioUrl(s3Assets.waterNewAudio) || Assets.waterNewAudio,
+        पलंग: {
+          image: Assets.palangM2Hin,
+          audio: Assets.palangM2Audio,
         },
-        MOTHER: {
-          image: Assets.motherImg,
-          audio:
-            getAssetAudioUrl(s3Assets.motherNewAudio) || Assets.motherNewAudio,
+        मटका: {
+          image: Assets.matkaM2Hin,
+          audio: Assets.matkaM2Audio,
         },
-        FATHER: {
-          image: Assets.fatherImg,
-          audio:
-            getAssetAudioUrl(s3Assets.fatherNewAudio) || Assets.fatherNewAudio,
+        मंदिर: {
+          image: Assets.mandirM2Hin,
+          audio: Assets.mandirM2Audio,
         },
-        PENCIL: {
-          image: getAssetUrl(s3Assets.pencilImg) || Assets.pencilImg,
-          audio:
-            getAssetAudioUrl(s3Assets.pencilNewAudio) || Assets.pencilNewAudio,
+        कददू: {
+          image: Assets.kadduM2Hin,
+          audio: Assets.kadduM2Audio,
         },
       },
-      arrM: ["MANGO", "WATER", "MOTHER", "FATHER", "PENCIL"],
+      arrM: ["मटर", "पलंग", "मटका", "मंदिर", "कददू"],
     },
     L2: {
+      words: [
+        "क",
+        "गन",
+        "यर",
+        "द",
+        "रत",
+        "दन",
+        "गाय",
+        "औ",
+        "ग",
+        "कन",
+        "गर",
+        "टा",
+      ],
+      imageAudioMap: {
+        कद: {
+          image: Assets.kadImg,
+          audio: Assets.kadAudio,
+        },
+        गगन: {
+          image: Assets.gaganImg,
+          audio: Assets.gaganAudio,
+        },
+        गायक: {
+          image: Assets.gayakImg,
+          audio: Assets.gayakAudio,
+        },
+        औरत: {
+          image: Assets.auratImg,
+          audio: Assets.auratAudio,
+        },
+        टायर: {
+          image: Assets.tyreImg,
+          audio: Assets.tyreAudio,
+        },
+      },
+      arrM: ["कद", "गगन", "गायक", "औरत", "टायर"],
+    },
+    L5: {
       words: [
         "MAR",
         "BAS",
@@ -799,6 +833,16 @@ const BingoCard = ({
       PUPPY: ["PUP", "PY"],
       STUDENT: ["STU", "DENT"],
       PAPER: ["PA", "PER"],
+      कद: ["क", "द"],
+      गगन: ["ग", "गन"],
+      गायक: ["गाय", "क"],
+      औरत: ["औ", "रत"],
+      टायर: ["टा", "यर"],
+      मटर: ["म", "टर"],
+      पलंग: ["प", "लंग"],
+      मटका: ["मट", "का"],
+      मंदिर: ["मं", "दिर"],
+      कददू: ["क", "ददू"],
     };
 
     const currentWord = levels[currentLevel]?.arrM[currentWordIndex];

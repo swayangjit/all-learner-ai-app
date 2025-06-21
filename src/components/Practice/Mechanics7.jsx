@@ -897,29 +897,24 @@ const Mechanics7 = ({
                     }}
                   />
                 )}
-                {currentText?.split("").map((char, index) => (
-                  <span
-                    key={index}
-                    style={{
-                      color: !isRecorded
-                        ? "#333F61" // default background
-                        : isIncorrectWord
-                        ? "#58CC02" // red FF7F36
-                        : "#58CC02",
-                      //color: isRecorded ? "#58CC02" : "#333F61",
-                      fontWeight: 700,
-                      fontSize: isMobile ? "50px" : "72px",
-                      lineHeight: isMobile ? "60px" : "87px",
-                      letterSpacing: isMobile ? "1%" : "2%",
-                      fontFamily: "Quicksand",
-                      marginLeft:
-                        index > 0 ? (isMobile ? "2px" : "10px") : undefined,
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {char}
-                  </span>
-                ))}
+                <span
+                  style={{
+                    color: !isRecorded
+                      ? "#333F61" // default background
+                      : isIncorrectWord
+                      ? "#58CC02" // red FF7F36
+                      : "#58CC02",
+                    //color: isRecorded ? "#58CC02" : "#333F61",
+                    fontWeight: 700,
+                    fontSize: isMobile ? "50px" : "72px",
+                    lineHeight: isMobile ? "60px" : "87px",
+                    letterSpacing: isMobile ? "1%" : "2%",
+                    fontFamily: "Quicksand",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {currentText}
+                </span>
               </Box>
               {isRecorded && (
                 <img

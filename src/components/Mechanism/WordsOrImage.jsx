@@ -93,6 +93,7 @@ const WordsOrImage = ({
   isNextButtonCalled,
   setIsNextButtonCalled,
   audioLink,
+  vocabCount,
 }) => {
   const audioRefs = createRef(null);
   const [audioInstance, setAudioInstance] = useState(null);
@@ -535,6 +536,7 @@ const WordsOrImage = ({
         gameOverData,
         loading,
         setIsNextButtonCalled,
+        vocabCount,
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -1050,7 +1052,7 @@ const WordsOrImage = ({
             mt: isMobile ? 2 : 0,
           }}
         >
-          {language === "en" && (level === 1 || level === 2 || level === 3) && !isShowCase ? (
+          {(level === 1 || level === 2 || level === 3) && !isShowCase ? (
             <div>
               {showSpeakButton && (
                 <Box

@@ -223,6 +223,7 @@ const MainLayout = (props) => {
     isRecordingComplete,
     answer,
     isCorrect,
+    vocabCount,
   } = props;
 
   const [shake, setShake] = useState(false);
@@ -231,11 +232,11 @@ const MainLayout = (props) => {
 
   const language = getLocalData("lang");
 
-  useEffect(() => {
-    if (language !== "en") {
-      setLocalData("rFlow", false);
-    }
-  }, [language]);
+  // useEffect(() => {
+  //   if (language !== "en") {
+  //     setLocalData("rFlow", false);
+  //   }
+  // }, [language]);
 
   const handleAudioPlay = (index) => {
     const audioElem = audioRefs.current[index];
@@ -374,7 +375,14 @@ const MainLayout = (props) => {
   return (
     <Box sx={sectionStyle}>
       <ProfileHeader
-        {...{ level: LEVEL, setOpenLangModal, lang, points, handleBack }}
+        {...{
+          level: LEVEL,
+          setOpenLangModal,
+          lang,
+          points,
+          handleBack,
+          vocabCount,
+        }}
       />
 
       {LEVEL && (
@@ -669,9 +677,7 @@ const MainLayout = (props) => {
                                           fontFamily: "Quicksand",
                                         }}
                                       >
-                                        {language !== "en"
-                                          ? elem.name
-                                          : LEVEL === 1
+                                        {LEVEL === 1
                                           ? elem.title
                                           : LEVEL === 2
                                           ? elem.titleNew
@@ -932,7 +938,7 @@ const MainLayout = (props) => {
                               <img
                                 src={`https://raw.githubusercontent.com/Sunbird-ALL/all-learner-ai-app/refs/heads/all-1.3/src/assets/images/gameLost.svg`}
                                 alt="gameLost"
-                                style={{ height: { xs: 200, md: 340 } }}
+                                height={"250px"}
                               />
                               <Typography
                                 sx={{ mb: 1, mt: 1, textAlign: "center" }}
@@ -974,15 +980,6 @@ const MainLayout = (props) => {
                                   </Typography>
                                 )}
                               </Typography>
-                            </Stack>
-                            {/* second stack below*/}
-                            <Stack
-                              direction={"column"}
-                              alignItems="center"
-                              spacing={2}
-                              marginLeft={{ xs: 0, md: "10px" }}
-                              sx={{ width: { xs: "90%", md: "auto" } }}
-                            >
                               <Stack
                                 sx={{
                                   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
@@ -1148,6 +1145,48 @@ const MainLayout = (props) => {
                                   </Stack>
                                 )}
                               </Stack>
+                            </Stack>
+                            {/* second stack below*/}
+                            <Stack
+                              direction={"column"}
+                              alignItems="center"
+                              spacing={2}
+                              marginLeft={{ xs: 0, md: "10px" }}
+                              sx={{ width: { xs: "90%", md: "auto" } }}
+                            >
+                              <Box
+                                component="img"
+                                src={Assets.wordsLearnt}
+                                alt="Words Learnt"
+                                sx={{
+                                  width: "100px",
+                                  height: "100px",
+                                }}
+                              />
+
+                              {/* Number */}
+                              <Typography
+                                sx={{
+                                  color: "#FF00B8",
+                                  fontWeight: "bold",
+                                  fontSize: "24px",
+                                  fontFamily: "Quicksand",
+                                }}
+                              >
+                                {vocabCount}
+                              </Typography>
+
+                              {/* Label */}
+                              <Typography
+                                sx={{
+                                  color: "#2E2E2E",
+                                  fontSize: "16px",
+                                  fontWeight: 600,
+                                  fontFamily: "Quicksand",
+                                }}
+                              >
+                                Words Learnt
+                              </Typography>
                               <Stack
                                 direction="row"
                                 alignItems="center"
@@ -1340,6 +1379,17 @@ const MainLayout = (props) => {
                                 console.log("mFlow value:", mFlow);
                                 setLocalData("rFlow", true);
                               }
+                              // if (
+                              //               LEVEL === 1 ||
+                              //               LEVEL === 2 ||
+                              //               LEVEL === 3 ||
+                              //               LEVEL === 4 ||
+                              //               LEVEL === 6 ||
+                              //               LEVEL === 9
+                              //             ) {
+                              //               setLocalData("tFlow", true);
+                              //               navigate("/_practice");
+                              //             }
                               if (
                                 props.pageName === "wordsorimage" ||
                                 props.pageName === "m5"

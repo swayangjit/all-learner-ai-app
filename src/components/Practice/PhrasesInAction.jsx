@@ -65,6 +65,7 @@ const PhrasesInAction = ({
   setOpenMessageDialog,
   audio,
   currentImg,
+  vocabCount,
 }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -1386,6 +1387,7 @@ const PhrasesInAction = ({
         handleBack,
         disableScreen,
         loading,
+        vocabCount,
       }}
     >
       <ThemeProvider theme={theme}>

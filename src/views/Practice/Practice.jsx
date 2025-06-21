@@ -82,6 +82,7 @@ const Practice = () => {
   const [parentWords, setParentWords] = useState({});
   const [levelOneWord, setLevelOneWord] = useState("");
   const [level, setLevel] = useState(0);
+  const [vocabCount, setVocabCount] = useState(0);
   const [isShowCase, setIsShowCase] = useState(false);
   const [startShowCase, setStartShowCase] = useState(false);
   const limit = 5;
@@ -106,88 +107,181 @@ const Practice = () => {
   const levels = {
     L1: [
       {
-        completeWord: "Apple",
-        syllable: ["Ap", "ple"],
-        img: getAssetUrl(s3Assets.Apple) || Assets.Apple,
+        completeWord: "बादल",
+        syllable: [" बा ", "दल"],
+        img: Assets.badalM1Hin,
         syllablesAudio: [
           {
-            name: "Ap",
-            audio: getAssetAudioUrl(s3Assets.apAudio) || Assets.apAudio,
+            name: "बा",
+            audio: Assets.baM1Audio,
           },
           {
-            name: "ple",
-            audio: getAssetAudioUrl(s3Assets.pleAudio) || Assets.pleAudio,
+            name: "दल",
+            audio: Assets.dalM1Audio,
           },
         ],
-        completeAudio:
-          getAssetAudioUrl(s3Assets.appleAudio) || Assets.appleAudio,
+        completeAudio: Assets.badalM1Audio,
       },
       {
-        completeWord: "Tiger",
-        syllable: ["Ti", "ger"],
-        img: getAssetUrl(s3Assets.TigerNewImg) || Assets.TigerNewImg,
+        completeWord: "तबला ",
+        syllable: ["त", "ब", "ला"],
+        img: Assets.tablaM1Hin,
         syllablesAudio: [
           {
-            name: "Ti",
-            audio: getAssetAudioUrl(s3Assets.tiAudio) || Assets.tiAudio,
+            name: "त",
+            audio: Assets.taM1Audio,
           },
           {
-            name: "ger",
-            audio: getAssetAudioUrl(s3Assets.gerAudio) || Assets.gerAudio,
+            name: "ब",
+            audio: Assets.baaM1Audio,
+          },
+          {
+            name: "ला",
+            audio: Assets.laM1Audio,
           },
         ],
-        completeAudio:
-          getAssetAudioUrl(s3Assets.tigerAudio) || Assets.tigerAudio,
+        completeAudio: Assets.tablaM1Audio,
       },
       {
-        completeWord: "Happy",
-        syllable: ["Hap", "py"],
-        img: getAssetUrl(s3Assets.happyImg) || Assets.happyImg,
+        completeWord: "चावल ",
+        syllable: ["चा", "वल"],
+        img: Assets.chawalM1Hin,
         syllablesAudio: [
           {
-            name: "Hap",
-            audio: getAssetAudioUrl(s3Assets.hapAudio) || Assets.hapAudio,
+            name: "चा",
+            audio: Assets.chaM1Audio,
           },
           {
-            name: "py",
-            audio: getAssetAudioUrl(s3Assets.pyAudio) || Assets.pyAudio,
+            name: "वल",
+            audio: Assets.walM1Audio,
           },
         ],
-        completeAudio:
-          getAssetAudioUrl(s3Assets.happyAudio) || Assets.happyAudio,
+        completeAudio: Assets.chawalM1Audio,
       },
       {
-        completeWord: "Pencil",
-        syllable: ["Pen", "cil"],
-        img: getAssetUrl(s3Assets.pencilImg) || Assets.pencilImg,
+        completeWord: "कोयल ",
+        syllable: ["को", "यल"],
+        img: Assets.koyalM1Hin,
         syllablesAudio: [
           {
-            name: "Pen",
-            audio: Assets.penAudio,
+            name: "को",
+            audio: Assets.koM1Audio,
           },
           {
-            name: "cil",
-            audio: getAssetAudioUrl(s3Assets.cilAudio) || Assets.cilAudio,
+            name: "यल",
+            audio: Assets.yalM1Audio,
           },
         ],
-        completeAudio:
-          getAssetAudioUrl(s3Assets.pencilAudio) || Assets.pencilAudio,
+        completeAudio: Assets.koyalM1Audio,
       },
       {
-        completeWord: "Rocket",
-        syllable: ["Rock", "et"],
-        img: getAssetUrl(s3Assets.RocketNewImg) || Assets.RocketNewImg,
+        completeWord: "कलम ",
+        syllable: ["क ", "ल ", "म"],
+        img: Assets.kalamM1Hin,
         syllablesAudio: [
           {
-            name: "Rock",
-            audio: getAssetAudioUrl(s3Assets.Rock) || Assets.Rock,
+            name: "क",
+            audio: Assets.kaM1Audio,
           },
-          { name: "Et", audio: getAssetAudioUrl(s3Assets.Et) || Assets.Et },
+          { name: "ल", audio: Assets.laaM1Audio },
+          { name: "म", audio: Assets.amM1Audio },
         ],
-        completeAudio: getAssetAudioUrl(s3Assets.RocketS) || Assets.RocketS,
+        completeAudio: Assets.kalamM1Audio,
       },
     ],
     L2: [
+      {
+        completeWord: "गायक",
+        syllable: ["गा", "य", "क"],
+        img: Assets.gayakImg,
+        syllablesAudio: [
+          {
+            name: "गा",
+            audio: Assets.gayak1Audio,
+          },
+          {
+            name: "य",
+            audio: Assets.gayak2Audio,
+          },
+          {
+            name: "क",
+            audio: Assets.gayak3Audio,
+          },
+        ],
+        completeAudio: Assets.gayakAudio,
+      },
+      {
+        completeWord: "कद",
+        syllable: ["क", "द"],
+        img: Assets.kadImg,
+        syllablesAudio: [
+          {
+            name: "क",
+            audio: Assets.kad1Audio,
+          },
+          {
+            name: "द",
+            audio: Assets.kadh2Audio,
+          },
+        ],
+        completeAudio: Assets.kadAudio,
+      },
+      {
+        completeWord: "गगन",
+        syllable: ["ग", "ग", "न"],
+        img: Assets.gaganImg,
+        syllablesAudio: [
+          {
+            name: "ग",
+            audio: Assets.gagan1Audio,
+          },
+          {
+            name: "ग",
+            audio: Assets.gagan2Audio,
+          },
+          {
+            name: "न",
+            audio: Assets.gagan3Audio,
+          },
+        ],
+        completeAudio: Assets.gaganAudio,
+      },
+      {
+        completeWord: "औरत",
+        syllable: ["औ", "र", "त"],
+        img: Assets.auratImg,
+        syllablesAudio: [
+          {
+            name: "औ",
+            audio: Assets.aurat1Audio,
+          },
+          {
+            name: "र",
+            audio: Assets.aurat2Audio,
+          },
+          {
+            name: "त",
+            audio: Assets.aurat3Audio,
+          },
+        ],
+        completeAudio: Assets.auratAudio,
+      },
+      {
+        completeWord: "टायर",
+        syllable: ["टा", "य", "र"],
+        img: Assets.tyreImg,
+        syllablesAudio: [
+          {
+            name: "टा",
+            audio: Assets.tayar1Audio,
+          },
+          { name: "य", audio: Assets.tayar2Audio },
+          { name: "र", audio: Assets.tayar3Audio },
+        ],
+        completeAudio: Assets.tyreAudio,
+      },
+    ],
+    L5: [
       {
         completeWord: "Basket",
         syllable: ["Bas", "ket"],
@@ -640,13 +734,17 @@ const Practice = () => {
   const rFlow = String(getLocalData("rFlow"));
   const tFlow = String(getLocalData("tFlow"));
 
-  useEffect(() => {
-    if (lang !== "en") {
-      setLocalData("rFlow", false);
-    }
-  }, [lang]);
+  // useEffect(() => {
+  //   if (lang !== "en") {
+  //     setLocalData("rFlow", false);
+  //   }
+  // }, [lang]);
 
   // useEffect(() => {
+  //   setLocalData("rFlow", true)
+  // }, []);
+
+  //  useEffect(() => {
   //   setLocalData("tFlow", true)
   // }, []);
 
@@ -911,6 +1009,22 @@ const Practice = () => {
               gameOver({ link: "/assesment-end" }, true);
               return;
             }
+            const lang = getLocalData("lang");
+            const getMilestoneDetails = await getFetchMilestoneDetails(lang);
+            setVocabCount(
+              getMilestoneDetails?.data?.extra?.vocabulary_count || 0
+            );
+            if (
+              level === 1 ||
+              level === 2 ||
+              level === 3 ||
+              level === 4 ||
+              level === 6 ||
+              level === 9
+            ) {
+              gameOver({ link: "/assesment-end" }, true);
+              setLocalData("tFlow", true);
+            }
 
             try {
               await addLesson({
@@ -938,6 +1052,16 @@ const Practice = () => {
           }
         }
 
+        try {
+          const lang = getLocalData("lang");
+          const getMilestoneDetails = await getFetchMilestoneDetails(lang);
+          setVocabCount(
+            getMilestoneDetails?.data?.extra?.vocabulary_count || 0
+          );
+        } catch (e) {
+          // catch error
+        }
+
         let quesArr = [];
 
         if (newPracticeStep === 10) {
@@ -958,7 +1082,7 @@ const Practice = () => {
           return;
         }
 
-        if (![10, 11, 12, 13, 14, 15].includes(level)) {
+        if (![1, 2, 10, 11, 12, 13, 14, 15].includes(level)) {
           const resGetContent = await getContent(
             currentGetContent.criteria,
             lang,
@@ -1024,7 +1148,7 @@ const Practice = () => {
           setQuestions(quesArr);
         }
 
-        if ([10, 11, 12, 13, 14, 15].includes(level)) {
+        if ([1, 2, 10, 11, 12, 13, 14, 15].includes(level)) {
           let showcaseLevel =
             currentPracticeStep === 3 || currentPracticeStep === 8;
           setIsShowCase(showcaseLevel);
@@ -1156,6 +1280,7 @@ const Practice = () => {
 
       // TODO: validate the getMilestoneDetails API return
       setLocalData("getMilestone", JSON.stringify({ ...getMilestoneDetails }));
+      setVocabCount(getMilestoneDetails?.data?.extra?.vocabulary_count || 0);
 
       let level =
         Number(getMilestoneDetails?.data?.milestone_level?.replace("m", "")) ||
@@ -1552,7 +1677,8 @@ const Practice = () => {
                 ? `Guess the below image`
                 : `Speak the below ${questions[currentQuestion]?.contentType}`),
             words:
-              lang === "en" && (level === 1 || level === 2 || level === 3)
+              (lang === "en" || lang === "hi") &&
+              (level === 1 || level === 2 || level === 3)
                 ? levelOneWord
                 : mechanism?.id === "mechanic_15"
                 ? questions[currentQuestion]?.mechanics_data?.[0]?.text
@@ -1600,6 +1726,7 @@ const Practice = () => {
             setEnableNext,
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
           }}
         />
       );
@@ -1644,6 +1771,7 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
           }}
         />
       );
@@ -2675,6 +2803,7 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
           }}
         />
       );
