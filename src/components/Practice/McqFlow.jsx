@@ -91,6 +91,8 @@ const McqFlow = ({
   setOpenMessageDialog,
   audio,
   currentImg,
+  vocabCount,
+  wordCount,
 }) => {
   const [showQuestion, setShowQuestion] = useState(false);
   const [conversationData, setConversationData] = useState([]);
@@ -289,6 +291,8 @@ const McqFlow = ({
         handleBack,
         disableScreen,
         loading,
+        vocabCount,
+        wordCount,
       }}
     >
       <ThemeProvider theme={theme}>

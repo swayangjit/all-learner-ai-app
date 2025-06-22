@@ -135,7 +135,7 @@ export const addTowreRecord = async (audioPath, towreResult) => {
 
   try {
     const response = await axios.post(
-      `${API_LEARNER_AI_APP_HOST}/lais/api/towre/addRecord`,
+      `${API_LEARNER_AI_APP_HOST}/api/towre/addRecord`,
       payload,
       getHeaders()
     );

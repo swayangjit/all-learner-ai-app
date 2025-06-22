@@ -376,6 +376,7 @@ export const ProfileHeader = ({
   points = 0,
   handleBack,
   vocabCount = 0,
+  wordCount = 0,
 }) => {
   const language = lang || getLocalData("lang");
   const username = profileName || getLocalData("profileName");
@@ -586,7 +587,7 @@ export const ProfileHeader = ({
                   fontFamily: "Quicksand",
                 }}
               >
-                0
+                {wordCount}
               </Box>
               <Box
                 sx={{
@@ -727,6 +728,7 @@ const Assesment = ({ discoverStart }) => {
   const [lang, setLang] = useState(getLocalData("lang") || "en");
   const [points, setPoints] = useState(0);
   const [vocabCount, setVocabCount] = useState(0);
+  const [wordCount, setWordCount] = useState(0);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
@@ -774,6 +776,10 @@ const Assesment = ({ discoverStart }) => {
         //let session_id = localStorage.getItem("sessionId");
         setLevel(getMilestoneDetails?.data?.milestone_level?.replace("m", ""));
         setVocabCount(getMilestoneDetails?.data?.extra?.vocabulary_count || 0);
+        setWordCount(
+          getMilestoneDetails?.data?.extra?.latest_towre_data?.wordsPerMinute ||
+            0
+        );
         let session_id = getLocalData("sessionId");
 
         if (!session_id) {
@@ -810,6 +816,10 @@ const Assesment = ({ discoverStart }) => {
           Number(getMilestoneDetails?.data?.milestone_level?.replace("m", ""))
         );
         setVocabCount(getMilestoneDetails?.data?.extra?.vocabulary_count || 0);
+        setWordCount(
+          getMilestoneDetails?.data?.extra?.latest_towre_data?.wordsPerMinute ||
+            0
+        );
 
         if (levelMapping[virtualId] !== undefined) {
           setLevel(levelMapping[virtualId]);
@@ -986,6 +996,7 @@ const Assesment = ({ discoverStart }) => {
               points,
               setOpenMessageDialog,
               vocabCount,
+              wordCount,
             }}
           />
           <Box>

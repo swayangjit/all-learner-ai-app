@@ -95,6 +95,8 @@ const PhoneConversation = ({
   matchedChar,
   isNextButtonCalled,
   setIsNextButtonCalled,
+  vocabCount,
+  wordCount,
 }) => {
   const [showQuestion, setShowQuestion] = useState(false);
   const [conversationData, setConversationData] = useState([]);
@@ -723,6 +725,8 @@ const PhoneConversation = ({
         livesData,
         gameOverData,
         setIsNextButtonCalled,
+        vocabCount,
+        wordCount,
       }}
     >
       <ThemeProvider theme={theme}>

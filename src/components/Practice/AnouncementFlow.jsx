@@ -97,6 +97,8 @@ const AnouncementFlow = ({
   matchedChar,
   isNextButtonCalled,
   setIsNextButtonCalled,
+  vocabCount,
+  wordCount,
 }) => {
   const [showQuestion, setShowQuestion] = useState(false);
   const [conversationData, setConversationData] = useState([]);
@@ -867,6 +869,8 @@ const AnouncementFlow = ({
         livesData,
         gameOverData,
         setIsNextButtonCalled,
+        vocabCount,
+        wordCount,
       }}
     >
       <ThemeProvider theme={theme}>

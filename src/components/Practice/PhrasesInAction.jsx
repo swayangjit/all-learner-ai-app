@@ -72,6 +72,7 @@ const PhrasesInAction = ({
   audio,
   currentImg,
   vocabCount,
+  wordCount,
 }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -1448,6 +1449,7 @@ const PhrasesInAction = ({
         disableScreen,
         loading,
         vocabCount,
+        wordCount,
       }}
     >
       <ThemeProvider theme={theme}>

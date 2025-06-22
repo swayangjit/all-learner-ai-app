@@ -96,6 +96,7 @@ const WordsOrImage = ({
   setIsNextButtonCalled,
   audioLink,
   vocabCount,
+  wordCount,
 }) => {
   const audioRefs = createRef(null);
   const [audioInstance, setAudioInstance] = useState(null);
@@ -604,6 +605,7 @@ const WordsOrImage = ({
         loading,
         setIsNextButtonCalled,
         vocabCount,
+        wordCount,
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "center" }}>

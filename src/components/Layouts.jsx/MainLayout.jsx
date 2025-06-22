@@ -224,6 +224,7 @@ const MainLayout = (props) => {
     answer,
     isCorrect,
     vocabCount,
+    wordCount,
   } = props;
 
   const [shake, setShake] = useState(false);
@@ -382,6 +383,7 @@ const MainLayout = (props) => {
           points,
           handleBack,
           vocabCount,
+          wordCount,
         }}
       />
 

@@ -572,6 +572,7 @@ const TowreFlow = ({
   isNextButtonCalled,
   setIsNextButtonCalled,
   vocabCount,
+  wordCount,
 }) => {
   const [activeSet, setActiveSet] = useState(0);
   const [currentWordSetIndex, setCurrentWordSetIndex] = useState(0);
@@ -886,6 +887,7 @@ const TowreFlow = ({
         disableScreen,
         loading,
         vocabCount,
+        wordCount,
       }}
     >
       <div

@@ -83,6 +83,7 @@ const Practice = () => {
   const [levelOneWord, setLevelOneWord] = useState("");
   const [level, setLevel] = useState(0);
   const [vocabCount, setVocabCount] = useState(0);
+  const [wordCount, setWordCount] = useState(0);
   const [isShowCase, setIsShowCase] = useState(false);
   const [startShowCase, setStartShowCase] = useState(false);
   const limit = 5;
@@ -997,6 +998,10 @@ const Practice = () => {
             setVocabCount(
               getMilestoneDetails?.data?.extra?.vocabulary_count || 0
             );
+            setWordCount(
+              getMilestoneDetails?.data?.extra?.latest_towre_data
+                ?.wordsPerMinute || 0
+            );
             if (level === 3 || level === 6 || level === 9) {
               gameOver({ link: "/assesment-end" }, true);
               setLocalData("tFlow", true);
@@ -1033,6 +1038,10 @@ const Practice = () => {
           const getMilestoneDetails = await getFetchMilestoneDetails(lang);
           setVocabCount(
             getMilestoneDetails?.data?.extra?.vocabulary_count || 0
+          );
+          setWordCount(
+            getMilestoneDetails?.data?.extra?.latest_towre_data
+              ?.wordsPerMinute || 0
           );
         } catch (e) {
           // catch error
@@ -1257,7 +1266,9 @@ const Practice = () => {
       // TODO: validate the getMilestoneDetails API return
       setLocalData("getMilestone", JSON.stringify({ ...getMilestoneDetails }));
       setVocabCount(getMilestoneDetails?.data?.extra?.vocabulary_count || 0);
-
+      setWordCount(
+        getMilestoneDetails?.data?.extra?.latest_towre_data?.wordsPerMinute || 0
+      );
       let level =
         Number(getMilestoneDetails?.data?.milestone_level?.replace("m", "")) ||
         1;
@@ -1703,6 +1714,7 @@ const Practice = () => {
             isNextButtonCalled,
             setIsNextButtonCalled,
             vocabCount,
+            wordCount,
           }}
         />
       );
@@ -1748,6 +1760,7 @@ const Practice = () => {
             loading,
             setOpenMessageDialog,
             vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2244,6 +2257,8 @@ const Practice = () => {
             fluency,
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2295,6 +2310,8 @@ const Practice = () => {
             setOpenMessageDialog,
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2339,6 +2356,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2383,6 +2402,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2427,6 +2448,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2482,6 +2505,8 @@ const Practice = () => {
             fluency,
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2592,6 +2617,8 @@ const Practice = () => {
             fluency,
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2636,6 +2663,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2680,6 +2709,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2735,6 +2766,8 @@ const Practice = () => {
             fluency,
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2780,6 +2813,7 @@ const Practice = () => {
             loading,
             setOpenMessageDialog,
             vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2824,6 +2858,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2887,6 +2923,8 @@ const Practice = () => {
               : [],
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
+            wordCount,
           }}
         />
       );

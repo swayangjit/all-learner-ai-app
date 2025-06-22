@@ -78,6 +78,8 @@ const BingoCard = ({
   setOpenMessageDialog,
   audio,
   currentImg,
+  vocabCount,
+  wordCount,
 }) => {
   const [showHint, setShowHint] = useState(false);
   const [hideButtons, setHideButtons] = useState(false);
@@ -990,6 +992,8 @@ const BingoCard = ({
         handleBack,
         disableScreen,
         loading,
+        vocabCount,
+        wordCount,
       }}
     >
       <ThemeProvider theme={theme}>
