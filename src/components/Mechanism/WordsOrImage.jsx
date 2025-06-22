@@ -20,6 +20,7 @@ import {
   SpeakButton,
   NextButtonRound,
   getLocalData,
+  setLocalData,
 } from "../../utils/constants";
 import MainLayout from "../Layouts.jsx/MainLayout";
 import PropTypes from "prop-types";
@@ -141,13 +142,20 @@ const WordsOrImage = ({
       console.log("filteredText", filteredText);
 
       if (filteredText.includes("*")) {
+        const count = parseInt(getLocalData("profanityCheck") || "0");
+
+        if (count > 2) {
+          setOpenMessageDialog({
+            open: true,
+            message: `Please speak properly.`,
+            severity: "warning",
+            isError: true,
+          });
+        }
+
         handleStopRecording();
 
-        setOpenMessageDialog({
-          open: true,
-          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
-          severity: "warning",
-        });
+        setLocalData("profanityCheck", (count + 1).toString());
       }
     }
   }, [transcript]);

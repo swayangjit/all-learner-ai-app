@@ -9,6 +9,7 @@ import {
   getLocalData,
   NextButtonRound,
   RetryIcon,
+  setLocalData,
 } from "../../utils/constants";
 import r3WrongTick from "../../assets/r3WrongTick.svg";
 import bingoReset from "../../assets/bingoReset.svg";
@@ -119,14 +120,20 @@ const BingoCard = ({
       console.log("filteredText", filteredText);
 
       if (filteredText.includes("*")) {
+        const count = parseInt(getLocalData("profanityCheck") || "0");
+
+        if (count > 2) {
+          setOpenMessageDialog({
+            open: true,
+            message: `Please speak properly.`,
+            severity: "warning",
+            isError: true,
+          });
+        }
+
         stopRecording();
 
-        setOpenMessageDialog({
-          open: true,
-          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
-          severity: "warning",
-          isError: true,
-        });
+        setLocalData("profanityCheck", (count + 1).toString());
       }
     }
   }, [transcript]);
@@ -557,81 +564,92 @@ const BingoCard = ({
   const levels = {
     L1: {
       words: [
-        "म",
-        "मं",
-        "का",
-        "ददू",
-        "लंग",
-        "क",
-        "टर",
-        "दू",
-        "मट",
-        "प",
-        "ट",
-        "दिर",
+        "MAN",
+        "WA",
+        "GO",
+        "CIL",
+        "MO",
+        "THER",
+        "FA",
+        "TER",
+        "SIS",
+        "BRO",
+        "PEN",
+        "E",
       ],
       imageAudioMap: {
-        मटर: {
-          image: Assets.matarM2Hin,
-          audio: Assets.matarM2Audio,
+        MANGO: {
+          image: getAssetUrl(s3Assets.mangoR1OneImg) || Assets.mangoR1OneImg,
+          audio:
+            getAssetAudioUrl(s3Assets.mangoNewAudio) || Assets.mangoNewAudio,
         },
-        पलंग: {
-          image: Assets.palangM2Hin,
-          audio: Assets.palangM2Audio,
+        WATER: {
+          image: getAssetUrl(s3Assets.waterImg) || Assets.waterImg,
+          audio:
+            getAssetAudioUrl(s3Assets.waterNewAudio) || Assets.waterNewAudio,
         },
-        मटका: {
-          image: Assets.matkaM2Hin,
-          audio: Assets.matkaM2Audio,
+        MOTHER: {
+          image: Assets.motherImg,
+          audio:
+            getAssetAudioUrl(s3Assets.motherNewAudio) || Assets.motherNewAudio,
         },
-        मंदिर: {
-          image: Assets.mandirM2Hin,
-          audio: Assets.mandirM2Audio,
+        FATHER: {
+          image: Assets.fatherImg,
+          audio:
+            getAssetAudioUrl(s3Assets.fatherNewAudio) || Assets.fatherNewAudio,
         },
-        कददू: {
-          image: Assets.kadduM2Hin,
-          audio: Assets.kadduM2Audio,
+        PENCIL: {
+          image: getAssetUrl(s3Assets.pencilImg) || Assets.pencilImg,
+          audio:
+            getAssetAudioUrl(s3Assets.pencilNewAudio) || Assets.pencilNewAudio,
         },
       },
-      arrM: ["मटर", "पलंग", "मटका", "मंदिर", "कददू"],
+      arrM: ["MANGO", "WATER", "MOTHER", "FATHER", "PENCIL"],
     },
     L2: {
       words: [
-        "क",
-        "गन",
-        "यर",
-        "द",
-        "रत",
-        "दन",
-        "गाय",
-        "औ",
-        "ग",
-        "कन",
-        "गर",
-        "टा",
+        "MAR",
+        "BAS",
+        "DOW",
+        "TOR",
+        "KET",
+        "CRICK",
+        "DOC",
+        "WIN",
+        "BOT",
+        "CHER",
+        "TLE",
+        "ET",
       ],
       imageAudioMap: {
-        कद: {
-          image: Assets.kadImg,
-          audio: Assets.kadAudio,
+        DOCTOR: {
+          image: getAssetUrl(s3Assets.doctorImg) || Assets.doctorImg,
+          audio:
+            getAssetAudioUrl(s3Assets.doctorNewAudio) || Assets.doctorNewAudio,
         },
-        गगन: {
-          image: Assets.gaganImg,
-          audio: Assets.gaganAudio,
+        MARKET: {
+          image: getAssetUrl(s3Assets.marketImg) || Assets.marketImg,
+          audio:
+            getAssetAudioUrl(s3Assets.marketNewAudio) || Assets.marketNewAudio,
         },
-        गायक: {
-          image: Assets.gayakImg,
-          audio: Assets.gayakAudio,
+        BASKET: {
+          image: getAssetUrl(s3Assets.basketImg) || Assets.basketImg,
+          audio:
+            getAssetAudioUrl(s3Assets.basketNewAudio) || Assets.basketNewAudio,
         },
-        औरत: {
-          image: Assets.auratImg,
-          audio: Assets.auratAudio,
+        CRICKET: {
+          image: getAssetUrl(s3Assets.cricketImg) || Assets.cricketImg,
+          audio:
+            getAssetAudioUrl(s3Assets.cricketNewAudio) ||
+            Assets.cricketNewAudio,
         },
-        टायर: {
-          image: Assets.tyreImg,
-          audio: Assets.tyreAudio,
+        WINDOW: {
+          image: getAssetUrl(s3Assets.WindowNewImg) || Assets.WindowNewImg,
+          audio:
+            getAssetAudioUrl(s3Assets.windowNewAudio) || Assets.windowNewAudio,
         },
       },
-      arrM: ["कद", "गगन", "गायक", "औरत", "टायर"],
+      arrM: ["DOCTOR", "MARKET", "BASKET", "CRICKET", "WINDOW"],
     },
     L5: {
       words: [

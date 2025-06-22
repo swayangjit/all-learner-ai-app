@@ -30,6 +30,7 @@ import {
   getLocalData,
   NextButtonRound,
   RetryIcon,
+  setLocalData,
 } from "../../utils/constants";
 import VoiceAnalyser from "../../utils/VoiceAnalyser";
 import {
@@ -141,14 +142,20 @@ const PhoneConversation = ({
     if (transcript) {
       const filteredText = filterBadWords(transcript, language);
       if (filteredText.includes("*")) {
+        const count = parseInt(getLocalData("profanityCheck") || "0");
+
+        if (count > 2) {
+          setOpenMessageDialog({
+            open: true,
+            message: `Please speak properly.`,
+            severity: "warning",
+            isError: true,
+          });
+        }
+
         handleStopRecording();
 
-        setOpenMessageDialog({
-          open: true,
-          message: `Warning: Inappropriate language detected. Please refrain from using such words.`,
-          severity: "warning",
-          isError: true,
-        });
+        setLocalData("profanityCheck", (count + 1).toString());
       }
     }
   }, [transcript]);

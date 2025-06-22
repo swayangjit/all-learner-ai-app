@@ -27,23 +27,24 @@ import MainLayout from "../Layouts.jsx/MainLayout";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { addTowreRecord } from "../../services/learnerAi/learnerAiService";
 
 env.localModelPath = "https://huggingface.co/Xenova/whisper-tiny/resolve/main/";
 
 const allWords = [
   { title: "is", isCorrect: false },
   { title: "up", isCorrect: false },
-  { title: "cat", isCorrect: true },
+  { title: "cat", isCorrect: false },
   { title: "red", isCorrect: false },
   { title: "me", isCorrect: false },
   { title: "to", isCorrect: false },
   { title: "no", isCorrect: false },
-  { title: "we", isCorrect: true },
+  { title: "we", isCorrect: false },
   { title: "he", isCorrect: false },
   { title: "the", isCorrect: false },
   { title: "and", isCorrect: false },
   { title: "yes", isCorrect: false },
-  { title: "of", isCorrect: true },
+  { title: "of", isCorrect: false },
   { title: "him", isCorrect: false },
   { title: "as", isCorrect: false },
   { title: "book", isCorrect: false },
@@ -53,27 +54,27 @@ const allWords = [
   { title: "time", isCorrect: false },
   { title: "wood", isCorrect: false },
   { title: "let", isCorrect: false },
-  { title: "men", isCorrect: true },
+  { title: "men", isCorrect: false },
   { title: "baby", isCorrect: false },
   { title: "new", isCorrect: false },
   { title: "stop", isCorrect: false },
   { title: "work", isCorrect: false },
   { title: "jump", isCorrect: false },
-  { title: "part", isCorrect: true },
+  { title: "part", isCorrect: false },
   { title: "fast", isCorrect: false },
   { title: "fine", isCorrect: false },
   { title: "milk", isCorrect: false },
   { title: "back", isCorrect: false },
   { title: "lost", isCorrect: false },
   { title: "find", isCorrect: false },
-  { title: "paper", isCorrect: true },
+  { title: "paper", isCorrect: false },
   { title: "open", isCorrect: false },
   { title: "kind", isCorrect: false },
   { title: "able", isCorrect: false },
   { title: "shoes", isCorrect: false },
   { title: "money", isCorrect: false },
   { title: "great", isCorrect: false },
-  { title: "father", isCorrect: true },
+  { title: "father", isCorrect: false },
   { title: "river", isCorrect: false },
   { title: "space", isCorrect: false },
   { title: "short", isCorrect: false },
@@ -83,14 +84,14 @@ const allWords = [
   { title: "waves", isCorrect: false },
   { title: "child", isCorrect: false },
   { title: "strong", isCorrect: false },
-  { title: "crowd", isCorrect: true },
+  { title: "crowd", isCorrect: false },
   { title: "better", isCorrect: false },
   { title: "inside", isCorrect: false },
   { title: "plane", isCorrect: false },
   { title: "pretty", isCorrect: false },
   { title: "famous", isCorrect: false },
   { title: "children", isCorrect: false },
-  { title: "without", isCorrect: true },
+  { title: "without", isCorrect: false },
   { title: "finally", isCorrect: false },
   { title: "strange", isCorrect: false },
   { title: "budget", isCorrect: false },
@@ -100,7 +101,7 @@ const allWords = [
   { title: "morning", isCorrect: false },
   { title: "resolve", isCorrect: false },
   { title: "describe", isCorrect: false },
-  { title: "garment", isCorrect: true },
+  { title: "garment", isCorrect: false },
   { title: "business", isCorrect: false },
   { title: "qualify", isCorrect: false },
   { title: "potent", isCorrect: false },
@@ -113,17 +114,17 @@ const allWords = [
   { title: "necessary", isCorrect: false },
   { title: "problems", isCorrect: false },
   { title: "absentee", isCorrect: false },
-  { title: "advertise", isCorrect: true },
+  { title: "advertise", isCorrect: false },
   { title: "pleasant", isCorrect: false },
   { title: "property", isCorrect: false },
   { title: "distress", isCorrect: false },
-  { title: "information", isCorrect: true },
+  { title: "information", isCorrect: false },
   { title: "recession", isCorrect: false },
   { title: "understand", isCorrect: false },
   { title: "emphasis", isCorrect: false },
   { title: "confident", isCorrect: false },
   { title: "intuition", isCorrect: false },
-  { title: "boisterous", isCorrect: true },
+  { title: "boisterous", isCorrect: false },
   { title: "plausible", isCorrect: false },
   { title: "courageous", isCorrect: false },
   { title: "alienate", isCorrect: false },
@@ -131,13 +132,13 @@ const allWords = [
   { title: "prairie", isCorrect: false },
   { title: "limousine", isCorrect: false },
   { title: "valentine", isCorrect: false },
-  { title: "detective", isCorrect: true },
+  { title: "detective", isCorrect: false },
   { title: "recently", isCorrect: false },
   { title: "instruction", isCorrect: false },
   { title: "transient", isCorrect: false },
   { title: "phenomenon", isCorrect: false },
   { title: "calculated", isCorrect: false },
-  { title: "alternative", isCorrect: true },
+  { title: "alternative", isCorrect: false },
   { title: "collective", isCorrect: false },
 ];
 
@@ -754,9 +755,9 @@ const TowreFlow = ({
       };
 
       mediaRecorder.onstop = async () => {
-        console.log("⛔ Recording stopped.");
+        console.log("Recording stopped.");
         if (chunksRef.current.length === 0) {
-          console.warn("❗ No data to create blob.");
+          console.warn("No data to create blob.");
           return;
         }
 
@@ -772,17 +773,15 @@ const TowreFlow = ({
             "automatic-speech-recognition",
             ""
           );
-          console.log("🧠 Pipeline loaded.");
 
           const audioUrl = URL.createObjectURL(audioBlob);
-          console.log("🎧 Transcribing audio:", audioUrl);
 
           const output = await transcriber(audioUrl, {
             chunk_length_s: 20,
             stride_length_s: 5,
           });
 
-          console.log("📝 Transcription result:", output.text);
+          console.log("Transcription result:", output.text);
 
           const transcripts = output.text;
           setTranscripts(transcripts);
@@ -796,13 +795,15 @@ const TowreFlow = ({
               transcriptPhonetics.has(getPhonetic(lower));
 
             word.isCorrect = isSpoken;
-            word.isAttempted = isSpoken;
           });
+
+          await addTowreRecord(audioBlob, allWords);
+
           setLoading(false);
           setCompleted(true);
         } catch (error) {
-          console.error("❌ Error during transcription:", error);
-          console.log("transcript", transcriptRef.current);
+          console.error("Error during transcription:", error);
+          console.log("transcriptok", transcriptRef.current);
           setTranscripts(transcriptRef.current);
           const transcriptWords = normalize(transcriptRef.current);
           const transcriptPhonetics = new Set(transcriptWords.map(getPhonetic));
@@ -814,8 +815,16 @@ const TowreFlow = ({
               transcriptPhonetics.has(getPhonetic(lower));
 
             word.isCorrect = isSpoken;
-            word.isAttempted = isSpoken;
           });
+
+          try {
+            await addTowreRecord(audioBlob, allWords);
+          } catch (apiErr) {
+            console.error("Error sending TOWRE record:", apiErr);
+            setLoading(false);
+            setCompleted(true);
+          }
+
           setLoading(false);
           setCompleted(true);
         }
@@ -836,7 +845,7 @@ const TowreFlow = ({
     ) {
       mediaRecorderRef.current.stop();
     } else {
-      console.warn("❗ Recorder already inactive or null.");
+      console.warn("Recorder already inactive or null.");
     }
   };
 

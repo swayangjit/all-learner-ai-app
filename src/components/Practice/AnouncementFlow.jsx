@@ -144,17 +144,13 @@ const AnouncementFlow = ({
     console.log("Live Transcript:", transcript);
     if (transcript) {
       const filteredText = filterBadWords(transcript, language);
-      if (
-        filteredText.includes("*") ||
-        filteredText.toLowerCase().includes("hello") ||
-        filteredText.toLowerCase().includes("duck")
-      ) {
+      if (filteredText.includes("*")) {
         const count = parseInt(getLocalData("profanityCheck") || "0");
 
         if (count > 2) {
           setOpenMessageDialog({
             open: true,
-            message: `Please speak appropriately.`,
+            message: `Please speak properly.`,
             severity: "warning",
             isError: true,
           });

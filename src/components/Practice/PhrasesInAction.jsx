@@ -28,6 +28,7 @@ import {
   RetryIcon,
   ListenButton,
   StopButton,
+  setLocalData,
 } from "../../utils/constants";
 import {
   fetchASROutput,
@@ -111,14 +112,20 @@ const PhrasesInAction = ({
     if (transcript && !abusiveFound) {
       const filteredText = filterBadWords(transcript, language);
       if (filteredText.includes("*")) {
+        const count = parseInt(getLocalData("profanityCheck") || "0");
+
+        if (count > 2) {
+          setOpenMessageDialog({
+            open: true,
+            message: `Please speak properly.`,
+            severity: "warning",
+            isError: true,
+          });
+        }
+
         stopAudioRecording();
-        setAbusiveFound(true);
-        setOpenMessageDialog({
-          open: true,
-          message: `Warning: Inappropriate language detected . Please refrain from using such words.`,
-          severity: "warning",
-          isError: true,
-        });
+
+        setLocalData("profanityCheck", (count + 1).toString());
       }
     }
   }, [transcript]);

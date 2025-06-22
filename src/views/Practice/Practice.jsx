@@ -107,178 +107,165 @@ const Practice = () => {
   const levels = {
     L1: [
       {
-        completeWord: "बादल",
-        syllable: [" बा ", "दल"],
-        img: Assets.badalM1Hin,
+        completeWord: "Apple",
+        syllable: ["Ap", "ple"],
+        img: getAssetUrl(s3Assets.Apple) || Assets.Apple,
         syllablesAudio: [
           {
-            name: "बा",
-            audio: Assets.baM1Audio,
+            name: "Ap",
+            audio: getAssetAudioUrl(s3Assets.apAudio) || Assets.apAudio,
           },
           {
-            name: "दल",
-            audio: Assets.dalM1Audio,
+            name: "ple",
+            audio: getAssetAudioUrl(s3Assets.pleAudio) || Assets.pleAudio,
           },
         ],
-        completeAudio: Assets.badalM1Audio,
+        completeAudio:
+          getAssetAudioUrl(s3Assets.appleAudio) || Assets.appleAudio,
       },
       {
-        completeWord: "तबला ",
-        syllable: ["त", "ब", "ला"],
-        img: Assets.tablaM1Hin,
+        completeWord: "Tiger",
+        syllable: ["Ti", "ger"],
+        img: getAssetUrl(s3Assets.TigerNewImg) || Assets.TigerNewImg,
         syllablesAudio: [
           {
-            name: "त",
-            audio: Assets.taM1Audio,
+            name: "Ti",
+            audio: getAssetAudioUrl(s3Assets.tiAudio) || Assets.tiAudio,
           },
           {
-            name: "ब",
-            audio: Assets.baaM1Audio,
-          },
-          {
-            name: "ला",
-            audio: Assets.laM1Audio,
+            name: "ger",
+            audio: getAssetAudioUrl(s3Assets.gerAudio) || Assets.gerAudio,
           },
         ],
-        completeAudio: Assets.tablaM1Audio,
+        completeAudio:
+          getAssetAudioUrl(s3Assets.tigerAudio) || Assets.tigerAudio,
       },
       {
-        completeWord: "चावल ",
-        syllable: ["चा", "वल"],
-        img: Assets.chawalM1Hin,
+        completeWord: "Happy",
+        syllable: ["Hap", "py"],
+        img: getAssetUrl(s3Assets.happyImg) || Assets.happyImg,
         syllablesAudio: [
           {
-            name: "चा",
-            audio: Assets.chaM1Audio,
+            name: "Hap",
+            audio: getAssetAudioUrl(s3Assets.hapAudio) || Assets.hapAudio,
           },
           {
-            name: "वल",
-            audio: Assets.walM1Audio,
+            name: "py",
+            audio: getAssetAudioUrl(s3Assets.pyAudio) || Assets.pyAudio,
           },
         ],
-        completeAudio: Assets.chawalM1Audio,
+        completeAudio:
+          getAssetAudioUrl(s3Assets.happyAudio) || Assets.happyAudio,
       },
       {
-        completeWord: "कोयल ",
-        syllable: ["को", "यल"],
-        img: Assets.koyalM1Hin,
+        completeWord: "Pencil",
+        syllable: ["Pen", "cil"],
+        img: getAssetUrl(s3Assets.pencilImg) || Assets.pencilImg,
         syllablesAudio: [
           {
-            name: "को",
-            audio: Assets.koM1Audio,
+            name: "Pen",
+            audio: Assets.penAudio,
           },
           {
-            name: "यल",
-            audio: Assets.yalM1Audio,
+            name: "cil",
+            audio: getAssetAudioUrl(s3Assets.cilAudio) || Assets.cilAudio,
           },
         ],
-        completeAudio: Assets.koyalM1Audio,
+        completeAudio:
+          getAssetAudioUrl(s3Assets.pencilAudio) || Assets.pencilAudio,
       },
       {
-        completeWord: "कलम ",
-        syllable: ["क ", "ल ", "म"],
-        img: Assets.kalamM1Hin,
+        completeWord: "Rocket",
+        syllable: ["Rock", "et"],
+        img: getAssetUrl(s3Assets.RocketNewImg) || Assets.RocketNewImg,
         syllablesAudio: [
           {
-            name: "क",
-            audio: Assets.kaM1Audio,
+            name: "Rock",
+            audio: getAssetAudioUrl(s3Assets.Rock) || Assets.Rock,
           },
-          { name: "ल", audio: Assets.laaM1Audio },
-          { name: "म", audio: Assets.amM1Audio },
+          { name: "Et", audio: getAssetAudioUrl(s3Assets.Et) || Assets.Et },
         ],
-        completeAudio: Assets.kalamM1Audio,
+        completeAudio: getAssetAudioUrl(s3Assets.RocketS) || Assets.RocketS,
       },
     ],
     L2: [
       {
-        completeWord: "गायक",
-        syllable: ["गा", "य", "क"],
-        img: Assets.gayakImg,
+        completeWord: "Basket",
+        syllable: ["Bas", "ket"],
+        img: getAssetUrl(s3Assets.Basket) || Assets.Basket,
         syllablesAudio: [
-          {
-            name: "गा",
-            audio: Assets.gayak1Audio,
-          },
-          {
-            name: "य",
-            audio: Assets.gayak2Audio,
-          },
-          {
-            name: "क",
-            audio: Assets.gayak3Audio,
-          },
+          { name: "Bas", audio: getAssetAudioUrl(s3Assets.Bas) || Assets.Bas },
+          { name: "Ket", audio: Assets.Ket },
         ],
-        completeAudio: Assets.gayakAudio,
+        completeAudio: getAssetAudioUrl(s3Assets.BasketS) || Assets.BasketS,
       },
       {
-        completeWord: "कद",
-        syllable: ["क", "द"],
-        img: Assets.kadImg,
+        completeWord: "Dinner",
+        syllable: ["Din", "ner"],
+        img: getAssetUrl(s3Assets.DinnerNewImg) || Assets.DinnerNewImg,
         syllablesAudio: [
           {
-            name: "क",
-            audio: Assets.kad1Audio,
+            name: "Din",
+            audio: getAssetAudioUrl(s3Assets.dinAudio) || Assets.dinAudio,
           },
           {
-            name: "द",
-            audio: Assets.kadh2Audio,
+            name: "ner",
+            audio: getAssetAudioUrl(s3Assets.nerAudio) || Assets.nerAudio,
           },
         ],
-        completeAudio: Assets.kadAudio,
+        completeAudio:
+          getAssetAudioUrl(s3Assets.dinnerAudio) || Assets.dinnerAudio,
       },
       {
-        completeWord: "गगन",
-        syllable: ["ग", "ग", "न"],
-        img: Assets.gaganImg,
+        completeWord: "Window",
+        syllable: ["Win", "dow"],
+        img: getAssetUrl(s3Assets.WindowNewImg) || Assets.WindowNewImg,
         syllablesAudio: [
           {
-            name: "ग",
-            audio: Assets.gagan1Audio,
+            name: "Win",
+            audio: getAssetAudioUrl(s3Assets.winAudio) || Assets.winAudio,
           },
           {
-            name: "ग",
-            audio: Assets.gagan2Audio,
-          },
-          {
-            name: "न",
-            audio: Assets.gagan3Audio,
+            name: "dow",
+            audio: getAssetAudioUrl(s3Assets.dowAudio) || Assets.dowAudio,
           },
         ],
-        completeAudio: Assets.gaganAudio,
+        completeAudio:
+          getAssetAudioUrl(s3Assets.windowAudio) || Assets.windowAudio,
       },
       {
-        completeWord: "औरत",
-        syllable: ["औ", "र", "त"],
-        img: Assets.auratImg,
+        completeWord: "Magnet",
+        syllable: ["Mag", "net"],
+        img: getAssetUrl(s3Assets.MagnetNewImg) || Assets.MagnetNewImg,
         syllablesAudio: [
           {
-            name: "औ",
-            audio: Assets.aurat1Audio,
+            name: "Mag",
+            audio: getAssetAudioUrl(s3Assets.magAudio) || Assets.magAudio,
           },
           {
-            name: "र",
-            audio: Assets.aurat2Audio,
-          },
-          {
-            name: "त",
-            audio: Assets.aurat3Audio,
+            name: "net",
+            audio: getAssetAudioUrl(s3Assets.netAudio) || Assets.netAudio,
           },
         ],
-        completeAudio: Assets.auratAudio,
+        completeAudio:
+          getAssetAudioUrl(s3Assets.magnetAudio) || Assets.magnetAudio,
       },
       {
-        completeWord: "टायर",
-        syllable: ["टा", "य", "र"],
-        img: Assets.tyreImg,
+        completeWord: "Tennis",
+        syllable: ["Ten", "nis"],
+        img: getAssetUrl(s3Assets.TennisNewImg) || Assets.TennisNewImg,
         syllablesAudio: [
           {
-            name: "टा",
-            audio: Assets.tayar1Audio,
+            name: "Ten",
+            audio: getAssetAudioUrl(s3Assets.tenAudio) || Assets.tenAudio,
           },
-          { name: "य", audio: Assets.tayar2Audio },
-          { name: "र", audio: Assets.tayar3Audio },
+          {
+            name: "nis",
+            audio: getAssetAudioUrl(s3Assets.nisAudio) || Assets.nisAudio,
+          },
         ],
-        completeAudio: Assets.tyreAudio,
+        completeAudio:
+          getAssetAudioUrl(s3Assets.tennisAudio) || Assets.tennisAudio,
       },
     ],
     L5: [
@@ -744,10 +731,6 @@ const Practice = () => {
   //   setLocalData("rFlow", true)
   // }, []);
 
-  //  useEffect(() => {
-  //   setLocalData("tFlow", true)
-  // }, []);
-
   useEffect(() => {
     console.log("levelsssss", level, rFlow, rStep);
 
@@ -1014,14 +997,7 @@ const Practice = () => {
             setVocabCount(
               getMilestoneDetails?.data?.extra?.vocabulary_count || 0
             );
-            if (
-              level === 1 ||
-              level === 2 ||
-              level === 3 ||
-              level === 4 ||
-              level === 6 ||
-              level === 9
-            ) {
+            if (level === 3 || level === 6 || level === 9) {
               gameOver({ link: "/assesment-end" }, true);
               setLocalData("tFlow", true);
             }
