@@ -14,7 +14,7 @@
     "@project-sunbird/client-services": "^5.1.2",
     "@reduxjs/toolkit": "^2.2.0",
     "@tekdi/all-telemetry-sdk": "^0.0.32",
-    "@tekdi/multilingual-profanity-filter": "^1.0.1",
+    "@tekdi/multilingual-profanity-filter": "1.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
