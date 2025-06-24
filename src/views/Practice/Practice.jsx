@@ -1087,7 +1087,7 @@ const Practice = () => {
           return;
         }
 
-        if (![1, 2, 10, 11, 12, 13, 14, 15].includes(level)) {
+        if (![10, 11, 12, 13, 14, 15].includes(level)) {
           const resGetContent = await getContent(
             currentGetContent.criteria,
             lang,
@@ -1097,6 +1097,7 @@ const Practice = () => {
               competency: currentGetContent?.competency,
               tags: currentGetContent?.tags,
               storyMode: currentGetContent?.storyMode,
+              CEFR_level: currentGetContent?.CEFR_level,
             }
           );
 
@@ -1153,7 +1154,7 @@ const Practice = () => {
           setQuestions(quesArr);
         }
 
-        if ([1, 2, 10, 11, 12, 13, 14, 15].includes(level)) {
+        if ([10, 11, 12, 13, 14, 15].includes(level)) {
           let showcaseLevel =
             currentPracticeStep === 3 || currentPracticeStep === 8;
           setIsShowCase(showcaseLevel);
@@ -1352,6 +1353,7 @@ const Practice = () => {
             competency: currentGetContent?.competency,
             tags: currentGetContent?.tags,
             storyMode: currentGetContent?.storyMode,
+            CEFR_level: currentGetContent?.CEFR_level,
           }
         );
         // TODO: handle error if resWord is empty
@@ -1474,6 +1476,7 @@ const Practice = () => {
             competency: currentGetContent?.competency,
             tags: currentGetContent?.tags,
             storyMode: currentGetContent?.storyMode,
+            CEFR_level: currentGetContent?.CEFR_level,
           }
         );
         setTotalSyllableCount(resWord?.totalSyllableCount);
