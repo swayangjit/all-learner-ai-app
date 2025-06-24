@@ -1828,6 +1828,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -1874,6 +1876,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -1920,6 +1924,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -1965,6 +1971,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2024,6 +2032,8 @@ const Practice = () => {
               : [],
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2069,6 +2079,8 @@ const Practice = () => {
             setOpenMessageDialog,
             isNextButtonCalled,
             setIsNextButtonCalled,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2113,6 +2125,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2157,6 +2171,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
@@ -2201,6 +2217,8 @@ const Practice = () => {
             setEnableNext,
             loading,
             setOpenMessageDialog,
+            vocabCount,
+            wordCount,
           }}
         />
       );
