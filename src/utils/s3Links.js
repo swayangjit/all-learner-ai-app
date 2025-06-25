@@ -1377,3 +1377,5 @@ export const brotherM2Kan = "483134bf-08e3-496c-8bb9-0bda719fa39b.mp3";
 export const prizeM2Kan = "cfb42fc8-f694-49cf-a204-1fac180c4003.mp3";
 export const almirahM2Kan = "bcfa235d-804e-4eef-9cfd-cc112ac1ce22.mp3";
 export const rawbananaM2Kan = "f8790636-5595-44f8-b40d-9185a13e06d0.mp3";
+
+export const level10S2Announcement = "dbc0f212-b68a-4b61-b3b9-25cf11cd092b.mp3";
