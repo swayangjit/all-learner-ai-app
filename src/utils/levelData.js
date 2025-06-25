@@ -1965,7 +1965,7 @@ export const level12 = [
         ],
         jumbledWords: [
           "begins at",
-          "3:00 PM",
+          "3:00 PM.",
           "The stadium",
           "sharp.",
           "open at",
@@ -2022,13 +2022,13 @@ export const level12 = [
           },
         ],
         jumbledWords: [
-          "6 PM",
+          "6 PM.",
           "Cultural performances",
           "Welcome to",
           "at",
           "Fair!",
           "will begin",
-          "Sompura Village",
+          "the Sompura Village",
         ],
       },
     ],
@@ -2747,11 +2747,11 @@ export const level12 = [
           {
             audio: "level12P8OneAudio",
             correctSentence:
-              "Try our special dish today – grilled salmon and mashed potatoes.",
+              "Try our special dish today, grilled salmon and mashed potatoes.",
           },
         ],
         jumbledWords: [
-          "today",
+          "today,",
           "mashed potatoes.",
           "Try our",
           "and",
@@ -2790,7 +2790,7 @@ export const level12 = [
           "all the books",
           "Please return",
           "now.",
-          "he library",
+          "The library",
         ],
       },
       {
@@ -2806,7 +2806,7 @@ export const level12 = [
           "2564",
           "Train number",
           "to Indore",
-          "Platform 7",
+          "Platform 7.",
           "in",
           "will depart",
           "from",
@@ -4027,7 +4027,7 @@ export const level15 = [
         jumbledWords: [
           "flowed gently",
           "near the",
-          "forest.",
+          "the forest.",
           "edge of",
           "The stream",
         ],
@@ -4095,7 +4095,7 @@ export const level15 = [
         ],
         jumbledWords: [
           "dreaming of",
-          "magic garden",
+          "the magic garden",
           "the next",
           "were asleep",
           "flowers in",
