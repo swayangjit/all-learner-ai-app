@@ -1121,7 +1121,7 @@ const WordsOrImage = ({
             mt: isMobile ? 2 : 0,
           }}
         >
-          {(level === 1 || level === 2 || level === 3) && !isShowCase ? (
+          {level === 15 && !isShowCase ? (
             <div>
               {showSpeakButton && (
                 <Box
