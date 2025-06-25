@@ -3759,11 +3759,7 @@ const Practice = () => {
             } catch (e) {
               // catch error
             }
-          } else if (
-            currentLevel === "S2" &&
-            lang === "en" &&
-            (level === 1 || level === 2)
-          ) {
+          } else if (currentLevel === "S2" && (level === 1 || level === 2)) {
             setLocalData("mFail", true);
             setTimeout(() => {
               setLocalData("rFlow", true);
