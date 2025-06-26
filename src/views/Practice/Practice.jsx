@@ -3343,76 +3343,779 @@ const Practice = () => {
   };
 
   const levelThree = {
-    P1: [
-      { completeWord: "I run.", syllable: ["I", "run."] },
-      { completeWord: "We play.", syllable: ["We", "play."] },
-      { completeWord: "She reads.", syllable: ["She", "reads."] },
-      { completeWord: "He eats.", syllable: ["He", "eats."] },
-      { completeWord: "They jump.", syllable: ["They", "jump."] },
-    ],
-    P2: [
-      { completeWord: "We walk.", syllable: ["We", "walk."] },
-      { completeWord: "I sleep.", syllable: ["I", "sleep."] },
-      { completeWord: "You swim.", syllable: ["You", "swim."] },
-      { completeWord: "She sings.", syllable: ["She", "sings."] },
-      { completeWord: "He dances.", syllable: ["He", "dances."] },
-    ],
-    P3: [
-      { completeWord: "It rains.", syllable: ["It", "rains."] },
-      { completeWord: "We win.", syllable: ["We", "win."] },
-      { completeWord: "You cook.", syllable: ["You", "cook."] },
-      { completeWord: "They laugh.", syllable: ["They", "laugh."] },
-      { completeWord: "I dream.", syllable: ["I", "dream."] },
-    ],
-    P4: [
-      { completeWord: "You learn.", syllable: ["You", "learn."] },
-      { completeWord: "We talk.", syllable: ["We", "talk."] },
-      { completeWord: "He listens.", syllable: ["He", "listens."] },
-      { completeWord: "She smiles.", syllable: ["She", "smiles."] },
-      { completeWord: "Birds fly.", syllable: ["Birds", "fly."] },
-    ],
-    S1: [
-      { completeWord: "Cats meow.", syllable: ["Cats", "meow."] },
-      { completeWord: "Dogs bark.", syllable: ["Dogs", "bark."] },
-      { completeWord: "Fish swim.", syllable: ["Fish", "swim."] },
-      { completeWord: "Sun shines.", syllable: ["Sun", "shines."] },
-      { completeWord: "Stars twinkle.", syllable: ["Stars", "twinkle."] },
-    ],
-    S2: [
-      { completeWord: "Baby cries.", syllable: ["Baby", "cries."] },
-      { completeWord: "Fire burns.", syllable: ["Fire", "burns."] },
-      { completeWord: "Flowers bloom.", syllable: ["Flowers", "bloom."] },
-      { completeWord: "Wind blows.", syllable: ["Wind", "blows."] },
-      { completeWord: "Bells ring.", syllable: ["Bells", "ring."] },
-    ],
-    L1: [
-      { completeWord: "I run.", syllable: ["I", "run."] },
-      { completeWord: "We play.", syllable: ["We", "play."] },
-      { completeWord: "She reads.", syllable: ["She", "reads."] },
-      { completeWord: "He eats.", syllable: ["He", "eats."] },
-      { completeWord: "They jump.", syllable: ["They", "jump."] },
-    ],
-    L2: [
-      { completeWord: "I run.", syllable: ["I", "run."] },
-      { completeWord: "We play.", syllable: ["We", "play."] },
-      { completeWord: "She reads.", syllable: ["She", "reads."] },
-      { completeWord: "He eats.", syllable: ["He", "eats."] },
-      { completeWord: "They jump.", syllable: ["They", "jump."] },
-    ],
-    L3: [
-      { completeWord: "I run.", syllable: ["I", "run."] },
-      { completeWord: "We play.", syllable: ["We", "play."] },
-      { completeWord: "She reads.", syllable: ["She", "reads."] },
-      { completeWord: "He eats.", syllable: ["He", "eats."] },
-      { completeWord: "They jump.", syllable: ["They", "jump."] },
-    ],
-    L4: [
-      { completeWord: "I run.", syllable: ["I", "run."] },
-      { completeWord: "We play.", syllable: ["We", "play."] },
-      { completeWord: "She reads.", syllable: ["She", "reads."] },
-      { completeWord: "He eats.", syllable: ["He", "eats."] },
-      { completeWord: "They jump.", syllable: ["They", "jump."] },
-    ],
+    en: {
+      P1: [
+        { completeWord: "I run.", syllable: ["I", "run."], audio: "iRun" },
+        {
+          completeWord: "We play.",
+          syllable: ["We", "play."],
+          audio: "wePlay",
+        },
+        {
+          completeWord: "She reads.",
+          syllable: ["She", "reads."],
+          audio: "sheReads",
+        },
+        {
+          completeWord: "He eats.",
+          syllable: ["He", "eats."],
+          audio: "heEats",
+        },
+        {
+          completeWord: "They jump.",
+          syllable: ["They", "jump."],
+          audio: "theyJump",
+        },
+      ],
+      P2: [
+        {
+          completeWord: "We walk.",
+          syllable: ["We", "walk."],
+          audio: "weWalk",
+        },
+        {
+          completeWord: "I sleep.",
+          syllable: ["I", "sleep."],
+          audio: "iSleep",
+        },
+        {
+          completeWord: "You swim.",
+          syllable: ["You", "swim."],
+          audio: "youSwim",
+        },
+        {
+          completeWord: "She sings.",
+          syllable: ["She", "sings."],
+          audio: "sheSings",
+        },
+        {
+          completeWord: "He dances.",
+          syllable: ["He", "dances."],
+          audio: "heDances",
+        },
+      ],
+      P3: [
+        {
+          completeWord: "It rains.",
+          syllable: ["It", "rains."],
+          audio: "itRains",
+        },
+        { completeWord: "We win.", syllable: ["We", "win."], audio: "weWin" },
+        {
+          completeWord: "You cook.",
+          syllable: ["You", "cook."],
+          audio: "youCook",
+        },
+        {
+          completeWord: "They laugh.",
+          syllable: ["They", "laugh."],
+          audio: "theyLaugh",
+        },
+        {
+          completeWord: "I dream.",
+          syllable: ["I", "dream."],
+          audio: "iDream",
+        },
+      ],
+      P4: [
+        {
+          completeWord: "You learn.",
+          syllable: ["You", "learn."],
+          audio: "youLearn",
+        },
+        {
+          completeWord: "We talk.",
+          syllable: ["We", "talk."],
+          audio: "weTalk",
+        },
+        {
+          completeWord: "He listens.",
+          syllable: ["He", "listens."],
+          audio: "heListens",
+        },
+        {
+          completeWord: "She smiles.",
+          syllable: ["She", "smiles."],
+          audio: "sheSmiles",
+        },
+        {
+          completeWord: "Birds fly.",
+          syllable: ["Birds", "fly."],
+          audio: "birdsFly",
+        },
+      ],
+      S1: [
+        { completeWord: "Cats meow.", syllable: ["Cats", "meow."] },
+        { completeWord: "Dogs bark.", syllable: ["Dogs", "bark."] },
+        { completeWord: "Fish swims.", syllable: ["Fish", "swims."] },
+        { completeWord: "The sun shines.", syllable: ["Sun", "shines."] },
+        { completeWord: "Stars twinkle.", syllable: ["Stars", "twinkle."] },
+      ],
+      S2: [
+        { completeWord: "Baby cries.", syllable: ["Baby", "cries."] },
+        { completeWord: "Fire burns.", syllable: ["Fire", "burns."] },
+        { completeWord: "Flowers bloom.", syllable: ["Flowers", "bloom."] },
+        { completeWord: "Wind blows.", syllable: ["Wind", "blows."] },
+        { completeWord: "Bells ring.", syllable: ["Bells", "ring."] },
+      ],
+      L1: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L2: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L3: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L4: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+    },
+    hi: {
+      P1: [
+        {
+          completeWord: "शहर का बग़ीचा",
+          syllable: ["शहर का", "बग़ीचा"],
+          audio: "shaharkabageechaM3Hin",
+        },
+        {
+          completeWord: "खेतों की सैर",
+          syllable: ["खेतों की", "सैर"],
+          audio: "khetonkisairM3Hin",
+        },
+        {
+          completeWord: "इकट्ठा करना",
+          syllable: ["इकट्ठा", "करना"],
+          audio: "ikathhakarnaM3Hin",
+        },
+        {
+          completeWord: "हवाई अड्डा",
+          syllable: ["हवाई", "अड्डा"],
+          audio: "hawaiaddaM3Hin",
+        },
+        {
+          completeWord: "ऑटो रिक्शा",
+          syllable: ["ऑटो", "रिक्शा"],
+          audio: "autorickshawM3Hin",
+        },
+      ],
+      P2: [
+        {
+          completeWord: "शयन कक्ष",
+          syllable: ["शयन", "कक्ष"],
+          audio: "shayankakshM3Hin",
+        },
+        {
+          completeWord: "ब्रश करना",
+          syllable: ["ब्रश", "करना"],
+          audio: "brushkarnaM3Hin",
+        },
+        {
+          completeWord: "माचिस की डिब्बी",
+          syllable: ["माचिस की", "डिब्बी"],
+          audio: "machiskidibbiM3Hin",
+        },
+        {
+          completeWord: "लोहे का बक्सा",
+          syllable: ["लोहे का", "बक्सा"],
+          audio: "lohekabaksaM3Hin",
+        },
+        {
+          completeWord: "बड़ों को प्रणाम",
+          syllable: ["बड़ों को", "प्रणाम"],
+          audio: "badonkopranamM3Hin",
+        },
+      ],
+      P3: [
+        {
+          completeWord: "आधी रात",
+          syllable: ["आधी", "रात"],
+          audio: "aadhiraatM3Hin",
+        },
+        {
+          completeWord: "उदास करना",
+          syllable: ["उदास", "करना"],
+          audio: "udaaskarnaM3Hin",
+        },
+        {
+          completeWord: "सूख जाना",
+          syllable: ["सूख", "जाना"],
+          audio: "sookhjanaM3Hin",
+        },
+        {
+          completeWord: "तैयार करना",
+          syllable: ["तैयार", "करना"],
+          audio: "taiyarkarnaM3Hin",
+        },
+        {
+          completeWord: "कितने बजे हैं?",
+          syllable: ["कितने", "बजे हैं?"],
+          audio: "kitnebajehainM3Hin",
+        },
+      ],
+      P4: [
+        {
+          completeWord: "चिड़िया छोटी है",
+          syllable: ["चिड़िया", "छोटी है"],
+          audio: "chidiyachhotihaiM3Hin",
+        },
+        {
+          completeWord: "प्रतीक्षा करना",
+          syllable: ["प्रतीक्षा", "करना"],
+          audio: "prateekshakarnaM3Hin",
+        },
+        {
+          completeWord: "तुम्हारा मित्र",
+          syllable: ["तुम्हारा", "मित्र"],
+          audio: "tumharamitraM3Hin",
+        },
+        {
+          completeWord: "स्कूल की छुट्टी",
+          syllable: ["स्कूल की", "छुट्टी"],
+          audio: "schoolkichhuttiM3Hin",
+        },
+        {
+          completeWord: "आशीर्वाद देना",
+          syllable: ["आशीर्वाद", "देना"],
+          audio: "aashirvaaddenaM3Hin",
+        },
+      ],
+      S1: [
+        { completeWord: "गपशप", syllable: ["गप", "शप"] },
+        { completeWord: "गरम करना", syllable: ["गरम", "करना"] },
+        { completeWord: "वजन करना", syllable: ["वजन", "करना"] },
+        { completeWord: "बंद करना", syllable: ["बंद", "करना"] },
+        { completeWord: "चोट लगना", syllable: ["चोट", "लगना"] },
+      ],
+      S2: [
+        { completeWord: "आनंद करना", syllable: ["आनंद", "करना"] },
+        { completeWord: "पीछा करना", syllable: ["पीछा", "करना"] },
+        { completeWord: "परिचय करना", syllable: ["परिचय", "करना"] },
+        { completeWord: "पशु चराना", syllable: ["पशु", "चराना"] },
+        { completeWord: "मोटर गाड़ी", syllable: ["मोटर", "गाड़ी"] },
+      ],
+      L1: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L2: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L3: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L4: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+    },
+    ta: {
+      P1: [
+        {
+          completeWord: "ஈர மண்",
+          syllable: ["ஈர", "மண்"],
+          audio: "wetsoilM3Tam",
+        },
+        {
+          completeWord: "உடல்நிலை குறைவு",
+          syllable: ["உடல்நிலை", "குறைவு"],
+          audio: "poorhealthM3Tam",
+        },
+        {
+          completeWord: "சுவையான உணவு",
+          syllable: ["சுவையான", "உணவு"],
+          audio: "adeliciousmealM3Tam",
+        },
+        {
+          completeWord: "அவன் பால் குடித்தான்",
+          syllable: ["அவன் பால்", "குடித்தான்"],
+          audio: "hedrankmilkM3Tam",
+        },
+        {
+          completeWord: "அவள் பூக்களைப் பறித்தாள்",
+          syllable: ["அவள் பூக்களைப்", "பறித்தாள்"],
+          audio: "shepickedflowersM3Tam",
+        },
+      ],
+      P2: [
+        {
+          completeWord: "நாய் குரைக்கிறது",
+          syllable: ["நாய்", "குரைக்கிறது"],
+          audio: "thedogisbarkingM3Tam",
+        },
+        {
+          completeWord: "நன்றி நண்பா",
+          syllable: ["நன்றி", "நண்பா"],
+          audio: "thankyoufriendM3Tam",
+        },
+        {
+          completeWord: "நான் வருகிறேன்",
+          syllable: ["நான்", "வருகிறேன்"],
+          audio: "iamcomingM3Tam",
+        },
+        {
+          completeWord: "தவளை வந்தது",
+          syllable: ["தவளை", "வந்தது"],
+          audio: "thefrogcameM3Tam",
+        },
+        {
+          completeWord: "ஒரு கழுதை வந்தது",
+          syllable: ["ஒரு கழுதை", "வந்தது"],
+          audio: "adonkeycameM3Tam",
+        },
+      ],
+      P3: [
+        {
+          completeWord: "நெய் தோசை",
+          syllable: ["நெய்", "தோசை"],
+          audio: "gheedosaM3Tam",
+        },
+        {
+          completeWord: "அவன் தண்ணீர் குடித்தான்",
+          syllable: ["அவன் தண்ணீர்", "குடித்தான்"],
+          audio: "hedrankwaterM3Tam",
+        },
+        {
+          completeWord: "யானை கர்ஜிக்கிறது",
+          syllable: ["யானை", "கர்ஜிக்கிறது"],
+          audio: "elephantroarsM3Tam",
+        },
+        {
+          completeWord: "அவர் அதை ஏழைகளுக்கு கொடுத்தார்",
+          syllable: ["அவர் அதை", "ஏழைகளுக்கு கொடுத்தார்"],
+          audio: "hegaveittothepoorM3Tam",
+        },
+        {
+          completeWord: "பாடல் பாடுதல்",
+          syllable: ["பாடல்", "பாடுதல்"],
+          audio: "singingasongM3Tam",
+        },
+      ],
+      P4: [
+        {
+          completeWord: "ஆமை வந்தது",
+          syllable: ["ஆமை", "வந்தது"],
+          audio: "theturtlecameM3Tam",
+        },
+        {
+          completeWord: "புழு வந்தது",
+          syllable: ["புழு", "வந்தது"],
+          audio: "thewormcameM3Tam",
+        },
+        {
+          completeWord: "முத்துச் சிப்பிபோல",
+          syllable: ["முத்துச்", "சிப்பிபோல"],
+          audio: "likeapearlM3Tam",
+        },
+        {
+          completeWord: "தேனீ",
+          syllable: ["தே", "னீ"],
+          audio: "honeybeeM3Tam",
+        },
+        {
+          completeWord: "சக்கரமும் சுழன்றோட",
+          syllable: ["சக்கரமும்", "சுழன்றோட"],
+          audio: "thewheelisspinningM3Tam",
+        },
+      ],
+      S1: [
+        { completeWord: "ஊஞ்சலிலே ஆடலாம்", syllable: ["ஊஞ்சலிலே", "ஆடலாம்"] },
+        {
+          completeWord: "ஆற்றில் நீந்தும் ஆமை",
+          syllable: ["ஆற்றில்", "நீந்தும் ஆமை"],
+        },
+        { completeWord: "எஃகு வாள்", syllable: ["எஃகு", "வாள்"] },
+        {
+          completeWord: "அண்ணன் கையில் அலைபேசி",
+          syllable: ["அண்ணன் கையில்", "அலைபேசி"],
+        },
+        {
+          completeWord: "ஓரம் நிற்கும் ஓடம்",
+          syllable: ["ஓரம்", "நிற்கும் ஓடம்"],
+        },
+      ],
+      S2: [
+        {
+          completeWord: "அம்மா இங்கே வா வா",
+          syllable: ["அம்மா", "இங்கே வா வா"],
+        },
+        {
+          completeWord: "ஓதும் செயலே நலமாம்",
+          syllable: ["ஓதும்", "செயலே நலமாம்"],
+        },
+        {
+          completeWord: "ஏதும் இங்கே இல்லை",
+          syllable: ["ஏதும்", "இங்கே இல்லை"],
+        },
+        {
+          completeWord: "இலையில் சோறு போட்டு",
+          syllable: ["இலையில்", "சோறு போட்டு"],
+        },
+        { completeWord: "பச்சை நிற மொச்சை", syllable: ["பச்சை நிற", "மொச்சை"] },
+      ],
+      L1: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L2: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L3: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L4: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+    },
+    kn: {
+      P1: [
+        {
+          completeWord: "ರಾಜನ ಕಿರೀಟ",
+          syllable: ["ರಾಜನ", "ಕಿರೀಟ"],
+          audio: "kingsCrown",
+        },
+        {
+          completeWord: "ಕೊತ್ತುಂಬರಿ ಸೊಪ್ಪು",
+          syllable: ["ಕೊತ್ತುಂಬರಿ", "ಸೊಪ್ಪು"],
+          audio: "coriander",
+        },
+        {
+          completeWord: "ಅದು ಎರೆಹುಳು",
+          syllable: ["ಅದು", "ಎರೆಹುಳು"],
+          audio: "thatIsEarthworm",
+        },
+        {
+          completeWord: "ಮಲಗುವ ಕೋಣೆ",
+          syllable: ["ಮಲಗುವ", "ಕೋಣೆ"],
+          audio: "bedRoom",
+        },
+        {
+          completeWord: "ಕಸದ ಬುಟ್ಟಿ",
+          syllable: ["ಕಸದ", "ಬುಟ್ಟಿ"],
+          audio: "theDustbin",
+        },
+      ],
+      P2: [
+        {
+          completeWord: "ನಾಯಿ ಓಡುತಿದೆ",
+          syllable: ["ನಾಯಿ", "ಓಡುತಿದೆ"],
+          audio: "dogIsRunning1",
+        },
+        {
+          completeWord: "ಆಮೆ ಈಜುವುದು",
+          syllable: ["ಆಮೆ", "ಈಜುವುದು"],
+          audio: "turtleSwims",
+        },
+        {
+          completeWord: "ನಾಯಿ ಓಡುತಿದೆ",
+          syllable: ["ನಾಯಿ", "ಓಡುತಿದೆ"],
+          audio: "dogIsRunning2",
+        },
+        {
+          completeWord: "ಫೌಂಟನ್ ಪೆನ್ನು",
+          syllable: ["ಫೌಂಟನ್", "ಪೆನ್ನು"],
+          audio: "aFountainPen",
+        },
+        {
+          completeWord: "ವಿಮಾನ ನಿಲ್ದಾಣ",
+          syllable: ["ವಿಮಾನ", "ನಿಲ್ದಾಣ"],
+          audio: "airport",
+        },
+      ],
+      P3: [
+        {
+          completeWord: "ಮಂಗನ ಬಾಲ",
+          syllable: ["ಮಂಗನ", "ಬಾಲ"],
+          audio: "monkeysTail",
+        },
+        {
+          completeWord: "ಐದು ಬಳೆಗಳು",
+          syllable: ["ಐದು", "ಬಳೆಗಳು"],
+          audio: "fiveBangles",
+        },
+        {
+          completeWord: "ಕಮಲ ಈಜಿದಳು",
+          syllable: ["ಕಮಲ", "ಈಜಿದಳು"],
+          audio: "kamalaIsSwimming",
+        },
+        {
+          completeWord: "ಹುಲಿ ಬಂತು, ಹುಲಿ!",
+          syllable: ["ಹುಲಿ ಬಂತು", "ಹುಲಿ!"],
+          audio: "tigerCameTiger",
+        },
+        {
+          completeWord: "ಹರಳಿನ ಉಂಗುರ",
+          syllable: ["ಹರಳಿನ", "ಉಂಗುರ"],
+          audio: "stoneFingerRing",
+        },
+      ],
+      P4: [
+        {
+          completeWord: "ಆಗಸದ ತಾರೆ",
+          syllable: ["ಆಗಸದ", "ತಾರೆ"],
+          audio: "starsInTheSky",
+        },
+        {
+          completeWord: "ಹೂವಿನ ತೋಟ",
+          syllable: ["ಹೂವಿನ", "ತೋಟ"],
+          audio: "flowerArcade",
+        },
+        {
+          completeWord: "ನೀಲಿಯ ಆಕಾಶ",
+          syllable: ["ನೀಲಿಯ", "ಆಕಾಶ"],
+          audio: "blueSky",
+        },
+        {
+          completeWord: "ಹೂವಿನ ಎಸಳು",
+          syllable: ["ಹೂವಿನ", "ಎಸಳು"],
+          audio: "petalsOfAFlower",
+        },
+        {
+          completeWord: "ಅರಸನ ಅರಮನೆ",
+          syllable: ["ಅರಸನ", "ಅರಮನೆ"],
+          audio: "kingsPalace",
+        },
+      ],
+      S1: [
+        { completeWord: "ಅಂದದ ಸರ", syllable: ["ಅಂದದ", "ಸರ"] },
+        { completeWord: "ಚಂದಿರ ಬಂದ", syllable: ["ಚಂದಿರ", "ಬಂದ"] },
+        { completeWord: "ಮರ ಒಣಗಿದೆ", syllable: ["ಮರ", "ಒಣಗಿದೆ"] },
+        { completeWord: "ಅದು ಗುಡಿ", syllable: ["ಅದು", "ಗುಡಿ"] },
+        { completeWord: "ಚೆಂಡು ಹೂ", syllable: ["ಚೆಂಡು", "ಹೂ"] },
+      ],
+      S2: [
+        { completeWord: "ಮಾವಿನ ಮರ", syllable: ["ಮಾವಿನ", "ಮರ"] },
+        { completeWord: "ಗೆಳೆಯರ ಮಾತುಕತೆ", syllable: ["ಗೆಳೆಯರ", "ಮಾತುಕತೆ"] },
+        { completeWord: "ಇದು ಮಸೀದಿ", syllable: ["ಇದು", "ಮಸೀದಿ"] },
+        { completeWord: "ಉದಯನ ಮನೆ", syllable: ["ಉದಯನ", "ಮನೆ"] },
+        { completeWord: "ಖೋ ಖೋ ಆಟ", syllable: ["ಖೋ ಖೋ", "ಆಟ"] },
+      ],
+      L1: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L2: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L3: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L4: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+    },
+    te: {
+      P1: [
+        {
+          completeWord: "పసుపురంగు పూవు",
+          syllable: ["పసుపురంగు", "పూవు"],
+          audio: "yellowFlower",
+        },
+        {
+          completeWord: "అన్నం తినడం",
+          syllable: ["అన్నం", "తినడం"],
+          audio: "eatingRice",
+        },
+        {
+          completeWord: "గూడు కట్టింది",
+          syllable: ["గూడు", "కట్టింది"],
+          audio: "birdsMadeNest",
+        },
+        {
+          completeWord: "పచ్చి గడ్డి",
+          syllable: ["పచ్చి", "గడ్డి"],
+          audio: "greenGrass",
+        },
+        {
+          completeWord: "అందమైన ఇల్లు",
+          syllable: ["అందమైన", "ఇల్లు"],
+          audio: "beautifulHouse",
+        },
+      ],
+      P2: [
+        {
+          completeWord: "మీసాల తాతయ్య",
+          syllable: ["మీసాల", "తాతయ్య"],
+          audio: "mustacheGrandfather",
+        },
+        {
+          completeWord: "మామిడి చెట్టు",
+          syllable: ["మామిడి", "చెట్టు"],
+          audio: "mangoTree",
+        },
+        {
+          completeWord: "నువ్వు ఆలోచించు",
+          syllable: ["నువ్వు", "ఆలోచించు"],
+          audio: "youThink",
+        },
+        {
+          completeWord: "అటవీ చెట్లు",
+          syllable: ["అటవీ", "చెట్లు"],
+          audio: "forestTrees",
+        },
+        {
+          completeWord: "ఇస్త్రీ పెట్టె",
+          syllable: ["ఇస్త్రీ", "పెట్టె"],
+          audio: "ironingBox",
+        },
+      ],
+      P3: [
+        {
+          completeWord: "నీలిరంగు చీర",
+          syllable: ["నీలిరంగు", "చీర"],
+          audio: "blueSaree",
+        },
+        {
+          completeWord: "పరుగు తీసింది",
+          syllable: ["పరుగు", "తీసింది"],
+          audio: "runningTookIt",
+        },
+        {
+          completeWord: "గాజు కప్పు",
+          syllable: ["గాజు", "కప్పు"],
+          audio: "glassCup",
+        },
+        {
+          completeWord: "రంగోలి వేయండి",
+          syllable: ["రంగోలి", "వేయండి"],
+          audio: "rangoliPutIt",
+        },
+        {
+          completeWord: "పతంగి చేసింది",
+          syllable: ["పతంగి", "చేసింది"],
+          audio: "makingKite",
+        },
+      ],
+      P4: [
+        {
+          completeWord: "చెత్త కుండీ",
+          syllable: ["చెత్త", "కుండీ"],
+          audio: "garbagePot",
+        },
+        {
+          completeWord: "అది బొప్పాయి",
+          syllable: ["అది", "బొప్పాయి"],
+          audio: "thatPapaya",
+        },
+        {
+          completeWord: "తల దువ్వుకోవడం",
+          syllable: ["తల", "దువ్వుకోవడం"],
+          audio: "headCombing",
+        },
+        {
+          completeWord: "ఎర్రనైన టమాట",
+          syllable: ["ఎర్రనైన", "టమాట"],
+          audio: "redTomato",
+        },
+        {
+          completeWord: "పులి వచ్చింది, పులి",
+          syllable: ["పులి వచ్చింది", "పులి"],
+          audio: "tigerHereItComes",
+        },
+      ],
+      S1: [
+        { completeWord: "ఒక చీమ", syllable: ["ఒక", "చీమ"] },
+        { completeWord: "మొండి బండ", syllable: ["మొండి", "బండ"] },
+        { completeWord: "గీతల అంగి", syllable: ["గీతల", "అంగి"] },
+        { completeWord: "నెమలి ఈక", syllable: ["నెమలి", "ఈక"] },
+        { completeWord: "పాప ఆడింది", syllable: ["పాప", "ఆడింది"] },
+      ],
+      S2: [
+        { completeWord: "పాట వినండి", syllable: ["పాట", "వినండి"] },
+        { completeWord: "రతనాల ఉంగరం", syllable: ["రతనాల", "ఉంగరం"] },
+        { completeWord: "మిరప పొడి", syllable: ["మిరప", "పొడి"] },
+        { completeWord: "ఇది మసీదు", syllable: ["ఇది", "మసీదు"] },
+        { completeWord: "ఏనుగు తోక", syllable: ["ఏనుగు", "తోక"] },
+      ],
+      L1: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L2: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L3: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+      L4: [
+        { completeWord: "I run.", syllable: ["I", "run."] },
+        { completeWord: "We play.", syllable: ["We", "play."] },
+        { completeWord: "She reads.", syllable: ["She", "reads."] },
+        { completeWord: "He eats.", syllable: ["He", "eats."] },
+        { completeWord: "They jump.", syllable: ["They", "jump."] },
+      ],
+    },
   };
 
   const handleComplete = (nextStep) => {
@@ -3434,7 +4137,7 @@ const Practice = () => {
 
   const currentLevel = practiceSteps?.[currentPracticeStep]?.title || "P1";
 
-  console.log("prog", progressDatas);
+  //console.log("prog", progressDatas);
 
   const rFlow = String(getLocalData("rFlow"));
   const tFlow = String(getLocalData("tFlow"));
@@ -3450,7 +4153,7 @@ const Practice = () => {
   // }, []);
 
   useEffect(() => {
-    console.log("levelsssss", level, rFlow, rStep);
+    //console.log("levelsssss", level, rFlow, rStep);
 
     let currentLevelMap;
     let currentImageMap;
@@ -3475,11 +4178,15 @@ const Practice = () => {
       progressData?.currentPracticeStep !== null
     ) {
       const selectedLevels =
-        level === 2 ? levelTwo[lang] : level === 3 ? levelThree : levels[lang];
+        level === 2
+          ? levelTwo[lang]
+          : level === 3
+          ? levelThree[lang]
+          : levels[lang];
 
       const levelData = selectedLevels[currentLevelMap];
       const levelImage = selectedLevels[currentImageMap];
-      console.log("levelsNew", level, levelData);
+      //console.log("levelsNew", level, levelData);
       const currentWord = levelData[currentQuestion];
 
       setCurrentImage(levelImage[currentQuestion]);
@@ -3597,7 +4304,7 @@ const Practice = () => {
           try {
             const decoded = jwtDecode(token);
             const emisUsername = String(decoded.emis_username);
-            console.log("emu", emisUsername);
+            //console.log("emu", emisUsername);
 
             if (levelMapping[emisUsername] !== undefined) {
               setLevel(levelMapping[emisUsername]);
@@ -3608,7 +4315,7 @@ const Practice = () => {
         }
       }
 
-      console.log("Assigned LEVEL:", level);
+      //console.log("Assigned LEVEL:", level);
       const token = getLocalData("token");
       let emisUsername = null;
 
@@ -3616,7 +4323,7 @@ const Practice = () => {
         try {
           const decoded = jwtDecode(token);
           emisUsername = String(decoded.emis_username);
-          console.log("emu", emisUsername);
+          //console.log("emu", emisUsername);
         } catch (error) {
           console.error("Error decoding JWT token:", error);
         }
@@ -3656,7 +4363,7 @@ const Practice = () => {
 
       const currentGetContent = getCurrentContent(newPracticeStep);
 
-      console.log("cqer", currentQuestion, questions, level);
+      //console.log("cqer", currentQuestion, questions, level);
 
       // if(updatedLevel === 14){
       //   setCurrentQuestion(currentQuestion + 1);
@@ -3927,7 +4634,7 @@ const Practice = () => {
             try {
               const decoded = jwtDecode(token);
               const emisUsername = String(decoded.emis_username);
-              console.log("emu", emisUsername);
+              //console.log("emu", emisUsername);
 
               if (levelMapping[emisUsername] !== undefined) {
                 setLevel(levelMapping[emisUsername]);
@@ -3938,7 +4645,7 @@ const Practice = () => {
           }
         }
 
-        console.log("Assigned LEVEL:", level);
+        //console.log("Assigned LEVEL:", level);
       } else if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
 
@@ -4008,7 +4715,7 @@ const Practice = () => {
         Number(getMilestoneDetails?.data?.milestone_level?.replace("m", "")) ||
         1;
 
-      console.log("curGetCont3", level, getMilestoneDetails);
+      //console.log("curGetCont3", level, getMilestoneDetails);
 
       setLevel(level);
 
@@ -4047,7 +4754,7 @@ const Practice = () => {
 
       const getCurrentContent = (stepKey) => {
         const lang = getLocalData("lang") || "en";
-        console.log("curGetCont2", lang, level);
+        //console.log("curGetCont2", lang, level);
         return levelGetContent[lang]?.[level]?.find(
           (elem) => elem.title === practiceSteps?.[stepKey]?.name
         );
@@ -4055,7 +4762,7 @@ const Practice = () => {
 
       const currentGetContent = getCurrentContent(userState);
 
-      console.log("curGetCont", userState, currentGetContent);
+      //console.log("curGetCont", userState, currentGetContent);
 
       if (![10, 11, 12, 13, 14, 15].includes(level)) {
         const resWord = await getContent(
@@ -4142,7 +4849,7 @@ const Practice = () => {
 
   const getCurrentContent = (stepKey) => {
     const lang = getLocalData("lang") || "en";
-    console.log("curGetCont2", lang, level);
+    //console.log("curGetCont2", lang, level);
     return levelGetContent[lang]?.[level]?.find(
       (elem) => elem.title === practiceSteps?.[stepKey]?.name
     );
@@ -4375,7 +5082,7 @@ const Practice = () => {
     }
   }, [questions[currentQuestion]]);
 
-  console.log("mec", mechanism, level, rFlow, currentLevel);
+  //console.log("mec", mechanism, level, rFlow, currentLevel);
 
   const renderMechanics = () => {
     if (
