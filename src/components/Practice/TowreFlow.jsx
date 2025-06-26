@@ -28,6 +28,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { addTowreRecord } from "../../services/learnerAi/learnerAiService";
+import * as Assets from "../../utils/imageAudioLinks";
 
 env.localModelPath = "https://huggingface.co/Xenova/whisper-tiny/resolve/main/";
 
@@ -185,16 +186,17 @@ const CombinedReportPage = ({
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const wordCount = transcript.trim().split(/\s+/).length;
-  const wordsPerMinute = Math.round((wordCount / totalSec) * 60);
+  //const wordsPerMinute = Math.round((wordCount / totalSec) * 60);
   const totalWordsInCurrentSets = (currentWordSetIndex + 1) * 12;
 
-  console.log("transcript", wordCount);
+  //console.log("transcript", wordCount);
 
   const attemptedWordsCount = wordCount;
   const correctWordsCount = allWords.filter((word) => word.isCorrect).length;
+  const wordsPerMinute = Math.round((correctWordsCount / totalSec) * 60);
   const unattemptedWordsCount = allWords.length - wordCount;
   const newWordsLearnt = correctWordsCount;
-  const totalWordsLearnt = 100;
+  const totalWordsLearnt = correctWordsCount;
   const renderResults = () => (
     <div
       style={{
@@ -592,6 +594,7 @@ const TowreFlow = ({
   const streamRef = useRef(null);
   const chunksRef = useRef([]);
   const [loading, setLoading] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [recordedAudioBlob, setRecordedAudioBlob] = useState(null);
   const [transcripts, setTranscripts] = useState("");
@@ -611,7 +614,7 @@ const TowreFlow = ({
 
   useEffect(() => {
     transcriptRef.current = transcript;
-    console.log("Live Transcript:", transcript);
+    //console.log("Live Transcript:", transcript);
   }, [transcript]);
 
   useEffect(() => {
@@ -627,7 +630,7 @@ const TowreFlow = ({
           if (prevTimer <= 1) {
             const endTime = Date.now();
             const elapsedSeconds = (endTime - startTime) / 1000;
-            console.log("testingg");
+            //console.log("testingg");
             setTotalSec(elapsedSeconds);
             stopAudioRecording();
             setLoading(true);
@@ -667,9 +670,14 @@ const TowreFlow = ({
       );
       setActiveSet(3);
     } else if (activeSet === 3) {
-      setMessage("Are You Ready?⏱️ You'll have 45 seconds.");
+      setMessage(
+        "If you are not able to speak a word,\nYou can move to the next word."
+      );
       setActiveSet(4);
     } else if (activeSet === 4) {
+      setMessage("Are You Ready?⏱️ You'll have 45 seconds.");
+      setActiveSet(5);
+    } else if (activeSet === 5) {
       startCountdown();
     }
   };
@@ -756,7 +764,7 @@ const TowreFlow = ({
       };
 
       mediaRecorder.onstop = async () => {
-        console.log("Recording stopped.");
+        //console.log("Recording stopped.");
         if (chunksRef.current.length === 0) {
           console.warn("No data to create blob.");
           return;
@@ -782,7 +790,7 @@ const TowreFlow = ({
             stride_length_s: 5,
           });
 
-          console.log("Transcription result:", output.text);
+          //console.log("Transcription result:", output.text);
 
           const transcripts = output.text;
           setTranscripts(transcripts);
@@ -804,7 +812,7 @@ const TowreFlow = ({
           setCompleted(true);
         } catch (error) {
           console.error("Error during transcription:", error);
-          console.log("transcriptok", transcriptRef.current);
+          //console.log("transcriptok", transcriptRef.current);
           setTranscripts(transcriptRef.current);
           const transcriptWords = normalize(transcriptRef.current);
           const transcriptPhonetics = new Set(transcriptWords.map(getPhonetic));
@@ -892,14 +900,14 @@ const TowreFlow = ({
     >
       <div
         style={{
-          backgroundColor: "#dff3fc",
-          minHeight: "100vh",
+          //backgroundColor: "#dff3fc",
+          //minHeight: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        {!loading && (
+        {!loading && isStarted && (
           <div
             style={{
               width: "95%",
@@ -1322,19 +1330,21 @@ const TowreFlow = ({
 
                     {/* Hide arrow for this specific message */}
                     {message !==
-                      "You'll go to the next set of words\nwhen you click the button below." && (
-                      <img
-                        src={arrowImg}
-                        alt="arrow"
-                        style={{
-                          width: "80px",
-                          position: "absolute",
-                          top: "15px",
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                        }}
-                      />
-                    )}
+                      "You'll go to the next set of words\nwhen you click the button below." &&
+                      message !==
+                        "If you are not able to speak a word,\nYou can move to the next word." && (
+                        <img
+                          src={arrowImg}
+                          alt="arrow"
+                          style={{
+                            width: "80px",
+                            position: "absolute",
+                            top: "15px",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                          }}
+                        />
+                      )}
 
                     <div
                       style={{
@@ -1393,7 +1403,7 @@ const TowreFlow = ({
                             }}
                           >
                             <img
-                              src={startImg}
+                              src={Assets.startNewButtonImg}
                               alt="next"
                               style={{ width: 60 }}
                             />
@@ -1402,7 +1412,7 @@ const TowreFlow = ({
                       ) : message ===
                         "Are You Ready?⏱️ You'll have 45 seconds." ? (
                         <img
-                          src={startImg}
+                          src={Assets.startNewButtonImg}
                           alt="start"
                           style={{
                             width: "60px",
@@ -1412,10 +1422,10 @@ const TowreFlow = ({
                         />
                       ) : (
                         <img
-                          src={startImg}
+                          src={Assets.startNewButtonImg}
                           alt="next"
                           style={{
-                            width: "70px",
+                            height: "45px",
                             cursor: "pointer",
                           }}
                           onClick={handleNext}
@@ -1472,39 +1482,70 @@ const TowreFlow = ({
             )}
           </div>
         )}
-        {loading && (
+        {!isStarted && (
           <div
             style={{
               width: "95%",
               maxWidth: 1150,
-              background: "#fff",
+              backgroundImage: `url(${Assets.yellowLightImg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
               borderRadius: 20,
               padding: "0 20px",
               position: "relative",
               overflow: "hidden",
               height: "530px",
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <div
+            <img
+              src={Assets.confettiImg}
+              alt="Confetti"
               style={{
-                backgroundColor: "#fff",
-                borderRadius: 4,
-                padding: 16,
-                width: "90%",
-                height: 200,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "64px",
-                fontWeight: "bold",
-                color: "#4CAF50",
-                boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
+                position: "absolute",
+                top: 0,
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "100%",
+                maxWidth: 500,
+                pointerEvents: "none",
               }}
-            >
-              {"...."}
+            />
+
+            <div style={{ textAlign: "center", zIndex: 1 }}>
+              <h2
+                style={{
+                  fontFamily: "Quicksand",
+                  fontWeight: 1200,
+                  fontSize: "56px",
+                  lineHeight: "60px",
+                  textAlign: "center",
+                  color: "#FF9050",
+                  marginBottom: "20px",
+                }}
+              >
+                Bonus Round!
+              </h2>
+              <img
+                src={Assets.birthdayBoxImg}
+                alt="Birthday Box"
+                style={{
+                  maxWidth: "200px",
+                  width: "100%",
+                  marginBottom: "20px",
+                }}
+              />
+              <img
+                src={Assets.startButtonImg}
+                alt="Start Button"
+                style={{ maxWidth: "180px", width: "100%", cursor: "pointer" }}
+                onClick={() => {
+                  setIsStarted(true);
+                }}
+              />
             </div>
           </div>
         )}
