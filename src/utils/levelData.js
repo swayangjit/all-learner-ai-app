@@ -733,10 +733,6 @@ export const level13 = [
           audio: "henFourAudio",
           text: "He waits until evening, but the chicks stay close to their mother. He cannot catch even a single one.",
         },
-        {
-          audio: "henFiveAudio",
-          text: "Night falls. The hen and chicks sleep together under the moon. The dog waits by the fence, but cannot catch any chicks.",
-        },
       ],
     },
   },
@@ -1302,10 +1298,6 @@ export const level13 = [
         {
           audio: "butterflyFourAudio",
           text: "One day, the caterpillar becomes a colourful butterfly.  The children and their mother watch it fly out of the window.",
-        },
-        {
-          audio: "butterflyFiveAudio",
-          text: "Outside the window, the butterfly flies into the garden. The two kids watches as it meet  other butterflies in the garden.",
         },
       ],
     },
@@ -2142,12 +2134,12 @@ export const level12 = [
         jumbledWords: [
           "kicking a",
           "game.",
-          "young",
+          "boys",
           "soccer ball",
           "during a",
           "are",
           "friendly",
-          "Two boys",
+          "Two young",
         ],
       },
       {
