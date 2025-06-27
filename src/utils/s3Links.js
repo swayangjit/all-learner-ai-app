@@ -221,7 +221,6 @@ export const level12P2Audio_9 = "d832573d-039e-4276-8e59-19573da4bffc.mp3";
 //M12S1
 export const KasturbaRoadAudio = "cfd70c7f-25c1-485c-94c7-9d118c32e110.mp3";
 
-
 //M12P6
 export const level12P6CAudio = "2411de31-c7c0-42b3-9c75-decc0b77942a.mp3";
 export const level12P6Audio_1 = "0b1b818e-1bb0-431c-b2f8-30757a4a4990.mp3";
@@ -247,7 +246,7 @@ export const level12P7FiveAudio = "fbc1b7d7-ae6a-49d4-b739-1b7f1ce1893f.mp3";
 //M12P5
 export const KasturbaRoad2Audio = "6cc1f0ba-d045-41dd-a300-5d9e3b7213f2.mp3";
 
-//M12S2 
+//M12S2
 export const TaraPlanetariumAudio = "ea114221-b6ff-483f-8b1d-d557489a5671.mp3";
 export const PlanetariumImg = "ae59f62b-8699-4567-9f0c-4c70e2233153.png";
 export const ChildrensParkImg = "263a1f6e-423a-472e-8e22-795f4dddcc82.png";
@@ -315,7 +314,6 @@ export const level11P8ThreeSAudio = "3153e1bf-2025-490c-8db2-2675a62781ee.mp3";
 export const level11P8FourSAudio = "695b330f-a63e-4d79-be86-20469005f701.mp3";
 export const level11P8FiveSAudio = "c5d49cef-0ab2-46b9-81ee-03da4e3035ee.mp3";
 
-
 //M11P6
 export const level11P6Audio = "78451122-778a-477b-b4ca-e46c2e6e6ba0.mp3";
 
@@ -359,7 +357,6 @@ export const rahulTwo = "ed2894a3-3730-4015-a4fa-85133fc6bd9d.png";
 export const friendintroductionAnouncementImg =
   "b0f1311b-c168-4b5b-8664-c2c9d10e96fe.png";
 
-
 //M11P2
 export const level11P2Audio = "64c131a2-49f4-42b6-b826-691aac36e945.mp3";
 export const boyfootballImg = "081a30ba-8a35-4836-9a23-cf003e1baf7f.png";
@@ -380,7 +377,6 @@ export const trainImgOne = "e68daca6-3dab-4323-b25c-fac63a5d4158.png";
 export const trainImgTwo = "d3a6dd32-3b4f-4f13-a215-e72561f6eb4f.png";
 export const railAnnouncementImg = "93bc06c4-06d4-44a3-be8f-e62a61444013.png";
 export const bengaluruTrainAudio = "81b67384-f0cf-4237-8b3a-d57f3c3c56bd.mp3";
-
 
 export const imageOne = "2afe10e0-4d94-490d-8242-19897849054f.png";
 export const imageTwo = "71bd9c0e-e792-48b7-8b4c-1280939f88dc.png";
@@ -415,7 +411,8 @@ export const imageThree = "481e761a-2254-4b7d-967a-36d0484aa2b6.png";
 export const toyTrainAudio = "df76ae56-08dc-4ed0-b153-6cd648fe68cb.mp3";
 
 //M10S1
-export const villageAnnouncementAudio = "9ad6a141-654c-4ae2-b8c8-ace18d101d86.mp3";
+export const villageAnnouncementAudio =
+  "9ad6a141-654c-4ae2-b8c8-ace18d101d86.mp3";
 export const villageDramaImg = "f959324f-8f80-40af-824e-30e6a8993514.png";
 export const AnnouncementLadyImg = "689a4db7-1b40-4dc5-85a2-199e6da6a2aa.png";
 export const childrenImg = "f4fcaa9e-5f08-43d5-8f47-967414faa05d.png";
@@ -428,7 +425,6 @@ export const patna2 = "c79c4d26-816e-40f2-8c8d-4202385a8687.png";
 export const TvBreakingNewsImg = "3baa6bb2-bba1-439d-8c46-8f5d683925cd.png";
 export const HeavyRainImg = "0c5f0143-c9a3-49f6-8db7-723646dfe300.png";
 export const RainAudio = "2d1586f1-d0de-4f0b-bf34-9a360479f895.mp3";
-
 
 export const reporter1 = "61a59cfe-aeb7-4c55-93d0-66001fe1f46b.png";
 export const reporter2 = "94ec9353-5fe5-4d8d-b449-053dbe98d224.png";
@@ -457,7 +453,8 @@ export const level10P7FiveAudio3 = "16c1e433-46a9-475c-bbd8-a20565acb076.mp3";
 //M10P8
 export const hockeyImg = "533d2350-7cd2-49be-9241-4502fe8a988e.png";
 export const TwogirlsImg = "be19f6b8-c79f-4312-ac91-df479ab0a1a1.png";
-export const hockeyAnnouncementAudio = "fe4568bb-ea3b-4f4d-9bfd-4acd68ff7286.mp3";
+export const hockeyAnnouncementAudio =
+  "fe4568bb-ea3b-4f4d-9bfd-4acd68ff7286.mp3";
 
 //M10S2
 export const level10S2Announcement = "b71f536a-08c8-4d51-b0ab-fa3d94409c6e.mp3";
@@ -924,7 +921,6 @@ export const butterflyFiveAudio = "17d8bf00-dc58-429b-b94d-e5c7c9e2fe94.mp3";
 export const roadSafety2Img1 = "9a7b7769-063f-4643-9e9b-d769a61d7951.png";
 export const roadSafety2Img2 = "520b289d-062e-4b57-afff-64ce0816783f.png";
 export const roadSafety2Audio = "a465b2b8-fe08-4aa2-ae7d-10f3af4b97dc.mp3";
-
 
 export const bengaluruImg = "0ec69ace-ce8a-42c3-865b-76f9d80824da.png";
 export const hospitalImg = "d8cd7610-7c19-4fcb-9ea2-0f549b860e73.png";
