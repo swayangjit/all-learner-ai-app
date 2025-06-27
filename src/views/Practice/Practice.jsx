@@ -4459,7 +4459,7 @@ const Practice = () => {
               getMilestoneDetails?.data?.extra?.latest_towre_data
                 ?.wordsPerMinute || 0
             );
-            if (level === 3 || level === 6 || level === 9) {
+            if (lang === "en" && (level === 3 || level === 6 || level === 9)) {
               gameOver({ link: "/assesment-end" }, true);
               setLocalData("tFlow", true);
             }
